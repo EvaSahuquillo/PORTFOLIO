@@ -46,107 +46,23 @@
 
 })();
 
-// FRASE CTA 
-// gsap.registerPlugin(SplitText, ScrollTrigger);
+// HORA
+function actualizarHora() {
+    const ahora = new Date();
 
-// let wrapper = document.querySelector(".Horizontal");
-// let text = document.querySelector(".Horizontal__text");
-// let split = SplitText.create(".Horizontal__text", { type: "chars, words" });
+    let horas = ahora.getHours();
+    let minutos = ahora.getMinutes();
 
-// const scrollTween = gsap.to(text, {
-//   xPercent: -100,
-//   ease: "none",
-//   scrollTrigger: {
-//     trigger: wrapper,
-//     pin: true,
-//     end: "+=800px",
-//     scrub: true
-//   }
-// });
+    // poner 0 delante si es necesario
+    horas = horas.toString().padStart(2, "0");
+    minutos = minutos.toString().padStart(2, "0");
 
-// split.chars.forEach((char) => {
-//   gsap.from(char, {
-//     yPercent: "random(-200, 200)",
-//     rotation: "random(-20, 20)",
-//     ease: "back.out(1.2)",
-//     scrollTrigger: {
-//       trigger: char,
-//       containerAnimation: scrollTween,
-//       start: "left 100%",
-//       end: "left 30%",
-//       scrub: 1
-//     }
-//   });
-// });
+    document.getElementById("hora").textContent = `${horas}:${minutos}`;
+}
 
+// ejecutar al cargar
+actualizarHora();
 
-// FOOTER
-gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin);
+// actualizar cada segundo
+setInterval(actualizarHora, 1000);
 
-const down = 'M0-0.3C0-0.3,464,156,1139,156S2278-0.3,2278-0.3V683H0V-0.3z';
-const center = 'M0-0.3C0-0.3,464,0,1139,0s1139-0.3,1139-0.3V683H0V-0.3z';
-
-ScrollTrigger.create({
-  trigger: '.footer',
-  start: 'top bottom',
-  toggleActions: 'play pause resume reverse',
-  onEnter: self => {
-    const velocity = self.getVelocity();
-    const variation = velocity / 10000;
-
-    gsap.fromTo('#bouncy-path', {
-      morphSVG: down
-    }, {
-      duration: 2, 
-      morphSVG: center, 
-      ease: `elastic.out(${1 + variation}, ${1 - variation})`, 
-      overwrite: 'true'
-    });
-  }
-});
-
-// MENU DE ARRIBA
-const trigger = document.getElementById("menu-trigger");
-const expandedMenu = document.getElementById("expanded-menu");
-
-let tl = gsap
-  .timeline({ paused: true })
-  .to("#expanded-menu", {
-    duration: 1.2,
-    delay: 0.1,
-    height: "auto", // height auto animation 🙌
-    ease: "power4.out"
-  })
-  .to(
-    "#sub-menu img",
-    {
-      duration: 1,
-      opacity: 1,
-      ease: "power4.inOut",
-      stagger: 0.05
-    },
-    0.3
-  )
-  .reverse();
-
-trigger.addEventListener("click", (event) => {
-  tl.reversed(!tl.reversed());
-});
-
-// TRANSICION 
-let path = document.querySelector(".path");
-
-const start = "M 0 100 V 50 Q 50 0 100 50 V 100 z";
-const end = "M 0 100 V 0 Q 50 0 100 0 V 100 z";
-
-let timeline = gsap.timeline()
-
-timeline.to(path, {morphSVG: start, ease: "power2.in"})
-.to(path,{morphSVG: end, ease: "power2.out"}).reverse()
-
-document.body.addEventListener("click", (e) => {
-  timeline.reversed(!timeline.reversed())
-})
-
-
-// TEXTO

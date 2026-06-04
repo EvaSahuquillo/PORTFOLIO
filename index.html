@@ -11,6 +11,9 @@
   <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,114 +33,70 @@
   <link rel="manifest" href="favicon/web-app-manifest-192x192.png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <div id="custom-cursor"><div class="cursor-inner"></div></div>
     <header >
-        <nav class="p-2">
+        <nav class="p-3">
             <div class="d-flex gap-4">
-                <div id="menu-trigger"class="nav-link">
-                    <h4>PROYECTOS</h4>
-                </div>
-                <div>
-                    <h4>ARCHIVOS</h4>
-                </div>
+                <a href=""><h4>sahuqui___®</h4></a>
             </div>
-            <div>
-                <a href="aboutme.html"><h4>ABOUT ME</h4></a>
+            <div class="d-flex gap-4">
+                <a href=""><h4>work</h4></a>
+                <a href="archivos.html"><h4>archivos</h4></a>
+                <a href="aboutme.html"><h4>about me</h4></a>
+                <a href=""><h4>contact</h4></a>
             </div>
-            <!-- <div id="menu-trigger"class="nav-link-arch">
-                <h4>ARCHIVOS</h4>
-            </div> -->
         </nav>
-        <div id="expanded-menu">
-            <div id="sub-menu" class="content p-2">
-                <div>
-                    <a href=""><img src="img/evacara.png" alt="" /></a>
-                    <p>Revista CasiCasi / 2025</p>
-                </div>
-                <div>
-                    <a href=""><img src="img/portada2026.png" alt="" /></a>
-                    <p>Exposición Alejandro Carpintero / 2025</p>
-                </div>
-                <div>
-                    <a href=""><img src="img/patas-min.png" alt="" /></a>
-                    <p>This is not a box / 2026</p>
-                </div>
-                <div>
-                    <a href=""><img src="img/MORPHO1.png" alt="" /></a>
-                </div>
-                
-            </div>
-        </div>
-        <!-- <div id="expanded-menu-arch">
-            <div id="sub-menu" class="content">
-                <img src="https://assets.codepen.io/16327/portrait-image-5.jpg" alt="" />
-                <img src="https://assets.codepen.io/16327/portrait-image-1.jpg" alt="" />
-                <img src="https://assets.codepen.io/16327/portrait-image-11.jpg" alt="" />
-                <img src="https://assets.codepen.io/16327/portrait-image-1.jpg" alt="" />
-                <img src="https://assets.codepen.io/16327/portrait-image-11.jpg" alt="" />
-            </div>
-        </div> -->
     </header>
-    <main>
-        <section class="p-2 d-flex section-present">
+    <main class="flex-grow-1">
+        <section class="p-3 d-flex section-present">
             <div class="presentacion">
                 <h1>Hola soy Eva Sahuquillo, una diseñadora gráfica viviendo en Madrid!</h1>
             </div>
-            <div class="imagen-present">
-                <!-- <img src="img/patas-min.png" alt=""> -->
-            </div>
         </section>
-        <section>
-            <!-- <p class="fixed braces">CONTACT ME!</p>
-            <div class='wrapper'>
-                <svg class="transition" viewBox="0 0 100 100" preserveAspectRatio="xMidYMin slice">
-                    <defs>
-                    <linearGradient id="grad" x1="0" y1="0" x2="99" y2="99" gradientUnits="userSpaceOnUse">
-                        <stop offset="0.2" stop-color="rgb(255, 135, 9)" />
-                        <stop offset="0.7" stop-color="rgb(247, 189, 248)" />
-                    </linearGradient>
-                    </defs>
-                    <path class="path" stroke="url(#grad)" fill="url(#grad)" stroke-width="2px" vector-effect="non-scaling-stroke" d="M 0 100 V 100 Q 50 100 100 100 V 100 z" />
-                </svg>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur qui, doloremque tenetur iure commodi corrupti iusto accusantium asperiores quisquam temporibus reprehenderit nam voluptatem minus rerum libero laudantium, necessitatibus odit alias.</p>
-            </div> -->
+        <!-- GALERÍA 3D - SOLO IMÁGENES QUE ROTAN -->
+        <section class="galeria-3d">
+            <div id="contenedor-3d"></div>
         </section>
-        <!-- <section class="Horizontal">
-            <div class="container">
-                <h3 class="Horizontal__text heading-xl">
-                If you’re interested in working with me, feel free to get in touch.
-                </h3>
-            </div>
-        </section> -->
     </main>
-    <div class="footer">
-        <!-- <h1>CONTACT ME!</h1> -->
-        <svg preserveAspectRatio="none" id="footer-img"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 2278 683">
-
-            <path class="footer-svg" id="bouncy-path"
-                fill="#000"
-                d="M0-0.3C0-0.3,464,156,1139,156S2278-0.3,2278-0.3V683H0V-0.3z"/>
-            
-        </svg>
-        
-    </div>
+    <footer>
+        <div class="p-3 d-flex justify-content-between">
+            <div class="d-flex gap-4">
+                <h4 class="sol">☀</h4>
+                <h4 id="hora"></h4>
+            </div>
+            <div class="text-end">
+                <p>© 2026 Eva Sahuquillo.<br>
+                    Web desarrollada en HTML, CSS y JS.</p>
+            </div>
+        </div>
+    </footer>
 
     <!-- ===== SCRIPTS ===== -->
 
-<!-- jQuery (OBLIGATORIO para el menú) -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<!-- Bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<!-- GSAP  -->
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/MorphSVGPlugin.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/SplitText.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-<!-- Tu JS -->
- <script  src="js/script.js"></script>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- GSAP -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/ScrollTrigger.min.js"></script>
+
+    <!-- Import map para Three.js -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
+            }
+        }
+    </script>
+
+    <!-- TU GALERÍA 3D (archivo externo) -->
+    <script type="module" src="js/galeria-3d.js"></script>
+
+    <!-- Tu JS personal -->
+    <script src="js/script.js"></script>
 </body>
 </html>
