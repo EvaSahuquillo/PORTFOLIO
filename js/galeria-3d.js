@@ -9,11 +9,29 @@ import * as THREE from 'three';
 // orientation: 'vertical' (retrato) o 'horizontal' (paisaje)
 const proyectos = [
     // Fila superior
-    { imagen: 'https://picsum.photos/id/1015/600/800', url: '#', titulo: 'Retrato 1', fila: 0, orientation: 'vertical' },
-    { imagen: 'https://picsum.photos/id/104/800/600', url: '#', titulo: 'Paisaje 1', fila: 0, orientation: 'horizontal' },
-    { imagen: 'https://picsum.photos/id/107/600/800', url: '#', titulo: 'Retrato 2', fila: 0, orientation: 'vertical' },
+    { 
+        imagen: 'img/proyectos/fuego.jpeg',
+        url: 'https://tupagina.com/proyecto5',
+        titulo: 'Loop Visual',
+        fila: 0,
+        orientation: 'vertical'
+    },  
+    { 
+        imagen: 'img/proyectos/cata.png',
+        url: 'https://tupagina.com/proyecto5',
+        titulo: 'Loop Visual',
+        fila: 0,
+        orientation: 'horizontal'
+    },
     
     // Fila media (principal)
+    { 
+        imagen: 'img/proyectos/cajapossssst.png',
+        url: 'https://tupagina.com/proyecto5',
+        titulo: 'Loop Visual',
+        fila: 1,
+        orientation: 'vertical'
+    },
     { 
         imagen: 'img/proyectos/evacara.png',
         url: 'https://tupagina.com/proyecto5',
@@ -21,47 +39,110 @@ const proyectos = [
         fila: 1,
         orientation: 'vertical'
     },
-    { imagen: 'https://picsum.photos/id/42/600/800', url: '#', titulo: 'Retrato 3', fila: 1, orientation: 'vertical' },
-    { imagen: 'https://picsum.photos/id/155/800/600', url: '#', titulo: 'Paisaje 3', fila: 1, orientation: 'horizontal' },
-    { imagen: 'https://picsum.photos/id/96/600/800', url: '#', titulo: 'Retrato 4', fila: 1, orientation: 'vertical' },
-    { imagen: 'https://picsum.photos/id/169/800/600', url: '#', titulo: 'Paisaje 4', fila: 1, orientation: 'horizontal' },
+    { 
+        imagen: 'img/proyectos/MORPHO1.png',
+        url: 'https://tupagina.com/proyecto5',
+        titulo: 'Loop Visual',
+        fila: 1,
+        orientation: 'vertical'
+    },
+    { 
+        imagen: 'img/proyectos/cata.png',
+        url: 'https://tupagina.com/proyecto5',
+        titulo: 'Loop Visual',
+        fila: 1,
+        orientation: 'horizontal'
+    },
+    { 
+        imagen: 'img/proyectos/cargo sardinas.png',
+        url: 'https://tupagina.com/proyecto5',
+        titulo: 'Loop Visual',
+        fila: 1,
+        orientation: 'vertical'
+    },
+    { 
+        imagen: 'img/proyectos/MORPHO1.png',
+        url: 'https://tupagina.com/proyecto5',
+        titulo: 'Loop Visual',
+        fila: 1,
+        orientation: 'vertical'
+    },
+    { 
+        imagen: 'img/proyectos/cata.png',
+        url: 'https://tupagina.com/proyecto5',
+        titulo: 'Loop Visual',
+        fila: 1,
+        orientation: 'horizontal'
+    },
+    { 
+        imagen: 'img/proyectos/cargo sardinas.png',
+        url: 'https://tupagina.com/proyecto5',
+        titulo: 'Loop Visual',
+        fila: 1,
+        orientation: 'vertical'
+    },
     
     // Fila inferior
-    { imagen: 'https://picsum.photos/id/15/800/600', url: '#', titulo: 'Paisaje 5', fila: 2, orientation: 'horizontal' },
-    { imagen: 'https://picsum.photos/id/26/600/800', url: '#', titulo: 'Retrato 5', fila: 2, orientation: 'vertical' },
-    { imagen: 'https://picsum.photos/id/28/800/600', url: '#', titulo: 'Paisaje 6', fila: 2, orientation: 'horizontal' }
+    { 
+        imagen: 'img/proyectos/ILUSTRACION5.png',
+        url: 'https://tupagina.com/proyecto5',
+        titulo: 'Loop Visual',
+        fila: 2,
+        orientation: 'vertical'
+    },
+    { 
+        imagen: 'img/proyectos/portada2026.png',
+        url: 'https://tupagina.com/proyecto5',
+        titulo: 'Loop Visual',
+        fila: 2,
+        orientation: 'vertical'
+    },
+    { 
+        imagen: 'img/proyectos/patas-min.png',
+        url: 'https://tupagina.com/proyecto5',
+        titulo: 'Loop Visual',
+        fila: 2,
+        orientation: 'vertical'
+    },
+    { 
+        imagen: 'img/proyectos/patas-min.png',
+        url: 'https://tupagina.com/proyecto5',
+        titulo: 'Loop Visual',
+        fila: 2,
+        orientation: 'vertical'
+    },
 ];
 
 // Configuración de las 3 filas
 const configFilas = {
     // Fila superior (arriba) - imágenes más pequeñas
     fila0: {
-        radioX: 7.0,
-        radioZ: 4.0,
-        tamanoHorizontal: 2.2,    // Tamaño base para horizontales
-        tamanoVertical: 1.8,      // Tamaño base para verticales (más pequeñas)
-        altura: 2.7,
+        radioX: 25.0,
+        radioZ: 3.0,
+        tamanoHorizontal: 5,    // Tamaño base para horizontales
+        tamanoVertical: 5,      // Tamaño base para verticales (más pequeñas)
+        altura: 10,
         velocidadRotacion: 0.002,
         factorHover: 1.2          // Las pequeñas crecen solo un 20%
     },
     // Fila media (principal) - imágenes más grandes
     fila1: {
         radioX: 12.0,
-        radioZ: 2.0,
-        tamanoHorizontal: 4,
-        tamanoVertical: 2,
+        radioZ: 12.0,
+        tamanoHorizontal: 4.5,
+        tamanoVertical: 4,
         altura: 0,
         velocidadRotacion: 0.003,
         factorHover: 1.15         // Crecen un 15%
     },
     // Fila inferior (abajo)
     fila2: {
-        radioX: 7.0,
-        radioZ: 4.0,
-        tamanoHorizontal: 2.0,
-        tamanoVertical: 1.6,
-        altura: -2.5,
-        velocidadRotacion: 0.0025,
+        radioX: 25.0,
+        radioZ: 3.0,
+        tamanoHorizontal: 5,
+        tamanoVertical: 5,
+        altura: -10,
+        velocidadRotacion: 0.002,
         factorHover: 1.2
     }
 };
