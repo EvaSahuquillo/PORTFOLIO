@@ -124,3 +124,40 @@ document.addEventListener('DOMContentLoaded', () => {
     toggle.textContent = mode === 'dark' ? '☼' : '☾';
   });
 });
+
+
+// ============================================
+// SPLIT TEXT - GSAP
+// ============================================
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Verificar que SplitText está disponible
+  if (typeof SplitText === 'undefined') {
+    console.warn('SplitText no está cargado');
+    return;
+  }
+
+  const titulo = document.querySelector('.split');
+  if (!titulo) return;
+
+  // Crear SplitText
+  const split = new SplitText(titulo, {
+    type: "lines",
+    linesClass: "line"
+  });
+
+  // Animación
+  gsap.fromTo(split.lines, 
+    {
+      y: 100,
+      opacity: 0
+    },
+    {
+      y: 0,
+      opacity: 1,
+      duration: 1,
+      stagger: 0.1,
+      ease: "power3.out"
+    }
+  );
+});

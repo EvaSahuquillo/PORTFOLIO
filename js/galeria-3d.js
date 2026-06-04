@@ -104,13 +104,6 @@ const proyectos = [
         fila: 2,
         orientation: 'vertical'
     },
-    { 
-        imagen: 'img/proyectos/patas-min.png',
-        url: 'https://tupagina.com/proyecto5',
-        titulo: 'Loop Visual',
-        fila: 2,
-        orientation: 'vertical'
-    },
 ];
 
 // Configuración de las 3 filas
@@ -119,8 +112,8 @@ const configFilas = {
     fila0: {
         radioX: 25.0,
         radioZ: 3.0,
-        tamanoHorizontal: 5,    // Tamaño base para horizontales
-        tamanoVertical: 5,      // Tamaño base para verticales (más pequeñas)
+        tamanoHorizontal: 4,    // Tamaño base para horizontales
+        tamanoVertical: 4,      // Tamaño base para verticales (más pequeñas)
         altura: 10,
         velocidadRotacion: 0.002,
         factorHover: 1.2          // Las pequeñas crecen solo un 20%
@@ -139,9 +132,9 @@ const configFilas = {
     fila2: {
         radioX: 25.0,
         radioZ: 3.0,
-        tamanoHorizontal: 5,
-        tamanoVertical: 5,
-        altura: -10,
+        tamanoHorizontal: 4,
+        tamanoVertical: 4,
+        altura: -5,
         velocidadRotacion: 0.002,
         factorHover: 1.2
     }
