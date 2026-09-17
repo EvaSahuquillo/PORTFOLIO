@@ -32,7 +32,75 @@
 </head>
 </head>
 <body>
-    
+    <div class="topbar">
+        <span class="logo"><img src="https://assets.codepen.io/16327/gsap-logo-light.svg" alt="" /></span>
+        <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-label="Open menu">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <line class="bar bar-top" x1="3" y1="7" x2="17" y2="7" stroke="var(--white)" stroke-width="1.5" stroke-linecap="round"/>
+            <line class="bar bar-mid" x1="3" y1="10" x2="17" y2="10" stroke="var(--white)" stroke-width="1.5" stroke-linecap="round"/>
+            <line class="bar bar-bot" x1="3" y1="13" x2="17" y2="13" stroke="var(--white)" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+        </button>
+        </div>
+
+
+        <div class="controls">
+            <label><input type="checkbox" id="erToggle" checked /><code>easeReverse</code></label>
+            <label>exit speed
+            <input type="range" id="exitSlider" min="1" max="4" step="0.5" value="1.5" />
+            <span class="speed-val" id="exitVal">1.5×</span>
+            </label>
+        </div>
+        </div>
+
+        <div class="nav" id="nav">
+        <div class="nav-bg"></div>
+
+        <!-- Top panel — white -->
+        <div class="nav-top nav-border nav-panel" id="navTop">
+            <ul class="nav-list">
+            <li class="nav-item"><a class="nav-link" href="#">Tools</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Showcase</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Community</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Learn GSAP</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Docs</a></li>
+            </ul>
+            <div class="nav-login">Login / Create Account</div>
+        </div>
+
+        <!-- Middle panel — matcha green gradient -->
+        <div class="nav-middle nav-border nav-panel" id="navMiddle">
+            <div class="nav-middle-header">What's New</div>
+            <div class="nav-middle-card">
+            <div class="nav-middle-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
+            </div>
+            <div class="nav-middle-info">
+                <div class="nav-middle-title">GSAP 3.15 is here</div>
+                <div class="nav-middle-desc">New easeReverse &amp; more.</div>
+            </div>
+            </div>
+            <div class="nav-middle-actions">
+            <a href="#">Release Notes</a>
+            </div>
+        </div>
+
+        <!-- Bottom panel — black -->
+        <div class="nav-bottom nav-border nav-panel" id="navBottom">
+            <ul class="nav-socials">
+            <li><a href="#">CodePen</a></li>
+            <li><a href="#">GitHub</a></li>
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">X</a></li>
+            </ul>
+            <div class="nav-asset">
+            <img src="https://gsap.com/img/header-shapes.png" alt="" />
+            </div>
+        </div>
+    </div>
     <!-- ===== SCRIPTS ===== -->
 
     <!-- jQuery (OBLIGATORIO para el menú) -->

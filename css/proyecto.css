@@ -1,0 +1,454 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+  /* font-size: 16px; */
+  scroll-behavior: smooth;
+  cursor: none !important;
+}
+
+
+:root {
+  --bg-light: #ffffff;
+  --bg-dark: #141414;
+  --text-light: #191919;
+  --text-dark: #efefef;
+  --text-middle: #969696;
+  --link-light: #191919;
+  --link-dark: #efefef;
+  --bg-light-transparent: #ffffff10;
+}
+
+body {
+  transition: 0.3s ease, color 0.3s ease;
+}
+
+body.light-mode {
+  background-color: var(--bg-light);
+  color: var(--text-light);  /* ← Esto funciona para todos los textos */
+}
+
+body.dark-mode {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);   /* ← Esto funciona para todos los textos */
+}
+
+body.light-mode a {
+  color: var(--link-light);
+  text-decoration: none;
+}
+
+body.dark-mode a {
+  color: var(--link-dark);
+  text-decoration: none;
+}
+
+body.light-mode .cursor-inner{
+  background-color: var(--bg-dark);
+}
+
+body.dark-mode .cursor-inner{
+  background-color: var(--bg-light);
+}
+
+
+body {
+  height: 100vh;
+  position: relative;
+  margin: 0;
+  background-color: var(--bg-light);
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1rem;
+  letter-spacing: -1px;
+}
+
+p {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 0.75rem;
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 0;
+}
+
+
+.premio {
+    font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1rem;
+  letter-spacing: -1px;
+  line-height: 0.5;
+  margin-bottom: 0;
+  
+}
+
+.caption {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.75rem;
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 0;
+  color: var(--text-middle);
+}
+
+h1 {
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 3.5rem;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  color: var(--text-middle);
+  /* text-indent: 2em; */
+}
+
+
+
+h3 {
+  font-family: "Instrument Serif", serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 2.5rem;
+  text-indent: 1.5em;
+  color: var(--text-middle);
+}
+
+.negri-italic {
+  font-family: "Instrument Serif", serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 3.5rem;
+  color: var(--bg-dark);
+  font-style: italic;
+}
+
+.negri {
+    font-family: "Instrument Serif", serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 1.5rem;
+  color: var(--bg-dark);
+}
+
+h4 {
+  font-family:  "Inter", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 2rem;
+  letter-spacing: -2px;
+  /* color: var(--text-light); */
+}
+
+h5 {
+  font-family:  "Inter", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 1rem;
+  color: var(--text-middle);
+}
+
+h6 {
+  font-family: "Instrument Serif", serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--text-middle);
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-light);
+}
+
+.grey {
+    color: var(--text-middle);
+}
+
+/* CUSTOM CURSOR */
+#custom-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-inner {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-dark);
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  mix-blend-mode: difference; /* ← Mover aquí */
+}
+
+.cursor-inner.link-hover {
+  width: 40px;
+  height: 40px;
+  background-color: var(--bg-dark);
+  transform: scale(1.5);
+}
+
+/* Asegurar que el cursor personalizado sea visible */
+#custom-cursor {
+  display: block !important;
+}
+
+/* Para elementos interactivos, seguimos sin mostrar el cursor por defecto */
+a, button, .btn, .sol, #mode-toggle, .proyecto-link, [href] {
+  cursor: none !important;
+}
+
+
+/* ocultar cursor en móvil */
+@media (max-width: 768px) {
+  #custom-cursor { display: none; }
+  body { cursor: auto !important; }
+
+  p {
+    font-size: 0.7rem;
+  }
+  h4 {
+    font-size: 1.25rem;
+
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .label {
+    font-size: 1.25rem;
+  }
+
+  h6 {
+    font-size: 1rem;
+  }
+
+  .negri {
+    font-size: 1rem;
+  }
+
+  .premio {
+    font-size: 0.7rem;
+
+  }
+
+  .img-portada img {
+    width: 150px;        /* ancho fijo, igual para todas — ajústalo a tu gusto */
+    max-height: 200px;     /* red de seguridad para fotos muy verticales, opcional */
+   }
+
+
+}
+
+/* HOME  */
+nav {
+  height: 55px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  background-color: transparent;
+  position: fixed;
+  top: 0;
+  z-index: 6;
+}
+
+.nav-link:hover {
+  cursor: pointer;
+}
+
+#expanded-menu {
+  background-color: transparent;
+  border-bottom: 1px solid var(--bg-dark);
+  overflow: hidden;
+  height: 0;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  img {
+    max-width: 40vh;
+    max-height: 40vh;
+    object-fit: cover;
+    opacity: 0;
+  }
+}
+
+.section-present {
+  justify-content: space-between;
+  width: 100%;
+  position: absolute;
+}
+
+.presentacion {
+  width: 50%;
+}
+
+/* Split Text */
+.split {
+  overflow: hidden;
+  width: 100%;
+}
+
+.line {
+  display: block;
+  overflow: hidden;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1; /* detrás del contenido del footer */
+    background: var(--bg-light-transparent);
+    backdrop-filter: blur(60px);
+    -webkit-backdrop-filter: blur(12px);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 60px);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 60px);
+}
+.sol {
+  font-family: "Inter", sans-serif;
+  font-weight: 500 !important;
+}
+
+
+/* RETICULA PROYECTO  */
+
+.img-portada {
+    /* antes: overflow-x: auto + scroll-snap.
+       ahora: es la "ventana" que recorta — el scroll real lo lleva el JS
+       sobre .carousel-track, para poder hacer el bucle infinito sin huecos.
+ 
+       IMPORTANTE: la altura se fija por JS (una vez cargan las imágenes) al
+       valor que tiene en reposo, para que el carrusel NUNCA empuje el layout
+       hacia abajo al crecer una imagen en hover.
+ 
+       overflow-x: clip recorta horizontalmente igual que "hidden", pero a
+       diferencia de "hidden" NO fuerza a overflow-y a convertirse en "auto"
+       cuando el otro eje es "visible" (esa conversión automática es la que
+       causaba el corte vertical). Con "clip" ambos ejes se comportan de
+       forma independiente de verdad. */
+    display: flex; /* para que .carousel-track ocupe el alto disponible */
+    position: relative;
+    overflow-x: clip;
+    overflow-y: visible;
+    cursor: grab;
+    touch-action: pan-y; /* deja scroll vertical de página; el horizontal lo coge el JS */
+    user-select: none;
+    z-index: 10;
+}
+ 
+.img-portada.dragging {
+    cursor: grabbing;
+}
+ 
+/* generado automáticamente por el JS alrededor de tus .col */
+.carousel-track {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    will-change: transform;
+}
+ 
+.img-portada .col {
+    flex: 0 0 auto;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    /* scroll-snap-align ya no aplica: no hay scroll nativo */
+}
+ 
+.img-portada img {
+    width: 340px;        /* ancho fijo, igual para todas — ajústalo a tu gusto */
+    height: auto;         /* la altura sale sola según la proporción real de cada foto */
+    max-height: 50vh;     /* red de seguridad para fotos muy verticales, opcional */
+    display: block;
+    object-fit: cover;
+    transition: width 0.55s;
+}
+ 
+/* --- Hover: la imagen crece (hacia arriba, gracias a align-items: flex-end
+   + la altura fija de .img-portada), empuja a las vecinas al ser un width
+   real (no un transform), y TODO el <main> se difumina excepto ella.
+ 
+   El trigger es la propia <img> (no toda la columna con el texto).
+ 
+   Nota técnica: el filtro blur no se puede "quitar" en un hijo si se aplicó
+   en un ancestro común — hay que aplicarlo elemento a elemento. Por eso se
+   listan aquí, en vez de poner un único blur en <main>. --- */
+ 
+.carousel-track .col:has(img:hover) img {
+    width: 540px; /* ancho al hacer hover — ajusta la proporción a tu gusto */
+    max-height: 55vh;
+}
+ 
+.texto-portada,
+.carousel-track .col {
+    transition: filter 0.35s ease;
+}
+ 
+.carousel-track .col > p {
+    transition: filter 0.35s ease;
+}
+ 
+/* todo lo que no sea la imagen hovered ni su propio contenedor se difumina */
+main:has(.carousel-track img:hover) .texto-portada,
+main:has(.carousel-track img:hover) .carousel-track .col:not(:has(img:hover)) {
+    filter: blur(6px);
+}
+ 
+/* dentro de la columna de la imagen hovered, el texto de esa misma columna
+   también se difumina — solo la <img> se queda nítida */
+main:has(.carousel-track img:hover) .carousel-track .col:has(img:hover) > p {
+    filter: blur(6px);
+}
+ 
+.portada {
+    height: 100vh;
+}
+ 
+.texto-portada {
+    width: 100%;
+    height: 30%;
+}
+ 
+.cuerpo-texto {
+    width: 100%;
+    text-indent: 2em;
+}
+ 
+/* Aseguramos que ningún antepasado de .img-portada recorte el crecimiento
+   vertical de la imagen en hover. Si alguno de estos tenía overflow-x: hidden
+   (para evitar scroll horizontal, por ejemplo), eso por spec de CSS convertía
+   su overflow-y en "auto" y recortaba igualmente — de ahí el corte. */
+html, body, main, .portada {
+    overflow-x: clip;
+    overflow-y: visible;
+}

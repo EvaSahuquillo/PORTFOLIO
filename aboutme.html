@@ -8,21 +8,29 @@
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
+  <!-- CSS de Locomotive Scroll -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@5.0.0-beta.12/dist/locomotive-scroll.css">
+
+    <!-- CSS LENIS  -->
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.14/dist/lenis.css">
+
   <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Instrument+Serif:ital@0;1&display=swap" 
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     
 
-
   <!-- Estilos -->
-  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/aboutme.css" />
 
   <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
@@ -33,6 +41,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+    <svg style="position:absolute; width:0; height:0;">
+    <filter id="wave-distort">
+        <feTurbulence type="turbulence" numOctaves="1" seed="7"
+              baseFrequency="0.012" result="noise" id="waveTurbulence" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" id="waveDisplace" />
+    </filter>
+    </svg>
     <div id="custom-cursor"><div class="cursor-inner"></div></div>
     <header >
         <nav class="p-3">
@@ -40,43 +55,112 @@
                 <a href="index.html"><h4>sahuqui___®</h4></a>
             </div>
             <div class="d-flex gap-4">
-                <a href=""><h4>work</h4></a>
+                <a href="work.html"><h4>work</h4></a>
                 <a href="archivos.html"><h4>archivos</h4></a>
-                <a href="aboutme.html"><h4>about me</h4></a>
+                <a href="aboutme.html" class="grey"><h4 class="grey">about me</h4></a>
                 <a href=""><h4>contact</h4></a>
             </div>
         </nav>
     </header>
     <main>
-        <div class="d-flex p-3">
-                <h1 class="split">El primer cartel, sobre fondo beige cálido con tipografía negra, interpela directamente al espectador con una afirmación que lo coloca en el centro de la historia:  . La primera frase genera el reconocimiento: hay algo que el espectador comparte sin saberlo. La segunda lo convierte en receptor de algo que ya ocurrió, alguien ya hizo el primer gesto, sin pedirle nada todavía. En la mitad inferior del cartel aparece la línea del horizonte, que divide el soporte horizontalmente, y en la esquina inferior izquierda el imagotipo de la marca, pequeño y discreto, como quien espera su turno.s
-                </h1>
+        <div class="demo-area wave-target" id="demoArea">
+            <div class="mag-zone" data-mode="true" data-wiggle="false">
+                <button class="mag-btn">
+                <div class="bg"></div>
+                <span class="label">3D</span>
+                </button>
+            </div>
+
+            <div class="mag-zone" data-mode="true" data-wiggle="false">
+                <button class="mag-btn">
+                <div class="bg"></div>
+                <span class="label">Web</span>
+                </button>
+            </div>
+
+            <div class="mag-zone" data-mode="true" data-wiggle="false">
+                <button class="mag-btn">
+                <div class="bg"></div>
+                <span class="label">UX design</span>
+                </button>
+            </div>
+            <div class="mag-zone" data-mode="true" data-wiggle="false">
+                <button class="mag-btn">
+                <div class="bg"></div>
+                <span class="label">Branding</span>
+                </button>
+            </div>
+
+            <div class="mag-zone" data-mode="true" data-wiggle="false">
+                <button class="mag-btn">
+                <div class="bg"></div>
+                <span class="label">Editorial</span>
+                </button>
+            </div>
+
+            <div class="mag-zone" data-mode="true" data-wiggle="false">
+                <button class="mag-btn">
+                <div class="bg"></div>
+                <span class="label">IA</span>
+                </button>
+            </div>
+
+            
+            <div class="mag-zone" data-mode="true" data-wiggle="false">
+                <button class="mag-btn">
+                <div class="bg"></div>
+                <span class="label">Cinema</span>
+                </button>
+            </div>
+
+            <div class="mag-zone" data-mode="true" data-wiggle="false">
+                <button class="mag-btn">
+                <div class="bg"></div>
+                <span class="label">Publicidad</span>
+                </button>
+            </div>
+            <div class="mag-zone" data-mode="true" data-wiggle="false">
+                <button class="mag-btn">
+                <div class="bg"></div>
+                <span class="label">Packaging</span>
+                </button>
+            </div>
+
+            <div class="mag-zone" data-mode="true" data-wiggle="false">
+                <button class="mag-btn">
+                <div class="bg"></div>
+                <span class="label">Art</span>
+                </button>
+            </div>
         </div>
-        <!-- <div class="d-flex justify-end ">
-            <div class="p-4 col-md-8">
-                <p>/SOBRE MÍ</p>
-                <p>¡Hola! Soy Eva, estudiante de Diseño Gráfico en Madrid, actualmente cursando mi cuarto año de carrera. Desde que tengo uso de razón me ha apasionado el arte en todas sus formas, desde pintar un óleo hasta tocar un instrumento.</p>
-                <p>Durante mi recorrido académico he participado en diversos proyectos y he tenido la oportunidad de ganar concursos como Inspirathon. Actualmente, busco seguir creciendo como creativa, enfrentándome a nuevos retos que me permitan fusionar mi pasión por el arte con el diseño.</p>
+        <div class="texto-introduccion wave-target d-flex align-items-center justify-content-center">
+            <h6 class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero veniam.</h6>
+        </div>
+        <section class="soap-product">
+            <div class="soap3D">
+                <div class="d-flex align-items-center justify-content-center">
+                    <model-viewer id="draggable-model" tabindex="-1" alt="Modelo 3D" src="media/3D/yo.glb"
+                    environment-image="media/3D/toposcope_sunset_4k.hdr" ar shadow-intensity="1" exposure="1"
+                    camera-controls disable-zoom
+                    touch-action="pan-y"
+                    min-camera-orbit="-Infinity 75deg auto"
+                    max-camera-orbit="Infinity 75deg auto"
+                    auto-rotate rotation-per-second="30deg"
+                    interaction-prompt="none">
+                    <!-- <div class="caption"><h5>DRAG-ME.png</h5></div> -->
+                    </model-viewer>
+                </div>
             </div>
-            <div class="col-6 col-md-4 text-justify info-content p-4 ">
-                <p>/EXPERIENCIA</p>
-                <p>/Coonic Conmunica Mediatrader S.L.
-                (Diseñadora Gráfica)
-                Jun-Sep 2025</p>
-                <p>Coonic Conmunica Mediatrader S.L.
-                (Intership)
-                Nov-May 2025</p>
-                <p>/CONCURSOS-PREMIOS</p>
-                <p>Inspirathon 2024-Cuarto premio 
-                (Merchandising UDIT)
-                Colaboración: Ayla Cano López</p>
-                <p>Inspirathon 2023-Primer premio
-                (Amenities Hotel Thompson Madrid)
-                Colaboración: Ayla Cano López</p>
+        </section>
+        <section class="container-fluid espacio"></section>
+        <section class="overlay-section">
+            <div class="d-flex p-3 overlay-content ">
+                <h1 class="split"> <span class="negri-italic">(01)</span> Hola, soy Eva: diseñadora gráfica, recién graduada en Madrid. Mi trabajo se mueve entre la investigación y la ejecución no me interesa una imagen bonita sin una razón detrás. Busco construir piezas que puedan defenderse con argumentos, no solo enseñarse. <span class="negri-italic">(02)</span> Trabajo de forma multidisciplinar, moviéndome entre motion graphics, diseño 3D, packaging e identidad de marca según lo que cada proyecto necesite decir. No tengo una técnica fija: tengo una forma de pensar que se adapta a cada herramienta, y eso es lo que me permite encontrar soluciones distintas para problemas distintos.
+                </h1>
             </div>
-        </div> -->
+        </section>   
     </main>
-    <footer>
+    <footer class="fixed-bottom">
         <div class="p-3 d-flex justify-content-between">
             <div class="d-flex gap-4">
                 <h4 id="mode-toggle" class="sol">☾</h4>
@@ -91,30 +175,34 @@
 
     <!-- ===== SCRIPTS ===== -->
 
-    <!-- jQuery -->
+    <!-- 1. jQuery (dependencia de Bootstrap) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-    <!-- Bootstrap -->
+    <!-- 2. Bootstrap (depende de jQuery) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- GSAP -->
+    <!-- 3. GSAP y plugins (independientes) -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/SplitText.min.js"></script>  <!-- ← AÑADE ESTA LÍNEA -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/SplitText.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/CustomEase.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/CustomWiggle.min.js"></script>
 
-    <!-- Import map para Three.js -->
+    <!-- 4. Import map para Three.js (debe ir ANTES que cualquier script que use Three.js) -->
     <script type="importmap">
-        {
-            "imports": {
-                "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
-            }
-        }
+    { "imports": { "three": "https://unpkg.com/three@0.128.0/build/three.module.js" } }
     </script>
 
-    <!-- TU GALERÍA 3D (archivo externo) -->
-    <script type="module" src="js/galeria-3d.js"></script>
+    <!-- 5. Model Viewer (CDN externo) -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
 
-    <!-- Tu JS personal -->
-    <script src="js/script.js"></script>
+    <!-- 7. MAGNETISMOS (si no usa Three.js, puede ir aquí) -->
+    <script src="js/magnetismos.js"></script>
+    <!-- <script src="js/wave-effect.js"></script> -->
+
+    <!-- 8. Tu JS personal (al final, después de todo) -->
+    <script src="js/aboutme.js"></script>
+
+    
 </body>
 </html>

@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // ============================================
-// SPLIT TEXT - GSAP
+// SPLIT TEXT CON SCROLLTRIGGER
 // ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -146,18 +146,28 @@ document.addEventListener('DOMContentLoaded', () => {
     linesClass: "line"
   });
 
-  // Animación
-  gsap.fromTo(split.lines, 
-    {
-      y: 100,
-      opacity: 0
+  // Configurar las líneas como ocultas inicialmente
+  gsap.set(split.lines, {
+    y: 100,
+    opacity: 0
+  });
+
+  // Animación con ScrollTrigger
+  ScrollTrigger.create({
+    trigger: titulo,           // El elemento que activa la animación
+    start: "top 80%",          // Cuando el top del título llegue al 80% de la ventana
+    onEnter: () => {
+      gsap.to(split.lines, {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.1,
+        ease: "power3.out",
+        overwrite: true
+      });
     },
-    {
-      y: 0,
-      opacity: 1,
-      duration: 1,
-      stagger: 0.1,
-      ease: "power3.out"
-    }
-  );
-});
+    once: true                 // Solo se ejecuta una vez
+  });
+})
+
+

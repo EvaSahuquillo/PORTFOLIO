@@ -1,0 +1,513 @@
+html {
+  overscroll-behavior: none;
+}
+
+* {
+  box-sizing: border-box;
+  /* font-size: 16px; */
+  scroll-behavior: smooth;
+  cursor: none !important;
+}
+
+
+:root {
+  --bg-light: #ffffff;
+  --bg-dark: #141414;
+  --text-light: #191919;
+  --text-dark: #efefef;
+  --text-middle: #969696;
+  --link-light: #191919;
+  --link-dark: #efefef;
+}
+
+body {
+  transition: 0.3s ease, color 0.3s ease;
+}
+
+body.light-mode {
+  background-color: var(--bg-light);
+  color: var(--text-light);  /* ← Esto funciona para todos los textos */
+}
+
+body.dark-mode {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);   /* ← Esto funciona para todos los textos */
+}
+
+body.light-mode a {
+  color: var(--link-light);
+  text-decoration: none;
+}
+
+body.dark-mode a {
+  color: var(--link-dark);
+  text-decoration: none;
+}
+
+body.light-mode .cursor-inner{
+  background-color: var(--bg-dark);
+}
+
+body.dark-mode .cursor-inner{
+  background-color: var(--bg-light);
+}
+
+body {
+  height: 100vh;
+  position: relative;
+  margin: 0;
+  background-color: var(--bg-light);
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1rem;
+  letter-spacing: -1px;
+}
+
+p {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 0.75rem;
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 0;
+}
+
+h1 {
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 3.5rem;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  color: var(--text-middle);
+  /* text-indent: 2em; */
+}
+
+
+
+h3 {
+  font-family: "Instrument Serif", serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 2.5rem;
+  text-indent: 1.5em;
+  color: var(--text-middle);
+}
+
+.negri-italic {
+  font-family: "Instrument Serif", serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 3.5rem;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+h4 {
+  font-family:  "Inter", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 2rem;
+  letter-spacing: -2px;
+  /* color: var(--text-light); */
+}
+
+h5 {
+  font-family:  "Inter", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 1rem;
+  color: var(--text-middle);
+}
+
+h6 {
+  font-family: "Instrument Serif", serif;
+  font-weight: 300;
+  font-size: 3.5rem;
+  /* color: var(--text-light); */
+  line-height: 1;
+}
+
+.grey {
+    color: var(--text-middle);
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-light);
+}
+
+/* CUSTOM CURSOR */
+#custom-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-inner {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-dark);
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  mix-blend-mode: difference; /* ← Mover aquí */
+}
+
+.cursor-inner.link-hover {
+  width: 40px;
+  height: 40px;
+  background-color: var(--bg-dark);
+  transform: scale(1.5);
+}
+
+/* Asegurar que el cursor personalizado sea visible */
+#custom-cursor {
+  display: block !important;
+}
+
+/* Para elementos interactivos, seguimos sin mostrar el cursor por defecto */
+a, button, .btn, .sol, #mode-toggle, .proyecto-link, [href] {
+  cursor: none !important;
+}
+
+
+/* ocultar cursor en móvil */
+@media (max-width: 768px) {
+  #custom-cursor { display: none; }
+  body { cursor: auto !important; }
+
+  p {
+    font-size: 0.7rem;
+  }
+  h4 {
+    font-size: 1.25rem;
+
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .label {
+    font-size: 1.25rem;
+  }
+}
+
+/* HOME  */
+nav {
+  height: 55px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  background-color: transparent;
+  position: fixed;
+  top: 0;
+  z-index: 6;
+}
+
+.nav-link:hover {
+  cursor: pointer;
+}
+
+#expanded-menu {
+  background-color: transparent;
+  border-bottom: 1px solid var(--bg-dark);
+  overflow: hidden;
+  height: 0;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  img {
+    max-width: 40vh;
+    max-height: 40vh;
+    object-fit: cover;
+    opacity: 0;
+  }
+}
+
+.section-present {
+  justify-content: space-between;
+  width: 100%;
+  position: absolute;
+}
+
+.presentacion {
+  width: 50%;
+}
+
+.texto-introduccion {
+    height: 100vh;
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    padding-inline: 25em;
+}
+
+/* Split Text */
+.split {
+  overflow: hidden;
+  width: 100%;
+}
+
+.line {
+  display: block;
+  overflow: hidden;
+}
+
+
+
+/* .split .line:first-child {
+  padding-left: 2em;
+} */
+
+.footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  z-index: 100;
+}
+
+.sol {
+  font-family: "Inter", sans-serif;
+  font-weight: 500 !important;
+}
+
+/* GALERIA  */
+
+.galeria-3d {
+    width: 100%;
+    height: 85vh;
+    position: relative;
+    overflow: hidden;
+    background: transparent; /* Importante: transparente */
+}
+
+#contenedor-3d {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* INFO */
+.info-content {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+
+h2 {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+
+
+/* ELEMENTO 3D */
+/* -------SOAP--------- */
+
+.soap-product {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.soap3D {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.soap3D > div {
+  flex-direction: column;
+}
+
+#draggable-model {
+  width: 30rem;
+  height: 40rem;
+  max-width: 100%;
+  max-height: 100%;
+  position: absolute;
+  top: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: grab;
+  outline: none;
+}
+
+#draggable-model:active {
+  cursor: grabbing;
+}
+
+.caption {
+  position: absolute;
+  z-index: 10;
+  top: 570px;
+  left: 200px;
+}
+
+.espacio {
+  height: 100vh;
+}
+
+/* Envuelve el contenido que quieres que "ondule" (texto, secciones, etc.) */
+.wave-target {
+  position: relative;
+  --wave-x: 50%;
+  --wave-y: 50%;
+}
+
+.wave-echo {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  filter: url(#wave-distort);
+  -webkit-mask-image: radial-gradient(circle at var(--wave-x) var(--wave-y),
+    transparent 0%,
+    transparent calc(var(--wave-ring, -20%) - 10%),
+    black var(--wave-ring, -20%),
+    transparent calc(var(--wave-ring, -20%) + 10%));
+  mask-image: radial-gradient(circle at var(--wave-x) var(--wave-y),
+    transparent 0%,
+    transparent calc(var(--wave-ring, -20%) - 10%),
+    black var(--wave-ring, -20%),
+    transparent calc(var(--wave-ring, -20%) + 10%));
+}
+
+/* el destello: esto es lo que realmente vende el efecto de agua */
+.wave-glint {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  background: radial-gradient(circle at var(--wave-x) var(--wave-y),
+    transparent 0%,
+    transparent calc(var(--wave-ring, -20%) - 3%),
+    rgba(255,255,255,0.6) var(--wave-ring, -20%),
+    transparent calc(var(--wave-ring, -20%) + 3%));
+}
+
+/* CAPA OVERLAY  */
+.overlay-section {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    backdrop-filter: blur(20px);
+    /* -webkit-backdrop-filter: blur(20px) opacity(0.9); */
+    height: 100vh;
+    padding-top: 3em;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 60px);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 60px);
+}
+
+.overlay-content {
+    flex: 1 1 auto;
+    width: 100%;
+}
+
+
+
+/* :root {
+  --green: #0ae448;
+  --black: #0e100f;
+  --white: #fffce1;
+  --lt: #abff84;
+  --grey: #191919;
+  --s75: #bbbaa6;
+  --s50: #7c7c6f;
+  --s25: #42433d;
+  --grad-macha: linear-gradient(114.41deg, #0ae448 20.74%, #abff84 65.5%);
+  --grad-orange: linear-gradient(111.45deg, #ff8709 19.42%, #f7bdf8 73.08%);
+} */
+
+
+.demo-area {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
+  pointer-events: none; /* que no bloquee el resto de la página */
+}
+
+.demo-area .mag-zone {
+  position: absolute;
+  pointer-events: auto; /* pero los botones sí reciben eventos */
+}
+
+.demo-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 40%;
+  position: relative;
+}
+.mag-zone {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border-radius: 50%;
+  border: 1px dashed var(--s25); */
+  position: relative;
+  cursor: pointer;
+}
+
+.mag-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 32px;
+  border-radius: 99px;
+  border: none;
+  background: transparent; /* ← añade esto */
+  cursor: pointer;
+  font-family: Mori, sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  overflow: hidden;
+  will-change: transform;
+}
+.mag-btn .bg {
+  position: absolute;
+  inset: 0;
+  border-radius: 99px;
+  z-index: 0;
+}
+.mag-btn .label {
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
+
+.label {
+    font-family: "Instrument Serif", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2.5rem;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    color: var(--text-middle);
+}
+
+
+
+

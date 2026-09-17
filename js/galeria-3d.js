@@ -1,12 +1,15 @@
 // ============================================
 // GALERÍA 3D INMERSIVA - 3 FILAS ELÍPTICAS
 // Hover proporcional + Verticales/Horizontales
+// Ahora respeta el aspect ratio REAL de cada imagen
 // ============================================
-
+ 
 import * as THREE from 'three';
-
+ 
 // TUS PROYECTOS - Con orientación específica
 // orientation: 'vertical' (retrato) o 'horizontal' (paisaje)
+// (orientation ya no se usa para forzar un ratio fijo, solo para
+//  decidir qué "caja máxima" de la fila le corresponde a cada imagen)
 const proyectos = [
     // Fila superior
     { 
@@ -22,6 +25,20 @@ const proyectos = [
         titulo: 'Loop Visual',
         fila: 0,
         orientation: 'horizontal'
+    },
+    { 
+        imagen: 'img/proyectos/5.jpeg',
+        url: 'https://tupagina.com/proyecto5',
+        titulo: 'Loop Visual',
+        fila: 0,
+        orientation: 'horizontal'
+    },
+    { 
+        imagen: 'img/proyectos/MORPHO1.png',
+        url: 'https://tupagina.com/proyecto5',
+        titulo: 'Loop Visual',
+        fila: 0,
+        orientation: 'vertical'
     },
     
     // Fila media (principal)
@@ -39,59 +56,47 @@ const proyectos = [
         fila: 1,
         orientation: 'vertical'
     },
+   
     { 
-        imagen: 'img/proyectos/MORPHO1.png',
-        url: 'https://tupagina.com/proyecto5',
-        titulo: 'Loop Visual',
-        fila: 1,
-        orientation: 'vertical'
-    },
-    { 
-        imagen: 'img/proyectos/cata.png',
+        imagen: 'img/proyectos/archif1.png',
         url: 'https://tupagina.com/proyecto5',
         titulo: 'Loop Visual',
         fila: 1,
         orientation: 'horizontal'
     },
     { 
-        imagen: 'img/proyectos/cargo sardinas.png',
+        imagen: 'img/proyectos/CERVEZAAA22.png',
         url: 'https://tupagina.com/proyecto5',
         titulo: 'Loop Visual',
         fila: 1,
         orientation: 'vertical'
     },
     { 
-        imagen: 'img/proyectos/MORPHO1.png',
-        url: 'https://tupagina.com/proyecto5',
-        titulo: 'Loop Visual',
-        fila: 1,
-        orientation: 'vertical'
-    },
-    { 
-        imagen: 'img/proyectos/cata.png',
+        imagen: 'img/proyectos/TRIPTIC.png',
         url: 'https://tupagina.com/proyecto5',
         titulo: 'Loop Visual',
         fila: 1,
         orientation: 'horizontal'
     },
     { 
-        imagen: 'img/proyectos/cargo sardinas.png',
+        imagen: 'img/proyectos/sardi-pack.png',
         url: 'https://tupagina.com/proyecto5',
         titulo: 'Loop Visual',
         fila: 1,
         orientation: 'vertical'
     },
+    { 
+        imagen: 'img/proyectos/Billboard2_mockup.png',
+        url: 'https://tupagina.com/proyecto5',
+        titulo: 'Loop Visual',
+        fila: 1,
+        orientation: 'horizontal'
+    },
+
     
     // Fila inferior
     { 
         imagen: 'img/proyectos/ILUSTRACION5.png',
-        url: 'https://tupagina.com/proyecto5',
-        titulo: 'Loop Visual',
-        fila: 2,
-        orientation: 'vertical'
-    },
-    { 
-        imagen: 'img/proyectos/portada2026.png',
         url: 'https://tupagina.com/proyecto5',
         titulo: 'Loop Visual',
         fila: 2,
@@ -104,56 +109,91 @@ const proyectos = [
         fila: 2,
         orientation: 'vertical'
     },
+    { 
+        imagen: 'img/proyectos/IMG_4965.jpeg',
+        url: 'https://tupagina.com/proyecto5',
+        titulo: 'Loop Visual',
+        fila: 2,
+        orientation: 'vertical'
+    },
 ];
-
+ 
 // Configuración de las 3 filas
+// tamanoHorizontal / tamanoVertical ahora actúan como la CAJA MÁXIMA
+// (ancho máx. para horizontales, alto máx. para verticales) dentro de
+// la cual se ajusta cada imagen sin deformarse.
 const configFilas = {
     // Fila superior (arriba) - imágenes más pequeñas
     fila0: {
-        radioX: 25.0,
-        radioZ: 3.0,
-        tamanoHorizontal: 4,    // Tamaño base para horizontales
-        tamanoVertical: 4,      // Tamaño base para verticales (más pequeñas)
-        altura: 10,
+        radioX: 15.0,
+        radioZ: 25.0,
+        tamanoHorizontal: 3,    // Ancho máximo para horizontales
+        tamanoVertical: 2.5,        // Alto máximo para verticales
+        altura: 4,
         velocidadRotacion: 0.002,
-        factorHover: 1.2          // Las pequeñas crecen solo un 20%
+        factorHover: 1.3          // Las pequeñas crecen solo un 20%
     },
     // Fila media (principal) - imágenes más grandes
     fila1: {
         radioX: 12.0,
-        radioZ: 12.0,
-        tamanoHorizontal: 4.5,
-        tamanoVertical: 4,
+        radioZ: 20.0,
+        tamanoHorizontal: 5,
+        tamanoVertical: 3,
         altura: 0,
         velocidadRotacion: 0.003,
         factorHover: 1.15         // Crecen un 15%
     },
     // Fila inferior (abajo)
     fila2: {
-        radioX: 25.0,
-        radioZ: 3.0,
-        tamanoHorizontal: 4,
-        tamanoVertical: 4,
-        altura: -5,
+        radioX: 15.0,
+        radioZ: 25.0,
+        tamanoHorizontal: 3,
+        tamanoVertical: 2.5,
+        altura: -4,
         velocidadRotacion: 0.002,
         factorHover: 1.2
     }
 };
-
+ 
 // Configuración general
 const config = {
     sensibilidadMouse: 0.005,
-    sensibilidadScroll: 0.01,
-    velocidadTransicion: 0.15
+    sensibilidadScroll: 0.005,
+    velocidadTransicion: 0.15,
+    // 1.0 = círculo perfecto (radioZ se usa tal cual)
+    // Cuanto más bajo, más plana la elipse (menos profundidad en Z)
+    // Prueba valores entre 0.3 y 0.6
+    achatamientoElipse: 0.45
 };
-
+ 
 let rotacionActual = 0;
 let rotacionObjetivo = 0;
-
+ 
 document.addEventListener('DOMContentLoaded', () => {
     iniciarGaleria3D();
 });
-
+ 
+// ============================================
+// Calcula ancho/alto reales SIN deformar la imagen,
+// ajustándola ("contain") dentro de una caja máxima.
+// ============================================
+function calcularDimensionesSinDeformar(imgWidth, imgHeight, cajaMaxAncho, cajaMaxAlto) {
+    const ratioImagen = imgWidth / imgHeight;
+    const ratioCaja = cajaMaxAncho / cajaMaxAlto;
+ 
+    let ancho, alto;
+    if (ratioImagen > ratioCaja) {
+        // La imagen es proporcionalmente más ancha que la caja -> limita el ancho
+        ancho = cajaMaxAncho;
+        alto = cajaMaxAncho / ratioImagen;
+    } else {
+        // La imagen es proporcionalmente más alta que la caja -> limita el alto
+        alto = cajaMaxAlto;
+        ancho = cajaMaxAlto * ratioImagen;
+    }
+    return { ancho, alto };
+}
+ 
 function iniciarGaleria3D() {
     const contenedor = document.getElementById('contenedor-3d');
     if (!contenedor) {
@@ -178,10 +218,18 @@ function iniciarGaleria3D() {
     
     const objetosImagenes = [];
     const gruposFila = [];
+    const loader = new THREE.TextureLoader();
     
     // ============================================
-    // CREAR 3 FILAS CON ORIENTACIÓN VARIABLE
+    // PRECARGAR TODAS LAS TEXTURAS ANTES DE MONTAR NADA
+    // (así no hay parpadeos ni imágenes "apareciendo" sueltas)
     // ============================================
+    
+    function cargarTextura(ruta) {
+        return new Promise((resolve, reject) => {
+            loader.load(ruta, resolve, undefined, reject);
+        });
+    }
     
     const proyectosPorFila = [[], [], []];
     proyectos.forEach(proyecto => {
@@ -189,82 +237,109 @@ function iniciarGaleria3D() {
         proyectosPorFila[fila].push(proyecto);
     });
     
-    [0, 1, 2].forEach(filaIndex => {
-        const proyectosFila = proyectosPorFila[filaIndex];
-        if (proyectosFila.length === 0) return;
+    const todasLasCargas = proyectos.map(proyecto =>
+        cargarTextura(proyecto.imagen)
+            .then(textura => ({ proyecto, textura, error: null }))
+            .catch(error => ({ proyecto, textura: null, error }))
+    );
+    
+    Promise.all(todasLasCargas).then((resultados) => {
+        // Índice rápido: ruta de imagen -> textura ya cargada
+        const texturasPorRuta = new Map();
+        resultados.forEach(({ proyecto, textura, error }) => {
+            if (error) {
+                console.warn(`No se pudo cargar la imagen: ${proyecto.imagen}`, error);
+            } else {
+                texturasPorRuta.set(proyecto.imagen, textura);
+            }
+        });
         
-        const configFila = configFilas[`fila${filaIndex}`];
-        const grupoFila = new THREE.Group();
-        grupoFila.position.y = configFila.altura;
-        
-        proyectosFila.forEach((proyecto, idx) => {
-            const textura = new THREE.TextureLoader().load(proyecto.imagen);
-            const material = new THREE.MeshBasicMaterial({
-                map: textura,
-                side: THREE.DoubleSide
+        montarGaleria(texturasPorRuta);
+    });
+    
+    // ============================================
+    // CREAR 3 FILAS CON ORIENTACIÓN VARIABLE
+    // (se ejecuta solo cuando TODAS las texturas ya están listas)
+    // ============================================
+    
+    function montarGaleria(texturasPorRuta) {
+        [0, 1, 2].forEach(filaIndex => {
+            const proyectosFila = proyectosPorFila[filaIndex];
+            if (proyectosFila.length === 0) return;
+            
+            const configFila = configFilas[`fila${filaIndex}`];
+            const grupoFila = new THREE.Group();
+            grupoFila.position.y = configFila.altura;
+            
+            proyectosFila.forEach((proyecto, idx) => {
+                const textura = texturasPorRuta.get(proyecto.imagen);
+                if (!textura) return; // esta imagen falló al cargar, se omite
+                
+                const isVertical = proyecto.orientation === 'vertical';
+                
+                // Caja máxima que le corresponde según orientación
+                const cajaAncho = isVertical ? configFila.tamanoVertical : configFila.tamanoHorizontal;
+                const cajaAlto  = isVertical ? configFila.tamanoVertical * 1.4 : configFila.tamanoHorizontal * 0.75;
+                
+                // Dimensiones reales sin deformar, ajustadas a la caja
+                const imgW = textura.image.width;
+                const imgH = textura.image.height;
+                const { ancho, alto } = calcularDimensionesSinDeformar(
+                    imgW, imgH, cajaAncho, cajaAlto
+                );
+                
+                const material = new THREE.MeshBasicMaterial({
+                    map: textura,
+                    side: THREE.DoubleSide
+                });
+                const geometria = new THREE.PlaneGeometry(ancho, alto);
+                const imagenPlano = new THREE.Mesh(geometria, material);
+                
+                // Posición en elipse (radioZ se aplana con achatamientoElipse
+                // para que no sea un círculo perfecto y las imágenes queden
+                // más de frente a la cámara, con menos deformación de perspectiva)
+                const angulo = (idx / proyectosFila.length) * Math.PI * 2;
+                const radioX = configFila.radioX;
+                const radioZ = configFila.radioZ * config.achatamientoElipse;
+                
+                imagenPlano.position.x = Math.cos(angulo) * radioX;
+                imagenPlano.position.z = Math.sin(angulo) * radioZ;
+                imagenPlano.lookAt(0, grupoFila.position.y, 0);
+                
+                // Tamaño hover proporcional al tamaño real ya calculado
+                const tamanoHover = {
+                    ancho: ancho * configFila.factorHover,
+                    alto: alto * configFila.factorHover
+                };
+                
+                imagenPlano.userData = {
+                    url: proyecto.url,
+                    titulo: proyecto.titulo,
+                    fila: filaIndex,
+                    escalaOriginal: { ancho, alto },
+                    escalaHover: tamanoHover,
+                    escalaActual: { ancho, alto },
+                    hoverActivo: false,
+                    isVertical: isVertical,
+                    anguloOriginal: angulo
+                };
+                
+                grupoFila.add(imagenPlano);
+                objetosImagenes.push(imagenPlano);
             });
             
-            // Determinar tamaño según orientación
-            const isVertical = proyecto.orientation === 'vertical';
-            const tamanoBase = isVertical ? configFila.tamanoVertical : configFila.tamanoHorizontal;
-            
-            // Proporción de aspecto: vertical (2:3), horizontal (3:2)
-            let ancho, alto;
-            if (isVertical) {
-                ancho = tamanoBase;
-                alto = tamanoBase * 1.4;  // 2:3 ratio
-            } else {
-                ancho = tamanoBase;
-                alto = tamanoBase * 0.75; // 3:2 ratio
-            }
-            
-            const geometria = new THREE.PlaneGeometry(ancho, alto);
-            const imagenPlano = new THREE.Mesh(geometria, material);
-            
-            // Posición en elipse
-            const angulo = (idx / proyectosFila.length) * Math.PI * 2;
-            const radioX = configFila.radioX;
-            const radioZ = configFila.radioZ;
-            
-            imagenPlano.position.x = Math.cos(angulo) * radioX;
-            imagenPlano.position.z = Math.sin(angulo) * radioZ;
-            imagenPlano.lookAt(0, grupoFila.position.y, 0);
-            
-            // Calcular tamaño hover (proporcional al tamaño original)
-            const tamanoHover = tamanoBase * configFila.factorHover;
-            let anchoHover, altoHover;
-            if (isVertical) {
-                anchoHover = tamanoHover;
-                altoHover = tamanoHover * 1.4;
-            } else {
-                anchoHover = tamanoHover;
-                altoHover = tamanoHover * 0.75;
-            }
-            
-            // Guardar datos
-            imagenPlano.userData = {
-                url: proyecto.url,
-                titulo: proyecto.titulo,
-                fila: filaIndex,
-                escalaOriginal: { ancho: ancho, alto: alto },
-                escalaHover: { ancho: anchoHover, alto: altoHover },
-                escalaActual: { ancho: ancho, alto: alto },
-                hoverActivo: false,
-                isVertical: isVertical,
-                anguloOriginal: angulo
-            };
-            
-            grupoFila.add(imagenPlano);
-            objetosImagenes.push(imagenPlano);
+            grupoPrincipal.add(grupoFila);
+            gruposFila.push({
+                grupo: grupoFila,
+                config: configFila,
+                rotacionActual: 0
+            });
         });
         
-        grupoPrincipal.add(grupoFila);
-        gruposFila.push({
-            grupo: grupoFila,
-            config: configFila,
-            rotacionActual: 0
-        });
-    });
+        animar();
+        
+        console.log(`✨ Galería 3D con orientaciones variable (aspect ratio real por imagen)`);
+    }
     
     // ============================================
     // ACTUALIZAR ESCALAS CON TRANSICIÓN (HOVER PROPORCIONAL)
@@ -392,8 +467,6 @@ function iniciarGaleria3D() {
         requestAnimationFrame(animar);
     }
     
-    animar();
-    
     window.addEventListener('resize', () => {
         const width = contenedor.clientWidth;
         const height = contenedor.clientHeight;
@@ -401,6 +474,4 @@ function iniciarGaleria3D() {
         camera.updateProjectionMatrix();
         renderer.setSize(width, height);
     });
-    
-    console.log(`✨ Galería 3D con orientaciones variable`);
 }
