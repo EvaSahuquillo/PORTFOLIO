@@ -364,42 +364,7 @@ h2 {
   height: 100vh;
 }
 
-/* Envuelve el contenido que quieres que "ondule" (texto, secciones, etc.) */
-.wave-target {
-  position: relative;
-  --wave-x: 50%;
-  --wave-y: 50%;
-}
 
-.wave-echo {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  filter: url(#wave-distort);
-  -webkit-mask-image: radial-gradient(circle at var(--wave-x) var(--wave-y),
-    transparent 0%,
-    transparent calc(var(--wave-ring, -20%) - 10%),
-    black var(--wave-ring, -20%),
-    transparent calc(var(--wave-ring, -20%) + 10%));
-  mask-image: radial-gradient(circle at var(--wave-x) var(--wave-y),
-    transparent 0%,
-    transparent calc(var(--wave-ring, -20%) - 10%),
-    black var(--wave-ring, -20%),
-    transparent calc(var(--wave-ring, -20%) + 10%));
-}
-
-/* el destello: esto es lo que realmente vende el efecto de agua */
-.wave-glint {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  mix-blend-mode: overlay;
-  background: radial-gradient(circle at var(--wave-x) var(--wave-y),
-    transparent 0%,
-    transparent calc(var(--wave-ring, -20%) - 3%),
-    rgba(255,255,255,0.6) var(--wave-ring, -20%),
-    transparent calc(var(--wave-ring, -20%) + 3%));
-}
 
 /* CAPA OVERLAY  */
 .overlay-section {
@@ -418,22 +383,6 @@ h2 {
     flex: 1 1 auto;
     width: 100%;
 }
-
-
-
-/* :root {
-  --green: #0ae448;
-  --black: #0e100f;
-  --white: #fffce1;
-  --lt: #abff84;
-  --grey: #191919;
-  --s75: #bbbaa6;
-  --s50: #7c7c6f;
-  --s25: #42433d;
-  --grad-macha: linear-gradient(114.41deg, #0ae448 20.74%, #abff84 65.5%);
-  --grad-orange: linear-gradient(111.45deg, #ff8709 19.42%, #f7bdf8 73.08%);
-} */
-
 
 .demo-area {
   position: fixed;

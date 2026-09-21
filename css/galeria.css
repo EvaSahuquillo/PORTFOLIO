@@ -1,0 +1,287 @@
+html {
+  overscroll-behavior: none;
+}
+
+* {
+  box-sizing: border-box;
+  /* font-size: 16px; */
+  scroll-behavior: smooth;
+  cursor: none !important;
+}
+
+
+:root {
+  --bg-light: #ffffff;
+  --bg-dark: #141414;
+  --text-light: #191919;
+  --text-dark: #efefef;
+  --text-middle: #969696;
+  --link-light: #191919;
+  --link-dark: #efefef;
+}
+
+body {
+  transition: 0.3s ease, color 0.3s ease;
+}
+
+body.light-mode {
+  background-color: var(--bg-light);
+  color: var(--text-light);  /* ← Esto funciona para todos los textos */
+}
+
+body.dark-mode {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);   /* ← Esto funciona para todos los textos */
+}
+
+body.light-mode a {
+  color: var(--link-light);
+  text-decoration: none;
+}
+
+body.dark-mode a {
+  color: var(--link-dark);
+  text-decoration: none;
+}
+
+body.light-mode .cursor-inner{
+  background-color: var(--bg-dark);
+}
+
+body.dark-mode .cursor-inner{
+  background-color: var(--bg-light);
+}
+
+body {
+  height: 100vh;
+  position: relative;
+  margin: 0;
+  background-color: var(--bg-light);
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1rem;
+  letter-spacing: -1px;
+  overflow-x: hidden;
+}
+
+p {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 0.75rem;
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 0;
+}
+
+h1 {
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 3.5rem;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  color: var(--text-middle);
+  /* text-indent: 1.5em; */
+}
+
+
+h3 {
+  font-family: "Instrument Serif", serif;
+  font-weight: 300;
+  font-style: normal;
+  /* font-size: 5rem; */
+}
+
+h4 {
+  font-family:  "Inter", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 2rem;
+  letter-spacing: -2px;
+  /* color: var(--text-light); */
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-light);
+}
+
+/* CUSTOM CURSOR */
+#custom-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-inner {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-dark);
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  mix-blend-mode: difference; /* ← Mover aquí */
+}
+
+.cursor-inner.link-hover {
+  width: 40px;
+  height: 40px;
+  background-color: var(--bg-dark);
+  transform: scale(1.5);
+}
+
+/* Asegurar que el cursor personalizado sea visible */
+#custom-cursor {
+  display: block !important;
+}
+
+/* Para elementos interactivos, seguimos sin mostrar el cursor por defecto */
+a, button, .btn, .sol, #mode-toggle, .proyecto-link, [href] {
+  cursor: none !important;
+}
+
+
+/* ocultar cursor en móvil */
+@media (max-width: 768px) {
+  #custom-cursor { display: none; }
+  body { cursor: auto !important; }
+
+  p {
+    font-size: 0.7rem;
+  }
+  h4 {
+    font-size: 1.25rem;
+
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+/* HOME  */
+
+header{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:1030; /* por encima de la galería */
+}
+
+nav {
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  background-color: transparent;
+  position: sticky;
+  top: 0;
+  z-index: 6;
+}
+
+
+.nav-link:hover {
+  cursor: pointer;
+}
+
+#expanded-menu {
+  background-color: transparent;
+  border-bottom: 1px solid var(--bg-dark);
+  overflow: hidden;
+  height: 0;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  img {
+    max-width: 40vh;
+    max-height: 40vh;
+    object-fit: cover;
+    opacity: 0;
+  }
+}
+
+.section-present {
+  /* justify-content: space-between; */
+  width: 100%;
+  /* position: absolute; */
+  padding: 10rem 0rem;
+  height: 85vh;
+}
+
+.presentacion {
+  width: 60%;
+}
+
+
+/* Split Text */
+.split {
+  overflow: hidden;
+}
+
+.line {
+  display: block;
+  overflow: hidden;
+}
+
+.footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  z-index: 100;
+}
+
+.sol {
+  font-family: "Inter", sans-serif;
+  font-weight: 500 !important;
+}
+
+
+/* GALERIA-ARCHIVOS  */
+*{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    overflow-x:hidden;
+  }
+ 
+  section{position:relative;overflow:hidden;text-align:center}
+ 
+  /* ARREGLO 1: en el pen original esto venía de una hoja de estilos externa
+     que no se copia con el CSS. Sin una altura, la primera sección solo
+     mide lo que mide su título. */
+  .panel{
+    min-height:100vh;
+    display:flex;align-items:center;justify-content:center;
+    padding:0 5vw;
+  }
+ 
+  /* Galería horizontal */
+  .horiz-gallery-wrapper{
+    position:relative;display:flex;flex-wrap:nowrap;will-change:transform;
+  }
+  .horiz-gallery-strip{
+    position:relative;display:flex;flex-wrap:nowrap;
+    width:max-content; align-items: end;           /* la tira mide lo que miden todas sus imágenes juntas */
+    will-change:transform;
+  }
+  .project-wrap{
+    flex:none;                    /* que ninguna imagen se encoja */
+    width:20vw;padding:0.5rem;box-sizing:content-box;
+  }
+  .project-wrap img{
+    display:block;width:100%;object-fit:cover;
+  }
+  .media{ position:relative; will-change:transform; }
+  .media img{ display:block; width:100%; object-fit:cover; }
+  .media-hover{ position:absolute; inset:0; height:100%; }
+  @media (max-width:700px){
+    .project-wrap{width:70vw;padding:1rem}
+  }

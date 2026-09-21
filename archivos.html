@@ -20,7 +20,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
     <!-- Estilos -->
-    <link rel="stylesheet" href="css/archivos.css" />
+    <link rel="stylesheet" href="css/work.css" />
 
     <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
@@ -29,91 +29,131 @@
     <meta name="apple-mobile-web-app-title" content="Archif." />
     <link rel="manifest" href="favicon/web-app-manifest-192x192.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="img/proyectos/favicon.png">
 </head>
 </head>
 <body>
-    <div class="topbar">
-        <span class="logo"><img src="https://assets.codepen.io/16327/gsap-logo-light.svg" alt="" /></span>
-        <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-label="Open menu">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <line class="bar bar-top" x1="3" y1="7" x2="17" y2="7" stroke="var(--white)" stroke-width="1.5" stroke-linecap="round"/>
-            <line class="bar bar-mid" x1="3" y1="10" x2="17" y2="10" stroke="var(--white)" stroke-width="1.5" stroke-linecap="round"/>
-            <line class="bar bar-bot" x1="3" y1="13" x2="17" y2="13" stroke="var(--white)" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-        </button>
-        </div>
-
-
-        <div class="controls">
-            <label><input type="checkbox" id="erToggle" checked /><code>easeReverse</code></label>
-            <label>exit speed
-            <input type="range" id="exitSlider" min="1" max="4" step="0.5" value="1.5" />
-            <span class="speed-val" id="exitVal">1.5×</span>
-            </label>
-        </div>
-        </div>
-
-        <div class="nav" id="nav">
-        <div class="nav-bg"></div>
-
-        <!-- Top panel — white -->
-        <div class="nav-top nav-border nav-panel" id="navTop">
-            <ul class="nav-list">
-            <li class="nav-item"><a class="nav-link" href="#">Tools</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Showcase</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Community</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Learn GSAP</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Docs</a></li>
-            </ul>
-            <div class="nav-login">Login / Create Account</div>
-        </div>
-
-        <!-- Middle panel — matcha green gradient -->
-        <div class="nav-middle nav-border nav-panel" id="navMiddle">
-            <div class="nav-middle-header">What's New</div>
-            <div class="nav-middle-card">
-            <div class="nav-middle-badge">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-                </svg>
+    <div id="custom-cursor"><div class="cursor-inner"></div></div>
+    <header >
+        <nav class="p-3">
+            <div class="d-flex gap-4">
+                <a href="index.html"><h4>sahuqui___®</h4></a>
             </div>
-            <div class="nav-middle-info">
-                <div class="nav-middle-title">GSAP 3.15 is here</div>
-                <div class="nav-middle-desc">New easeReverse &amp; more.</div>
+            <div class="d-flex gap-4">
+                <a href="work.html"><h4 >work</h4></a>
+                <a href="archivos.html"><h4 class="grey">archivos</h4></a>
+                <a href="aboutme.html"><h4>about me</h4></a>
+                <a href=""><h4>contact</h4></a>
             </div>
+        </nav>
+    </header>
+    <main>
+        <ul role="list">
+            <li class="container-fluid">
+                <a href="3d.html">
+                    <img class="swipeimage" src="img/proyectos/MORPHO1.png">
+                    <div class="text d-flex justify-content-between">
+                        <div>
+                            <h1><i>(01)</i> 3D</h1>
+                        </div>
+                        <div>
+                            <h1 class="text-end">2024/26</h1>
+                        </div>
+                    </div>
+                </a> 
+            </li>
+            <li class="container-fluid">
+                <a href="ilustracion.html">
+                    <img class="swipeimage" src="img/proyectos/cata.png">
+                    <div class="text d-flex justify-content-between">
+                        <div>
+                            <h1><i>(02)</i> Ilustración</h1>
+                        </div>
+                        <div>
+                            <h1 class="text-end">2024/26</h1>
+                        </div>
+                    </div>
+                </a>
+                
+            </li>
+            <li class="container-fluid">
+                <a href="thisisnotabox.html">
+                    <img class="swipeimage" src="img/proyectos/cajapossssst.png">
+                    <div class="text d-flex justify-content-between">
+                        <div>
+                            <h1><i>(03)</i> Fotografía</h1>
+                        </div>
+                        <div>
+                            <h1 class="text-end">2023/26</h1>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="container-fluid">
+                <img class="swipeimage" src="img/proyectos/evacara.png">
+                <div class="text d-flex justify-content-between">
+                    <div>
+                        <h1><i>(04)</i> Casi casi</h1>
+                    </div>
+                    <div>
+                        <h1 class="text-end">Editorial</h1>
+                    </div>
+                </div>
+            </li>
+            <li class="container-fluid">
+                <img class="swipeimage" src="https://assets.codepen.io/16327/portrait-image-6.jpg">
+                <div class="text d-flex justify-content-between">
+                    <div>
+                        <h1>This is not a box</h1>
+                    </div>
+                    <div>
+                        <h1 class="text-end">Editorial</h1>
+                    </div>
+                </div>
+            </li>
+        </ul>  
+    </main>
+    <footer class="fixed-bottom">
+        <div class="p-3 d-flex justify-content-between">
+            <div class="d-flex gap-4">
+                <h4 id="mode-toggle" class="sol">☾</h4>
+                <h4 id="hora"></h4>
             </div>
-            <div class="nav-middle-actions">
-            <a href="#">Release Notes</a>
+            <div class="text-end">
+                <p>© 2026 Eva Sahuquillo.<br>
+                    Web desarrollada en HTML, CSS y JS.</p>
             </div>
         </div>
+    </footer>
 
-        <!-- Bottom panel — black -->
-        <div class="nav-bottom nav-border nav-panel" id="navBottom">
-            <ul class="nav-socials">
-            <li><a href="#">CodePen</a></li>
-            <li><a href="#">GitHub</a></li>
-            <li><a href="#">LinkedIn</a></li>
-            <li><a href="#">X</a></li>
-            </ul>
-            <div class="nav-asset">
-            <img src="https://gsap.com/img/header-shapes.png" alt="" />
-            </div>
-        </div>
-    </div>
     <!-- ===== SCRIPTS ===== -->
 
-    <!-- jQuery (OBLIGATORIO para el menú) -->
+    <!-- 1. jQuery (dependencia de Bootstrap) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <!-- Bootstrap -->
+
+    <!-- 2. Bootstrap (depende de jQuery) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- GSAP  -->
+
+    <!-- 3. GSAP y plugins (independientes) -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/MorphSVGPlugin.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/SplitText.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/CustomEase.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/CustomWiggle.min.js"></script>
 
-    <!-- Tu JS -->
-    <script  src="js/archivos.js"></script>
+    <!-- 4. Import map para Three.js (debe ir ANTES que cualquier script que use Three.js) -->
+    <script type="importmap">
+    { "imports": { "three": "https://unpkg.com/three@0.128.0/build/three.module.js" } }
+    </script>
+
+    <!-- 5. Model Viewer (CDN externo) -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
+
+    <!-- 7. MAGNETISMOS (si no usa Three.js, puede ir aquí) -->
+    <script src="js/magnetismos.js"></script>
+    <!-- <script src="js/wave-effect.js"></script> -->
+
+    <!-- 8. Tu JS personal (al final, después de todo) -->
+    <script src="js/work.js"></script>
 </body>
 </html>

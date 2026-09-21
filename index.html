@@ -32,34 +32,89 @@
   <meta name="apple-mobile-web-app-title" content="Archif." />
   <link rel="manifest" href="favicon/web-app-manifest-192x192.png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="img/proyectos/favicon.png">
 </head>
 <body class="d-flex flex-column min-vh-100">
     <div id="custom-cursor"><div class="cursor-inner"></div></div>
     <header >
         <nav class="p-3 mt-2">
-            <div class="d-flex gap-4">
+            <div class="nav-brand d-flex gap-4">
                 <a href="index.html"><h4>sahuqui___®</h4></a>
             </div>
-            <div class="d-flex gap-4">
+            <div class="nav-links d-flex gap-4">
                 <a href="work.html"><h4>work</h4></a>
                 <a href="archivos.html"><h4>archives</h4></a>
                 <a href="aboutme.html"><h4>about me</h4></a>
                 <a href=""><h4>contact</h4></a>
             </div>
+    
+            <!-- Botón (solo se ve en móvil) -->
+            <button class="menu-toggle" id="menuToggle" type="button"
+                    aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
+                <svg width="24" height="24" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <line class="bar bar-top" x1="3" y1="7"  x2="17" y2="7"  stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    <line class="bar bar-mid" x1="3" y1="10" x2="17" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    <line class="bar bar-bot" x1="3" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </button>
         </nav>
     </header>
+    <!-- Paneles del menú (pégalos justo debajo del </header>).
+     OJO: no uses la etiqueta <nav> para el panel: tu CSS ya da estilos a "nav"
+     (fixed, 55px de alto…) y lo rompería. -->
+    <div class="menu" id="menu">
+        <div class="menu-bg"></div>
+    
+        <!-- Panel blanco: opciones -->
+        <div class="menu-top menu-panel" role="navigation" aria-label="Menú principal">
+            <ul class="menu-list">
+                <li class="menu-item"><a class="menu-link" href="work.html">work</a></li>
+                <li class="menu-item"><a class="menu-link" href="archivos.html">archives</a></li>
+                <li class="menu-item"><a class="menu-link" href="aboutme.html">about me</a></li>
+                <li class="menu-item"><a class="menu-link" href="">contact</a></li>
+            </ul>
+        </div>
+    
+        <!-- Panel negro: redes sociales (cambia los nombres y los enlaces por los tuyos) -->
+        <div class="menu-bottom menu-panel">
+            <ul class="menu-socials">
+                <li><a class="menu-social" href="#" target="_blank" rel="noopener">Instagram</a></li>
+                <li><a class="menu-social" href="#" target="_blank" rel="noopener">Behance</a></li>
+                <li><a class="menu-social" href="#" target="_blank" rel="noopener">LinkedIn</a></li>
+            </ul>
+        </div>
+    </div>
     <main class="flex-grow-1">
-        <section class="p-3 d-flex section-present">
+        <section class="p-3 d-flex section-present justify-content-center text-center align-items-center">
             <div class="presentacion">
-                <h1 >Hola, soy Eva Sahuquillo, diseñadora gráfica viviendo en Madrid. Bienvenidx a mi portfolio !</h1>
+                <h1 >Hola, soy <span style="color: black;">(Eva Sahuquillo)</span>, diseñadora gráfica viviendo en Madrid. Bienvenidx a mi portfolio !</h1>
             </div>
         </section>
+         
+        <canvas id="c" aria-label="Esfera de proyectos. Arrastra para girar y haz clic en una imagen para abrirla."></canvas>
+        <p class="hint" id="hint"></p>
+        
+        <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="ov-title" aria-hidden="true">
+            <figure class="card">
+                <img id="ov-img" alt="">
+                <figcaption>
+                <div>
+                    <h2 id="ov-title"></h2>
+                    <p id="ov-tag"></p>
+                </div>
+                <div class="actions">
+                    <a id="ov-link" href="#">Ver proyecto</a>
+                    <button id="ov-close" type="button">Cerrar</button>
+                </div>
+                </figcaption>
+            </figure>
+        </div>
         <!-- GALERÍA 3D - SOLO IMÁGENES QUE ROTAN -->
-        <section class="galeria-3d">
+        <!-- <section class="galeria-3d">
             <div id="contenedor-3d"></div>
-        </section>
+        </section> -->
     </main>
-    <footer>
+    <footer class="fixed-bottom">
         <div class="p-3 d-flex justify-content-between">
             <div class="d-flex gap-4">
                 <h4 id="mode-toggle" class="sol">☾</h4>

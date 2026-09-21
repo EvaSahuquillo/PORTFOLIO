@@ -135,11 +135,10 @@ h3 {
 }
 
 .negri {
-    font-family: "Instrument Serif", serif;
+  font-family: "Instrument Serif", serif;
   font-weight: 300;
   font-style: normal;
   font-size: 1.5rem;
-  color: var(--bg-dark);
 }
 
 h4 {
@@ -322,17 +321,17 @@ footer {
     z-index: 100;
 }
 
-footer::before {
+/* footer::before {
     content: "";
     position: absolute;
     inset: 0;
-    z-index: -1; /* detrás del contenido del footer */
+    z-index: -1; 
     background: var(--bg-light-transparent);
     backdrop-filter: blur(60px);
     -webkit-backdrop-filter: blur(12px);
     mask-image: linear-gradient(to bottom, transparent 0%, black 60px);
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 60px);
-}
+} */
 .sol {
   font-family: "Inter", sans-serif;
   font-weight: 500 !important;
