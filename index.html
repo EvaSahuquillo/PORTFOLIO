@@ -35,6 +35,23 @@
   <link rel="icon" type="image/png" href="img/proyectos/favicon.png">
 </head>
 <body class="d-flex flex-column min-vh-100">
+    <!-- PRELOADER -->
+    <!-- <div id="loader" class="loader" aria-hidden="true">
+        <svg class="loader-transition" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+            <defs>
+            <linearGradient id="loader-grad" x1="0" y1="0" x2="99" y2="99" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="var(--bg-dark)" />
+                <stop offset="1" stop-color="var(--bg-dark)" />
+            </linearGradient>
+            </defs>
+            <path class="loader-path"
+                fill="url(#loader-grad)"
+                d="M 0 100 V 100 Q 50 100 100 100 V 100 z" />
+        </svg>
+        <div class="loader-counter">
+            <span id="loader-counter-num">0</span><span class="loader-counter-symbol">%</span>
+        </div>
+    </div> -->
     <div id="custom-cursor"><div class="cursor-inner"></div></div>
     <header >
         <nav class="p-3 mt-2">
@@ -42,15 +59,14 @@
                 <a href="index.html"><h4>sahuqui___®</h4></a>
             </div>
             <div class="nav-links d-flex gap-4">
-                <a href="work.html"><h4>work</h4></a>
-                <a href="archivos.html"><h4>archives</h4></a>
-                <a href="aboutme.html"><h4>about me</h4></a>
-                <a href=""><h4>contact</h4></a>
+                <a href="work.html" class="rot"><h4>work</h4></a>
+                <a href="archivos.html" class="rot"><h4>archives</h4></a>
+                <a href="aboutme.html" class="rot"><h4>about</h4></a>
+                <a href="contact.html" class="rot"><h4>contact</h4></a>
             </div>
     
             <!-- Botón (solo se ve en móvil) -->
-            <button class="menu-toggle" id="menuToggle" type="button"
-                    aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
+            <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
                 <svg width="24" height="24" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                     <line class="bar bar-top" x1="3" y1="7"  x2="17" y2="7"  stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                     <line class="bar bar-mid" x1="3" y1="10" x2="17" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
@@ -59,23 +75,17 @@
             </button>
         </nav>
     </header>
-    <!-- Paneles del menú (pégalos justo debajo del </header>).
-     OJO: no uses la etiqueta <nav> para el panel: tu CSS ya da estilos a "nav"
-     (fixed, 55px de alto…) y lo rompería. -->
+    <!-- ✅ MENÚ FUERA DEL HEADER -->
     <div class="menu" id="menu">
         <div class="menu-bg"></div>
-    
-        <!-- Panel blanco: opciones -->
         <div class="menu-top menu-panel" role="navigation" aria-label="Menú principal">
             <ul class="menu-list">
                 <li class="menu-item"><a class="menu-link" href="work.html">work</a></li>
                 <li class="menu-item"><a class="menu-link" href="archivos.html">archives</a></li>
-                <li class="menu-item"><a class="menu-link" href="aboutme.html">about me</a></li>
-                <li class="menu-item"><a class="menu-link" href="">contact</a></li>
+                <li class="menu-item"><a class="menu-link" href="aboutme.html">about</a></li>
+                <li class="menu-item"><a class="menu-link" href="contact.html">contact</a></li>
             </ul>
         </div>
-    
-        <!-- Panel negro: redes sociales (cambia los nombres y los enlaces por los tuyos) -->
         <div class="menu-bottom menu-panel">
             <ul class="menu-socials">
                 <li><a class="menu-social" href="#" target="_blank" rel="noopener">Instagram</a></li>
@@ -84,35 +94,24 @@
             </ul>
         </div>
     </div>
+
     <main class="flex-grow-1">
         <section class="p-3 d-flex section-present justify-content-center text-center align-items-center">
             <div class="presentacion">
-                <h1 >Hola, soy <span style="color: black;">(Eva Sahuquillo)</span>, diseñadora gráfica viviendo en Madrid. Bienvenidx a mi portfolio !</h1>
+                <h1>Hi, I’m Eva Sahuquillo, a graphic designer based in Madrid. Welcome to my portfolio!</h1>
             </div>
         </section>
-         
-        <canvas id="c" aria-label="Esfera de proyectos. Arrastra para girar y haz clic en una imagen para abrirla."></canvas>
+        
+        <canvas id="c" aria-label="Esfera de proyectos. Arrastra para girar y haz clic en una imagen para ampliarla."></canvas>
         <p class="hint" id="hint"></p>
         
         <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="ov-title" aria-hidden="true">
             <figure class="card">
+                <p id="ov-title"></p>
                 <img id="ov-img" alt="">
-                <figcaption>
-                <div>
-                    <h2 id="ov-title"></h2>
-                    <p id="ov-tag"></p>
-                </div>
-                <div class="actions">
-                    <a id="ov-link" href="#">Ver proyecto</a>
-                    <button id="ov-close" type="button">Cerrar</button>
-                </div>
-                </figcaption>
+                <p id="ov-tag"></p>
             </figure>
         </div>
-        <!-- GALERÍA 3D - SOLO IMÁGENES QUE ROTAN -->
-        <!-- <section class="galeria-3d">
-            <div id="contenedor-3d"></div>
-        </section> -->
     </main>
     <footer class="fixed-bottom">
         <div class="p-3 d-flex justify-content-between">
@@ -139,6 +138,10 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/SplitText.min.js"></script>  <!-- ← AÑADE ESTA LÍNEA -->
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/MorphSVGPlugin.min.js"></script>
+
+    <!-- ⬇ Preloader PRIMERO, sin depender de Three.js -->
+    <script defer src="js/preloader.js"></script>
 
     <!-- Import map para Three.js -->
     <script type="importmap">
@@ -151,6 +154,8 @@
 
     <!-- TU GALERÍA 3D (archivo externo) -->
     <script type="module" src="js/galeria-3d.js"></script>
+    <script type="module" src="js/menu.js"></script>
+
 
     <!-- Tu JS personal -->
     <script src="js/script.js"></script>

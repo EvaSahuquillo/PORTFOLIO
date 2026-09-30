@@ -20,7 +20,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
     <!-- Estilos -->
-    <link rel="stylesheet" href="css/work.css" />
+    <link rel="stylesheet" href="css/archivos.css" />
 
     <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
@@ -35,26 +35,101 @@
 <body>
     <div id="custom-cursor"><div class="cursor-inner"></div></div>
     <header >
-        <nav class="p-3">
-            <div class="d-flex gap-4">
+        <nav class="p-3 mt-2">
+            <div class="nav-brand d-flex gap-4">
                 <a href="index.html"><h4>sahuqui___®</h4></a>
             </div>
-            <div class="d-flex gap-4">
-                <a href="work.html"><h4 >work</h4></a>
-                <a href="archivos.html"><h4 class="grey">archivos</h4></a>
-                <a href="aboutme.html"><h4>about me</h4></a>
-                <a href=""><h4>contact</h4></a>
+            <div class="nav-links d-flex gap-4">
+                <a href="work.html" class="rot"><h4>work</h4></a>
+                <a href="archivos.html" class="rot"><h4>archives</h4></a>
+                <a href="aboutme.html" class="rot"><h4>about</h4></a>
+                <a href="contact.html" class="rot"><h4>contact</h4></a>
             </div>
+    
+            <!-- Botón (solo se ve en móvil) -->
+            <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
+                <svg width="24" height="24" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <line class="bar bar-top" x1="3" y1="7"  x2="17" y2="7"  stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    <line class="bar bar-mid" x1="3" y1="10" x2="17" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    <line class="bar bar-bot" x1="3" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </button>
         </nav>
     </header>
+    <!-- ✅ MENÚ FUERA DEL HEADER -->
+    <div class="menu" id="menu">
+        <div class="menu-bg"></div>
+        <div class="menu-top menu-panel" role="navigation" aria-label="Menú principal">
+            <ul class="menu-list">
+                <li class="menu-item"><a class="menu-link" href="work.html">work</a></li>
+                <li class="menu-item"><a class="menu-link" href="archivos.html">archives</a></li>
+                <li class="menu-item"><a class="menu-link" href="aboutme.html">about</a></li>
+                <li class="menu-item"><a class="menu-link" href="contact.html">contact</a></li>
+            </ul>
+        </div>
+        <div class="menu-bottom menu-panel">
+            <ul class="menu-socials">
+                <li><a class="menu-social" href="#" target="_blank" rel="noopener">Instagram</a></li>
+                <li><a class="menu-social" href="#" target="_blank" rel="noopener">Behance</a></li>
+                <li><a class="menu-social" href="#" target="_blank" rel="noopener">LinkedIn</a></li>
+            </ul>
+        </div>
+    </div>
     <main>
-        <ul role="list">
+        <div id="grid" class="p-3"></div>
+
+        <div id="lightbox">
+            
+            <div id="lightbox-content"></div>
+        </div>
+
+        <!-- <div class="container-fluid p-4">
+            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 p-0">
+                <div class="col p-0">
+                    <div class="d-flex flex-column">
+                        <div><img src="img/proyectos/IMG_4965.jpeg" class="img-fluid w-100" alt=""></div>
+                        <div><img src="img/proyectos/foto1-portfolio.jpg" class="img-fluid w-100" alt=""></div>
+                        <div><video autoplay muted loop src="img/proyectos/Sahuquillo.Eva_A3D_P1_VIDEO.mp4" class="img-fluid w-100 m-0 p-0"></video></div>
+                    </div>
+                </div>
+                <div class="col p-0">
+                    <div class="d-flex flex-column">
+                    <div><img src="img/proyectos/zapatilla_pospo.jpg" class="img-fluid w-100" alt=""></div>
+                    <div><img src="img/proyectos/IMG_6578.jpeg" class="img-fluid w-100" alt=""></div>
+                    </div>
+                </div>
+                <div class="col p-0">
+                    <div class="d-flex flex-column">
+                    <div><img src="img/proyectos/patas-min.png" class="img-fluid w-100" alt=""></div>
+                    <div><img src="img/proyectos/ender cuadrado weno.jpg" class="img-fluid w-100" alt=""></div>
+                    <div><img src="img/proyectos/roberto.jpg" class="img-fluid w-100" alt=""></div>
+                    </div>
+                </div>
+                <div class="col p-0">
+                    <div class="d-flex flex-column">
+                    <div><img src="img/proyectos/fuego.jpeg" class="img-fluid w-100" alt=""></div>
+                    <div><img src="img/proyectos/loreal-ilustracion.gif" class="img-fluid w-100" alt=""></div>
+                    <div><img src="img/proyectos/zapatilla_pospo.jpg" class="img-fluid w-100" alt=""></div>
+                    </div>
+                </div>
+
+                <div class="col p-0">
+                    <div class="d-flex flex-column">
+                    <div><img src="img/proyectos/SUJETADOR.png" class="img-fluid w-100" alt=""></div>
+                    <div><img src="img/proyectos/cuadro-metro.gif" class="img-fluid w-100" alt=""></div>
+                    <div><img src="img/proyectos/IMG_6578.jpeg" class="img-fluid w-100" alt=""></div>
+                    </div>
+                </div>
+
+
+        </div> -->
+        <!-- <ul role="list">
             <li class="container-fluid">
                 <a href="3d.html">
-                    <img class="swipeimage" src="img/proyectos/MORPHO1.png">
+                    <img class="swipeimage" src="img/proyectos/zapatilla_pospo.jpg">
                     <div class="text d-flex justify-content-between">
                         <div>
-                            <h1><i>(01)</i> 3D</h1>
+                            <h1><i>(01)</i> 3D Archive</h1>
                         </div>
                         <div>
                             <h1 class="text-end">2024/26</h1>
@@ -64,10 +139,10 @@
             </li>
             <li class="container-fluid">
                 <a href="ilustracion.html">
-                    <img class="swipeimage" src="img/proyectos/cata.png">
+                    <img class="swipeimage" src="img/proyectos/fuego.jpeg">
                     <div class="text d-flex justify-content-between">
                         <div>
-                            <h1><i>(02)</i> Ilustración</h1>
+                            <h1><i>(02)</i> Ilustration Archive</h1>
                         </div>
                         <div>
                             <h1 class="text-end">2024/26</h1>
@@ -77,11 +152,11 @@
                 
             </li>
             <li class="container-fluid">
-                <a href="thisisnotabox.html">
-                    <img class="swipeimage" src="img/proyectos/cajapossssst.png">
+                <a href="photo.html">
+                    <img class="swipeimage" src="img/proyectos/patas-min.png">
                     <div class="text d-flex justify-content-between">
                         <div>
-                            <h1><i>(03)</i> Fotografía</h1>
+                            <h1><i>(03)</i>Photo Archive</h1>
                         </div>
                         <div>
                             <h1 class="text-end">2023/26</h1>
@@ -89,29 +164,7 @@
                     </div>
                 </a>
             </li>
-            <li class="container-fluid">
-                <img class="swipeimage" src="img/proyectos/evacara.png">
-                <div class="text d-flex justify-content-between">
-                    <div>
-                        <h1><i>(04)</i> Casi casi</h1>
-                    </div>
-                    <div>
-                        <h1 class="text-end">Editorial</h1>
-                    </div>
-                </div>
-            </li>
-            <li class="container-fluid">
-                <img class="swipeimage" src="https://assets.codepen.io/16327/portrait-image-6.jpg">
-                <div class="text d-flex justify-content-between">
-                    <div>
-                        <h1>This is not a box</h1>
-                    </div>
-                    <div>
-                        <h1 class="text-end">Editorial</h1>
-                    </div>
-                </div>
-            </li>
-        </ul>  
+        </ul>   -->
     </main>
     <footer class="fixed-bottom">
         <div class="p-3 d-flex justify-content-between">
@@ -150,10 +203,12 @@
     <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
 
     <!-- 7. MAGNETISMOS (si no usa Three.js, puede ir aquí) -->
-    <script src="js/magnetismos.js"></script>
+    <script src="js/galeria-archivos.js"></script>
     <!-- <script src="js/wave-effect.js"></script> -->
+    <script type="module" src="js/menu.js"></script>
+
 
     <!-- 8. Tu JS personal (al final, después de todo) -->
-    <script src="js/work.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

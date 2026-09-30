@@ -130,6 +130,18 @@ h6 {
   line-height: 1;
 }
 
+h2 {
+  font-family: "Instrument Serif", serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 1.5rem;
+  letter-spacing: -1px;
+  color: var(--text-middle);
+
+  /* color: var(--text-light); */
+  line-height: 1.15;
+}
+
 .grey {
     color: var(--text-middle);
 }
@@ -205,7 +217,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 3rem;
   background-color: transparent;
   position: fixed;
   top: 0;
@@ -305,15 +317,6 @@ nav {
   width: 30%;
 }
 
-h2 {
-  font-family: "Inter", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 300;
-  font-style: normal;
-}
-
-
-
 /* ELEMENTO 3D */
 /* -------SOAP--------- */
 
@@ -382,6 +385,7 @@ h2 {
 .overlay-content {
     flex: 1 1 auto;
     width: 100%;
+    gap: 5rem;
 }
 
 .demo-area {
@@ -457,6 +461,219 @@ h2 {
     color: var(--text-middle);
 }
 
+/* ─────────────────────────────────────────────────────────────
+   MENÚ DESPLEGABLE
+ 
+   - Escritorio (más de 768px): se ve tu nav de siempre, con las opciones
+     desplegadas. El botón y los paneles no existen.
+   - Móvil (768px o menos): se ocultan las opciones, aparece el botón y
+     al pulsarlo salen dos paneles: blanco (opciones) y negro (redes).
+ 
+   Enlázalo en todas las páginas, DESPUÉS de tu css principal:
+     <link rel="stylesheet" href="css/menu.css" />
+   ───────────────────────────────────────────────────────────── */
+ 
+:root {
+  --menu-radius: 10px;
+}
+
+header {
+  position: relative;
+  z-index: 100;   /* por encima del menú cerrado, por debajo cuando está abierto */
+}
+
+body.menu-open header {
+  z-index: 300;   /* por encima del menú abierto para que el botón X funcione */
+}
+ 
+/* Botón (se oculta en escritorio) */
+.menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;          /* alinea las barras con el borde del nav */
+  padding: 0;
+  border: 0;
+  background: transparent;          /* las barras usan el color del texto (claro/oscuro) */
+  position: relative;
+}
+.menu-toggle svg {
+  display: block;
+}
+ 
+/* Contenedor de los paneles (se oculta en escritorio) */
+.menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  padding: 5rem 1rem;
+  gap: 0.5rem;
+  flex-direction: column;
+  visibility: hidden;           /* lo activa el JS al abrir */
+  pointer-events: none;
+  touch-action: none;           /* que no se mueva la página de detrás */
+}
+ 
+.menu-bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
+  opacity: 0;
+}
+ 
+.menu-panel {
+  position: relative;
+  width: 100%;
+  border: 2px solid;
+  border-radius: var(--menu-radius);
+  transform: translateX(101%);  /* fuera de pantalla hasta que entra */
+}
+ 
+/* Panel blanco (arriba): opciones */
+.menu-top {
+  flex: 1;
+  min-height: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem 1.5rem;  /* el hueco de arriba deja libres el logo y el botón */
+  overflow-y: auto;
+  touch-action: pan-y;
+  background: var(--bg-light);
+  color: var(--text-light);
+  border-color: var(--text-light);
+}
+
+.menu-list{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+ 
+/* Panel negro (abajo): redes sociales */
+.menu-bottom {
+  z-index: 1;
+  min-height: 110px;
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  background: var(--bg-dark);
+  color: var(--text-middle);
+  border-color: #3a3a3a;
+}
+
+.menu-socials {
+  display: flex;
+  align-items: center;
+}
+ 
+.menu-list,
+.menu-socials {
+  list-style: none;
+}
+.menu-item {
+  overflow: hidden;
+}
+ 
+/* Los selectores llevan ".menu" delante para ganar a tus reglas
+   "body.dark-mode a" / "body.light-mode a", que si no pintarían los enlaces
+   con el color del modo y en modo oscuro quedarían blancos sobre blanco. */
+.menu .menu-link {
+  display: block;
+  padding: 0.4rem 0;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: clamp(2.5rem, 13vw, 4rem);
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: var(--text-light);
+}
+ 
+.menu-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+}
+.menu .menu-social {
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  color: var(--text-middle);
+}
+ 
+/* Mientras el menú está abierto, el nav (logo + botón) se coloca por encima
+   de los paneles para poder cerrarlo */
+body.menu-open nav {
+  z-index: 300;
+}
+ 
+@media (max-width: 957px) {
+  /* .d-flex de Bootstrap lleva !important, por eso hace falta aquí también */
+  .nav-links {
+    display: none !important;
+  }
+  .menu-toggle {
+    display: flex;
+  }
+  .menu {
+    display: flex;
+  }
+}
+
+
+/* EFECTO GIRAR  */
+.rot {
+  display: block;
+  font-family:  "Inter", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 2rem;
+  letter-spacing: -2px;
+  /* text-transform: uppercase; */
+  cursor: pointer;
+  perspective: 600px;
+  white-space: nowrap;
+}
+
+.char {
+  display: inline-block;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: translateZ(-0.5em);
+  transition: transform 0.6s cubic-bezier(0.65, 0, 0.2, 1);
+  transition-delay: calc(var(--i) * 30ms);
+}
+
+/* Cara frontal */
+.char > span {
+  display: inline-block;
+  transform: translateZ(0.5em);
+  backface-visibility: hidden;
+}
+
+/* Cara que aparece al girar (misma letra, mismo color) */
+.char::after {
+  content: attr(data-char);
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: rotateX(90deg) translateZ(0.5em);
+  backface-visibility: hidden;
+}
+
+.rot:hover .char {
+  transform: translateZ(-0.5em) rotateX(-90deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .char { transition: none; }
+}
 
 
 

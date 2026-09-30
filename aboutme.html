@@ -44,18 +44,46 @@
 <body>
     <div id="custom-cursor"><div class="cursor-inner"></div></div>
     <header >
-        <nav class="p-3">
-            <div class="d-flex gap-4">
+        <nav class="p-3 mt-2">
+            <div class="nav-brand d-flex gap-4">
                 <a href="index.html"><h4>sahuqui___®</h4></a>
             </div>
-            <div class="d-flex gap-4">
-                <a href="work.html"><h4>work</h4></a>
-                <a href="archivos.html"><h4>archivos</h4></a>
-                <a href="aboutme.html" class="grey"><h4 class="grey">about me</h4></a>
-                <a href=""><h4>contact</h4></a>
+            <div class="nav-links d-flex gap-4">
+                <a href="work.html" class="rot"><h4>work</h4></a>
+                <a href="archivos.html" class="rot"><h4>archives</h4></a>
+                <a href="aboutme.html" class="rot"><h4>about</h4></a>
+                <a href="contact.html" class="rot"><h4>contact</h4></a>
             </div>
+    
+            <!-- Botón (solo se ve en móvil) -->
+            <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
+                <svg width="24" height="24" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <line class="bar bar-top" x1="3" y1="7"  x2="17" y2="7"  stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    <line class="bar bar-mid" x1="3" y1="10" x2="17" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    <line class="bar bar-bot" x1="3" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </button>
         </nav>
     </header>
+    <!-- ✅ MENÚ FUERA DEL HEADER -->
+    <div class="menu" id="menu">
+        <div class="menu-bg"></div>
+        <div class="menu-top menu-panel" role="navigation" aria-label="Menú principal">
+            <ul class="menu-list">
+                <li class="menu-item"><a class="menu-link" href="work.html">work</a></li>
+                <li class="menu-item"><a class="menu-link" href="archivos.html">archives</a></li>
+                <li class="menu-item"><a class="menu-link" href="aboutme.html">about</a></li>
+                <li class="menu-item"><a class="menu-link" href="contact.html">contact</a></li>
+            </ul>
+        </div>
+        <div class="menu-bottom menu-panel">
+            <ul class="menu-socials">
+                <li><a class="menu-social" href="#" target="_blank" rel="noopener">Instagram</a></li>
+                <li><a class="menu-social" href="#" target="_blank" rel="noopener">Behance</a></li>
+                <li><a class="menu-social" href="#" target="_blank" rel="noopener">LinkedIn</a></li>
+            </ul>
+        </div>
+    </div>
     <main>
         <div class="demo-area wave-target" id="demoArea">
             <div class="mag-zone" data-mode="true" data-wiggle="false">
@@ -128,7 +156,7 @@
             </div>
         </div>
         <div class="texto-introduccion wave-target d-flex align-items-center justify-content-center">
-            <h6 class="text-center">Haz scroll para saber &nbsp; &nbsp; &nbsp; más de mi o quedate girando este muñeco.</h6>
+            <h6 class="text-center">Haz scroll para saber más de mi o quedate girando este muñeco.</h6>
         </div>
         <section class="soap-product">
             <div class="soap3D">
@@ -148,9 +176,19 @@
         </section>
         <section class="container-fluid espacio"></section>
         <section class="overlay-section">
-            <div class="d-flex p-3 overlay-content ">
-                <h1 class="split"> <i>(01)</i> Hola, soy Eva: diseñadora gráfica, recién graduada en Madrid. Mi trabajo se mueve entre la investigación y la ejecución no me interesa una imagen bonita sin una razón detrás. Busco construir piezas que puedan defenderse con argumentos, no solo enseñarse. <i>(02)</i> Trabajo de forma multidisciplinar, moviéndome entre motion graphics, diseño 3D, packaging e identidad de marca según lo que cada proyecto necesite decir. No tengo una técnica fija: tengo una forma de pensar que se adapta a cada herramienta, y eso es lo que me permite encontrar soluciones distintas para problemas distintos.
-                </h1>
+            <div class="d-flex p-3 overlay-content">
+                <div class="col-sm-8"><h1 class="split"> <i>(01)</i> Hola, soy Eva: diseñadora gráfica, recién graduada en Madrid. Mi trabajo se mueve entre la investigación y la ejecución no me interesa una imagen bonita sin una razón detrás. Busco construir piezas que puedan defenderse con argumentos, no solo enseñarse. <i>(02)</i> Trabajo de forma multidisciplinar, moviéndome entre motion graphics, diseño 3D, packaging e identidad de marca según lo que cada proyecto necesite decir. No tengo una técnica fija: tengo una forma de pensar que se adapta a cada herramienta, y eso es lo que me permite encontrar soluciones distintas para problemas distintos.
+                </h1></div>
+                <div class="col-sm">
+                    <h2 class="split">Herramientas <br> Pack Adobe/Cinema 4d/Figma/Procreate/ <br><br>Experiencia<br>/Jun-Sep 2025<br>→Coonic Conmunica Mediatrader S.L.(Diseñadora Gráfica)
+                    <br>/Jun-Sep 2025<br>→Coonic Conmunica Mediatrader S.L.(Intership)
+
+                    <br><br>Estudios <br>/2022-2026<br>
+                    →Grado Universitario Diseño Gráfico y Multimedia, UDIT Universidad de Diseño, Innovación y tecnología, Madrid<br>/2020-2022<br>
+                    →Bachillerato Artes, IES Isabel la Católica, Madrid <br><br>Awards <br>/2023<br>
+                    → Inspirathon 2023-Primer premio (Amenities Hotel Thompson Madrid)<br>/2020-2022<br>
+                    →Bachillerato Artes, IES Isabel la Católica, Madrid</h2>
+                </div>
             </div>
         </section>   
     </main>
@@ -193,6 +231,7 @@
     <!-- 7. MAGNETISMOS (si no usa Three.js, puede ir aquí) -->
     <script src="js/magnetismos.js"></script>
     <!-- <script src="js/wave-effect.js"></script> -->
+    <script type="module" src="js/menu.js"></script>
 
     <!-- 8. Tu JS personal (al final, después de todo) -->
     <script src="js/aboutme.js"></script>

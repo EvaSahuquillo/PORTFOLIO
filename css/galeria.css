@@ -1,12 +1,12 @@
 html {
-  overscroll-behavior: none;
+  /* overscroll-behavior: none; */
 }
 
 * {
   box-sizing: border-box;
-  /* font-size: 16px; */
-  scroll-behavior: smooth;
+  font-size: 16px;
   cursor: none !important;
+  scroll-behavior: smooth;
 }
 
 
@@ -62,12 +62,11 @@ body {
   font-style: normal;
   font-size: 1rem;
   letter-spacing: -1px;
-  overflow-x: hidden;
 }
 
 p {
   font-family: "Inter", sans-serif;
-  font-weight: 600;
+  font-weight: 400;
   font-style: normal;
   font-size: 0.75rem;
   letter-spacing: -1px;
@@ -180,9 +179,10 @@ nav {
   justify-content: space-between;
   gap: 2rem;
   background-color: transparent;
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 6;
+  z-index: 350;
+  width: 100%;
 }
 
 
@@ -197,29 +197,6 @@ nav {
   height: 0;
 }
 
-.content {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  img {
-    max-width: 40vh;
-    max-height: 40vh;
-    object-fit: cover;
-    opacity: 0;
-  }
-}
-
-.section-present {
-  /* justify-content: space-between; */
-  width: 100%;
-  /* position: absolute; */
-  padding: 10rem 0rem;
-  height: 85vh;
-}
-
-.presentacion {
-  width: 60%;
-}
 
 
 /* Split Text */
@@ -245,43 +222,248 @@ nav {
 }
 
 
-/* GALERIA-ARCHIVOS  */
-*{box-sizing:border-box}
-  html,body{margin:0}
-  body{
-    overflow-x:hidden;
-  }
+/* GALERIA */
+
+.gallery {
+  width: 100%;
+  margin-top: 8vh;
+  margin-bottom: 8vh;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8rem;
+}
  
-  section{position:relative;overflow:hidden;text-align:center}
+.row {
+  display: flex;
+  align-items: flex-start;      /* todas las imágenes de la fila arrancan arriba */
+  /* max-height: 400px; */
+  gap: 1rem;
+}
+
+.col,.col-6,.col-4,.col-8,.col-2,.col-3  {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.col img,.col-6 img,.col-4 img,.col-8 img,.col-2 img,.col-3 img {
+  width: 100%;
+  height: 100%;
+  /* min-width: 100px; */
+}
+
+.col-8 img {}
+
+.col-6 video {
+  width: 100%;
+}
+
+.item__caption {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.5rem;
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 0;
+}
+
+
+@media (max-width: 957px) {
+  .row {
+    gap: 2rem;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+  }
+  .gallery {
+    width: 100%;
+    margin-top: 8vh;
+    padding: 1rem;
+    /* display: flex; */
+    /* flex-direction: column; */
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .col,.col-6,.col-4,.col-8,.col-2  {
+    gap: 0.2rem;
+    width: 100%;
+    justify-content: center;
+  }
+}
  
-  /* ARREGLO 1: en el pen original esto venía de una hoja de estilos externa
-     que no se copia con el CSS. Sin una altura, la primera sección solo
-     mide lo que mide su título. */
-  .panel{
-    min-height:100vh;
-    display:flex;align-items:center;justify-content:center;
-    padding:0 5vw;
-  }
+
+/* ─────────────────────────────────────────────────────────────
+   MENÚ DESPLEGABLE
  
-  /* Galería horizontal */
-  .horiz-gallery-wrapper{
-    position:relative;display:flex;flex-wrap:nowrap;will-change:transform;
+   - Escritorio (más de 768px): se ve tu nav de siempre, con las opciones
+     desplegadas. El botón y los paneles no existen.
+   - Móvil (768px o menos): se ocultan las opciones, aparece el botón y
+     al pulsarlo salen dos paneles: blanco (opciones) y negro (redes).
+ 
+   Enlázalo en todas las páginas, DESPUÉS de tu css principal:
+     <link rel="stylesheet" href="css/menu.css" />
+   ───────────────────────────────────────────────────────────── */
+ 
+:root {
+  --menu-radius: 10px;
+}
+
+header {
+  position: relative;
+  z-index: 100;   /* por encima del menú cerrado, por debajo cuando está abierto */
+}
+
+body.menu-open header {
+  z-index: 300;   /* por encima del menú abierto para que el botón X funcione */
+}
+
+body.menu-open .menu-toggle {
+  color: var(--text-light);  /* o el color que quieras para la X */
+}
+ 
+/* Botón (se oculta en escritorio) */
+.menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;          /* alinea las barras con el borde del nav */
+  padding: 0;
+  border: 0;
+  background: transparent;          /* las barras usan el color del texto (claro/oscuro) */
+  position: relative;
+}
+.menu-toggle svg {
+  display: block;
+}
+ 
+/* Contenedor de los paneles (se oculta en escritorio) */
+.menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  padding: 5rem 1rem;
+  gap: 0.5rem;
+  flex-direction: column;
+  visibility: hidden;           /* lo activa el JS al abrir */
+  pointer-events: none;
+  touch-action: none;           /* que no se mueva la página de detrás */
+}
+ 
+.menu-bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+}
+ 
+.menu-panel {
+  position: relative;
+  width: 100%;
+  border: 2px solid;
+  border-radius: var(--menu-radius);
+  transform: translateX(101%);  /* fuera de pantalla hasta que entra */
+}
+ 
+/* Panel blanco (arriba): opciones */
+.menu-top {
+  flex: 1;
+  min-height: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem 1.5rem;  /* el hueco de arriba deja libres el logo y el botón */
+  overflow-y: auto;
+  touch-action: pan-y;
+  background: var(--bg-light);
+  color: var(--text-light);
+  border-color: var(--text-light);
+}
+
+.menu-list{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+ 
+/* Panel negro (abajo): redes sociales */
+.menu-bottom {
+  z-index: 1;
+  min-height: 110px;
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  background: var(--bg-dark);
+  color: var(--text-middle);
+  border-color: #3a3a3a;
+}
+
+.menu-socials {
+  display: flex;
+  align-items: center;
+}
+ 
+.menu-list,
+.menu-socials {
+  list-style: none;
+}
+.menu-item {
+  overflow: hidden;
+}
+ 
+/* Los selectores llevan ".menu" delante para ganar a tus reglas
+   "body.dark-mode a" / "body.light-mode a", que si no pintarían los enlaces
+   con el color del modo y en modo oscuro quedarían blancos sobre blanco. */
+.menu .menu-link {
+  display: block;
+  padding: 0.4rem 0;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: clamp(2.5rem, 13vw, 4rem);
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: var(--text-light);
+}
+ 
+.menu-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+}
+.menu .menu-social {
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  color: var(--text-middle);
+}
+ 
+/* Mientras el menú está abierto, el nav (logo + botón) se coloca por encima
+   de los paneles para poder cerrarlo */
+body.menu-open nav {
+  z-index: 300;
+}
+ 
+@media (max-width: 957px) {
+  /* .d-flex de Bootstrap lleva !important, por eso hace falta aquí también */
+  .nav-links {
+    display: none !important;
   }
-  .horiz-gallery-strip{
-    position:relative;display:flex;flex-wrap:nowrap;
-    width:max-content; align-items: end;           /* la tira mide lo que miden todas sus imágenes juntas */
-    will-change:transform;
+  .menu-toggle {
+    display: flex;
   }
-  .project-wrap{
-    flex:none;                    /* que ninguna imagen se encoja */
-    width:20vw;padding:0.5rem;box-sizing:content-box;
+  .menu {
+    display: flex;
   }
-  .project-wrap img{
-    display:block;width:100%;object-fit:cover;
-  }
-  .media{ position:relative; will-change:transform; }
-  .media img{ display:block; width:100%; object-fit:cover; }
-  .media-hover{ position:absolute; inset:0; height:100%; }
-  @media (max-width:700px){
-    .project-wrap{width:70vw;padding:1rem}
-  }
+}

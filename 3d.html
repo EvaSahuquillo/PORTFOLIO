@@ -44,20 +44,112 @@
 <body>
     <div id="custom-cursor"><div class="cursor-inner"></div></div>
     <header >
-        <nav class="p-3">
-            <div class="d-flex gap-4">
+        <nav class="p-3 mt-2">
+            <div class="nav-brand d-flex gap-4">
                 <a href="index.html"><h4>sahuqui___®</h4></a>
             </div>
-            <div class="d-flex gap-4">
+            <div class="nav-links d-flex gap-4">
                 <a href="work.html"><h4>work</h4></a>
-                <a href="archivos.html"><h4 class="grey">archivos</h4></a>
-                <a href="aboutme.html"><h4>about me</h4></a>
-                <a href=""><h4>contact</h4></a>
+                <a href="archivos.html"><h4>archives</h4></a>
+                <a href="aboutme.html"><h4>about</h4></a>
+                <a href="contact.html"><h4>contact</h4></a>
             </div>
+    
+            <!-- Botón (solo se ve en móvil) -->
+            <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
+                <svg width="24" height="24" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <line class="bar bar-top" x1="3" y1="7"  x2="17" y2="7"  stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    <line class="bar bar-mid" x1="3" y1="10" x2="17" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    <line class="bar bar-bot" x1="3" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </button>
         </nav>
     </header>
+    <!-- ✅ MENÚ FUERA DEL HEADER -->
+    <div class="menu" id="menu">
+        <div class="menu-bg"></div>
+        <div class="menu-top menu-panel" role="navigation" aria-label="Menú principal">
+            <ul class="menu-list">
+                <li class="menu-item"><a class="menu-link" href="work.html">work</a></li>
+                <li class="menu-item"><a class="menu-link" href="archivos.html">archives</a></li>
+                <li class="menu-item"><a class="menu-link" href="aboutme.html">about</a></li>
+                <li class="menu-item"><a class="menu-link" href="contact.html">contact</a></li>
+            </ul>
+        </div>
+        <div class="menu-bottom menu-panel">
+            <ul class="menu-socials">
+                <li><a class="menu-social" href="#" target="_blank" rel="noopener">Instagram</a></li>
+                <li><a class="menu-social" href="#" target="_blank" rel="noopener">Behance</a></li>
+                <li><a class="menu-social" href="#" target="_blank" rel="noopener">LinkedIn</a></li>
+            </ul>
+        </div>
+    </div>
     <main>
-        <div id="smooth-wrapper">
+        <div class="gallery">
+            <!-- Fila 1 -->
+            <div class="row">
+                <div class="col p-0" data-reveal>
+                    <img class="" src="img/proyectos/render weno wenisimo.jpg" alt="Anillo">
+                    <div class="item__caption"><span>(01)</span></div>
+                </div>
+                <div class="col p-0" data-reveal>
+                    <img class="" src="img/proyectos/clay render.jpg" alt="Set de anillos">
+                    <div class="item__caption"><span>(02)</span></div>
+                </div>
+                <div class="col" data-reveal>
+                    
+                </div>
+                <div class="col-6 p-0" data-reveal>
+                    <video autoplay muted loop src="img/proyectos/Sahuquillo.Eva_A3D_P1_VIDEO.mp4"></video>
+                    <div class="item__caption"><span>Collar</span></div>
+                </div>
+            </div>
+            <!-- Fila 2 -->
+            <div class="row">
+                <div class="col-6 p-0" data-reveal>
+                    <img class="" src="img/proyectos/zapatilla_pospo.jpg" alt="Anillo">
+                    <div class="item__caption"><span>(04)</span></div>
+                </div>
+                <div class="col-4 p-0" data-reveal>
+                    <img class="" src="img/proyectos/Sahuquillo.Eva_3.1_Campaña.Zapatilla.ClayRender.jpg" alt="Set de anillos">
+                    <div class="item__caption"><span>(05)</span></div>
+                </div>
+            </div>
+
+            <!-- Fila 3 -->
+            <div class="row">
+                <div class="col p-0" data-reveal>
+                    <img class="" src="img/proyectos/render-postproduccin.jpg" alt="Anillo">
+                    <div class="item__caption"><span>(01)</span></div>
+                </div>
+                <div class="col p-0" data-reveal>
+                    <img class="" src="img/proyectos/clay-render-parte-de-delante.jpg" alt="Set de anillos">
+                    <div class="item__caption"><span>(02)</span></div>
+                </div>
+                
+                <div class="col-8 p-0" data-reveal>
+                    <img src="img/proyectos/Sahuquillo.Eva_3.1_Yorokobu_Revista.png" alt="">
+                    <div class="item__caption"><span>Collar</span></div>
+                </div>
+            </div>
+            <!-- Fila 4 -->
+            <div class="row">
+                <div class="col p-0" data-reveal>
+                    <img class="" src="img/proyectos/Sahuquillo.Eva_3.1_Composicin_Render1.jpg" alt="Set de anillos">
+                    <div class="item__caption"><span>(02)</span></div>
+                </div>
+                <div class="col p-0" data-reveal>
+                    <img src="img/proyectos/Sahuquillo.Eva_3.1_Composicin_Render2.jpg" alt="">
+                    <div class="item__caption"><span>Collar</span></div>
+                </div>
+                <div class="col" data-reveal>
+                    
+                </div>
+            </div>
+            <div class="row">
+            </div>
+        </div>
+        <!-- <div id="smooth-wrapper">
             <div id="smooth-content">
 
                 <section class="panel plain">
@@ -98,7 +190,7 @@
                 </div>
                 </section>
             </div>
-        </div>
+        </div> -->
     </main>
     <footer class="fixed-bottom">
         <div class="p-3 d-flex justify-content-between">
@@ -138,6 +230,7 @@
     <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
 
     <!-- 8. Tu JS personal (al final, después de todo) -->
+     <script type="module" src="js/menu.js"></script>
     <script src="js/galeria-archivos.js"></script>
      <script src="js/script.js"></script>
 

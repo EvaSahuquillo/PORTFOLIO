@@ -1,400 +1,549 @@
+html {
+  overscroll-behavior: none;
+}
+
 * {
   box-sizing: border-box;
   /* font-size: 16px; */
   scroll-behavior: smooth;
+  cursor: none !important;
 }
-/* Temas */
+
+
 :root {
   --bg-light: #ffffff;
-  --bg-dark: #111111;
-  --text-light: #000000;
-  --text-dark: #ffffff;
+  --bg-dark: #141414;
+  --text-light: #191919;
+  --text-dark: #efefef;
+  --text-middle: #969696;
+  --link-light: #191919;
+  --link-dark: #efefef;
+}
+
+body {
+  transition: 0.3s ease, color 0.3s ease;
 }
 
 body.light-mode {
   background-color: var(--bg-light);
-  color: var(--text-light);
+  color: var(--text-light);  /* ← Esto funciona para todos los textos */
 }
 
 body.dark-mode {
   background-color: var(--bg-dark);
-  color: var(--text-dark);
+  color: var(--text-dark);   /* ← Esto funciona para todos los textos */
 }
 
+body.light-mode a {
+  color: var(--link-light);
+  text-decoration: none;
+}
 
-html,
+body.dark-mode a {
+  color: var(--link-dark);
+  text-decoration: none;
+}
+
+body.light-mode .cursor-inner{
+  background-color: var(--bg-dark);
+}
+
+body.dark-mode .cursor-inner{
+  background-color: var(--bg-light);
+}
+
 body {
+  height: 100vh;
+  position: relative;
   margin: 0;
-  height: 100%;
-  -webkit-overflow-scrolling: touch;
-}
-
-body {
-  overflow-x: hidden;
-  overflow-y: scroll;
-}
-
-/* .nav {
+  background-color: var(--bg-light);
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1rem;
+  letter-spacing: -1px;
   width: 100%;
-  height: 60px;
+}
+
+p {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 0.75rem;
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 0;
+}
+
+h1 {
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 5rem;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  /* color: var(--text-light); */
+}
+
+
+h3 {
+  font-family: "Instrument Serif", serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 1.5rem;
+  text-indent: 1.5em;
+  line-height: 1.1;
+  color: var(--text-middle);
+}
+
+.negri-italic {
+  font-family: "Instrument Serif", serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 3.5rem;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+h4 {
+  font-family:  "Inter", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 2rem;
+  letter-spacing: -2px;
+  /* color: var(--text-light); */
+}
+
+h5 {
+  font-family:  "Inter", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 1rem;
+  color: var(--text-middle);
+}
+
+h6 {
+  font-family: "Instrument Serif", serif;
+  font-weight: 300;
+  font-size: 3.5rem;
+  color: var(--text-light);
+  line-height: 1;
+}
+
+.grey {
+    color: var(--text-middle);
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-light);
+}
+
+/* CUSTOM CURSOR */
+#custom-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-inner {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-dark);
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  mix-blend-mode: difference; /* ← Mover aquí */
+}
+
+.cursor-inner.link-hover {
+  width: 40px;
+  height: 40px;
+  background-color: var(--bg-dark);
+  transform: scale(1.5);
+}
+
+/* Asegurar que el cursor personalizado sea visible */
+#custom-cursor {
+  display: block !important;
+}
+
+/* Para elementos interactivos, seguimos sin mostrar el cursor por defecto */
+a, button, .btn, .sol, #mode-toggle, .proyecto-link, [href] {
+  cursor: none !important;
+}
+
+
+/* ocultar cursor en móvil */
+@media (max-width: 768px) {
+  #custom-cursor { display: none; }
+  body { cursor: auto !important; }
+
+  p {
+    font-size: 0.7rem;
+  }
+  h4 {
+    font-size: 1.25rem;
+
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  .label {
+    font-size: 1.25rem;
+  }
+}
+
+/* HOME  */
+nav {
+  height: 55px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  background-color: transparent;
   position: fixed;
   top: 0;
-  z-index: 999;
-  display: flex;
-  color: #fff;
-  background: #000;
-  justify-content: space-between;
+  z-index: 6;
 }
 
-.nav-links {
-  display: flex;
-} */
-
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  transition: none !important;
-  animation: none !important;
+.nav-link:hover {
+  cursor: pointer;
 }
 
-:root {
-  --green: #0ae448;
-  --lt: #abff84;
-  --black: #0e100f;
-  --white: #fffce1;
-  --s75: #bbbaa6;
-  --s50: #7c7c6f;
-  --s25: #42433d;
-  --color-shockingly-green: #0ae448;
-  --color-just-black: #0e100f;
-  --color-surface-white: #fffce1;
-  --color-lt-green: #abff84;
-  --color-grey: #191919;
-  --color-grey-dark: #191919;
-  --color-surface75: #bbbaa6;
-  --color-surface50: #7c7c6f;
-  --color-surface25: #42433d;
-  --gradient-macha: linear-gradient(114.41deg, var(--color-shockingly-green) 20.74%, var(--color-lt-green) 65.5%);
-  --dark: var(--color-just-black);
-  --light: var(--color-surface-white);
-  --green: var(--color-shockingly-green);
-}
-
-html,
-body {
-  width: 100%;
-  height: 100%;
+#expanded-menu {
+  background-color: transparent;
+  border-bottom: 1px solid var(--bg-dark);
   overflow: hidden;
-  font-family: Mori, sans-serif;
-  background: var(--black);
-  color: var(--white);
+  height: 0;
 }
 
-.topbar {
+/* MENU  */
+
+ul {
+  width: 100%;
+  margin: 0;
+  padding-top: 55px;
+  padding-left: 0;
+}
+
+.container-fluid {
+  display: inline-block;
+  border-bottom: 2px solid var(--text-middle);
+  width: 100%;
+  padding: 1.5rem 1rem;
+}
+
+.container-fluid .text {
+    width: 100%;
+}
+
+.container-fluid img.swipeimage {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  z-index: 300;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 24px;
-}
-.logo {
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--white);
-  z-index: 310;
-}
-.logo img {
-  width: 60px;
+  width: auto;
+  height: 300px;
+  object-fit: cover;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 9;
+  opacity: 0;
+  visibily: hidden;
+  pointer-events: none;
 }
 
-h1 code {
-  font-size: inherit;
+/* ─────────────────────────────────────────────────────────────
+   MENÚ DESPLEGABLE
+ 
+   - Escritorio (más de 768px): se ve tu nav de siempre, con las opciones
+     desplegadas. El botón y los paneles no existen.
+   - Móvil (768px o menos): se ocultan las opciones, aparece el botón y
+     al pulsarlo salen dos paneles: blanco (opciones) y negro (redes).
+ 
+   Enlázalo en todas las páginas, DESPUÉS de tu css principal:
+     <link rel="stylesheet" href="css/menu.css" />
+   ───────────────────────────────────────────────────────────── */
+ 
+:root {
+  --menu-radius: 10px;
 }
+
+header {
+  position: relative;
+  z-index: 100;   /* por encima del menú cerrado, por debajo cuando está abierto */
+}
+
+body.menu-open header {
+  z-index: 300;   /* por encima del menú abierto para que el botón X funcione */
+}
+
+body.menu-open .menu-toggle {
+  color: var(--text-light);  /* o el color que quieras para la X */
+}
+ 
+/* Botón (se oculta en escritorio) */
 .menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
   width: 44px;
   height: 44px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 310;
-  position: relative;
+  margin-right: -10px;          /* alinea las barras con el borde del nav */
   padding: 0;
+  border: 0;
+  background: transparent;          /* las barras usan el color del texto (claro/oscuro) */
+  position: relative;
 }
-
-/* ─── Header ─── */
-.header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  gap: 16px;
-  padding: 80px 24px 24px;
+.menu-toggle svg {
+  display: block;
 }
-.header h1 {
-  color: var(--light);
-  font-weight: 400;
-  font-size: clamp(1.4rem, 3vw, 2rem);
-}
-.header p {
-  color: var(--s50);
-  font-size: 0.88rem;
-  margin-top: 8px;
-  max-width: 70ch;
-  margin-left: auto;
-  margin-right: auto;
-}
-code {
-  font-family: Fraktion Mono, monospace;
-  font-size: 0.72rem;
-  background: rgba(10, 228, 72, 0.08);
-  color: var(--green);
-  padding: 2px 6px;
-  border-radius: 3px;
-}
-
-.controls {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  font-size: 0.72rem;
-  color: var(--s50);
-}
-.controls label {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  cursor: pointer;
-}
-.controls input[type="checkbox"] {
-  accent-color: var(--green);
-}
-.controls input[type="range"] {
-  width: 64px;
-  accent-color: var(--green);
-}
-.controls code {
-  font-family: Fraktion Mono, monospace;
-  font-size: 0.66rem;
-  background: rgba(10, 228, 72, 0.08);
-  color: var(--green);
-  padding: 2px 6px;
-  border-radius: 3px;
-}
-.speed-val {
-  font-family: Fraktion Mono, monospace;
-  font-size: 0.66rem;
-  min-width: 2em;
-}
-
-/* ── Nav overlay ── */
-.nav {
+ 
+/* Contenedor de los paneles (se oculta en escritorio) */
+.menu {
+  display: none;
   position: fixed;
   inset: 0;
   z-index: 200;
-  padding: 1rem;
-  pointer-events: none;
-  visibility: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  padding: 5rem 1rem;
   gap: 0.5rem;
+  flex-direction: column;
+  visibility: hidden;           /* lo activa el JS al abrir */
+  pointer-events: none;
+  touch-action: none;           /* que no se mueva la página de detrás */
 }
-.nav-bg {
+ 
+.menu-bg {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
+
   opacity: 0;
 }
-
-.nav-border {
-  border: solid 2px;
-  border-radius: 10px;
+ 
+.menu-panel {
+  position: relative;
+  width: 100%;
+  border: 2px solid;
+  border-radius: var(--menu-radius);
+  transform: translateX(101%);  /* fuera de pantalla hasta que entra */
 }
-
-.nav-top {
+ 
+/* Panel blanco (arriba): opciones */
+.menu-top {
   flex: 1;
-  width: 100%;
-  background: var(--white);
-  color: var(--black);
-  transform: translateX(-101%);
-  display: flex;
-  flex-direction: column;
-  padding: 50px 28px 28px;
-  overflow-y: auto;
-  position: relative;
-  z-index: 3;
-  border-color: var(--black);
-}
-
-.nav-middle {
-  position: relative;
-  width: 100%;
-  background: linear-gradient(
-    135deg,
-    #0ae448 0%,
-    #abff84 40%,
-    #6fdd8b 70%,
-    #0ae448 100%
-  );
-  color: var(--black);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 24px 28px;
+  min-height: 0;
   z-index: 2;
-  border-color: #065a1e;
-  min-height: 180px;
-}
-
-.nav-middle-header {
-  font-family: Fraktion Mono, monospace;
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  opacity: 0.6;
-  margin-bottom: 12px;
-}
-
-.nav-panel {
-  max-width: 700px
-}
-
-.nav-middle-card {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.nav-middle-badge {
-  flex-shrink: 0;
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background: rgba(0, 0, 0, 0.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.nav-middle-badge svg {
-  width: 24px;
-  height: 24px;
-}
-
-.nav-middle-info {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-}
-.nav-middle-title {
-  font-weight: 600;
-  font-size: clamp(1rem, 3vw, 1.25rem);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-}
-.nav-middle-desc {
-  font-size: 0.78rem;
-  opacity: 0.7;
-  line-height: 1.4;
+  justify-content: center;
+  padding: 3rem 1.5rem;  /* el hueco de arriba deja libres el logo y el botón */
+  overflow-y: auto;
+  touch-action: pan-y;
+  background: var(--bg-light);
+  color: var(--text-light);
+  border-color: var(--text-light);
 }
 
-.nav-middle-actions {
+.menu-list{
   display: flex;
-  gap: 10px;
-  margin-top: 14px;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
-.nav-middle-actions a {
-  font-family: Fraktion Mono, monospace;
-  font-size: 0.7rem;
-  text-decoration: none;
-  color: var(--black);
-  padding: 6px 14px;
-  border-radius: 100px;
-  background: rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  cursor: pointer;
-}
-.nav-middle-actions a:first-child {
-  background: var(--black);
-  color: var(--lt);
-  border-color: var(--black);
-}
-
-.nav-bottom {
-  position: relative;
-  height: 120px;
-  width: 100%;
-  background: var(--black);
-  color: var(--s50);
-  transform: translateX(101%);
-  display: flex;
-  align-items: center;
-  padding: 24px 28px;
+ 
+/* Panel negro (abajo): redes sociales */
+.menu-bottom {
   z-index: 1;
-  border-color: var(--s25);
+  min-height: 110px;
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  background: var(--bg-dark);
+  color: var(--text-middle);
+  border-color: #3a3a3a;
 }
 
-.nav-list {
-  list-style: none;
+.menu-socials {
   display: flex;
-  flex-direction: column;
-  gap: 0;
-  flex: 1;
-  justify-content: center;
+  align-items: center;
 }
-.nav-item {
+ 
+.menu-list,
+.menu-socials {
+  list-style: none;
+}
+.menu-item {
   overflow: hidden;
 }
-.nav-link {
+ 
+/* Los selectores llevan ".menu" delante para ganar a tus reglas
+   "body.dark-mode a" / "body.light-mode a", que si no pintarían los enlaces
+   con el color del modo y en modo oscuro quedarían blancos sobre blanco. */
+.menu .menu-link {
   display: block;
-  text-decoration: none;
-  color: var(--black);
-  padding: 10px 0;
-  font-size: clamp(1.5rem, 4vw, 1.8rem);
+  padding: 0.4rem 0;
+  font-family: "Inter", sans-serif;
   font-weight: 600;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.5rem, 13vw, 4rem);
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: var(--text-light);
 }
-.nav-login {
-  margin-top: auto;
-  padding-top: 20px;
-  font-size: 0.82rem;
-  color: var(--s50);
-  font-family: Fraktion Mono, monospace;
-}
-
-.nav-socials {
-  list-style: none;
+ 
+.menu-socials {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 0.5rem 1.25rem;
 }
-.nav-socials a {
-  font-family: Fraktion Mono, monospace;
-  font-size: 0.8rem;
-  color: var(--s50);
-  text-decoration: none;
+.menu .menu-social {
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  color: var(--text-middle);
 }
-.nav-asset {
-  margin-left: auto;
+ 
+/* Mientras el menú está abierto, el nav (logo + botón) se coloca por encima
+   de los paneles para poder cerrarlo */
+body.menu-open nav {
+  z-index: 300;
 }
-.nav-asset img {
-  position: absolute;
-  bottom: 0;
-  right: 2rem;
-  width: 100px;
+ 
+@media (max-width: 957px) {
+  /* .d-flex de Bootstrap lleva !important, por eso hace falta aquí también */
+  .nav-links {
+    display: none !important;
+  }
+  .menu-toggle {
+    display: flex;
+  }
+  .menu {
+    display: flex;
+  }
+}
+
+/* GALERIA */
+#grid {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 5vh;
+}
+
+.col {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.item { cursor: zoom-in; }
+
+.item img,
+.item video {
+  display: block;
+  width: 100%;
   height: auto;
 }
+
+
+/* Visor */
+#lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, .2);
+  backdrop-filter: blur(20px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  z-index: 10;
+}
+
+#lightbox.open { display: flex; }
+
+#lightbox-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#lightbox-content img,
+#lightbox-content video {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100vh - 140px); /* deja sitio para el caption */
+  cursor: default;
+}
+
+.caption {
+  margin: 0;
+  max-width: 600px;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
+  cursor: default;
+}
+
+@media (max-width: 600px) {
+  #lightbox { padding: 20px; }
+}
+
+
+/* EFECTO GIRAR  */
+.rot {
+  display: block;
+  font-family:  "Inter", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 2rem;
+  letter-spacing: -2px;
+  /* text-transform: uppercase; */
+  cursor: pointer;
+  perspective: 600px;
+  white-space: nowrap;
+}
+
+.char {
+  display: inline-block;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: translateZ(-0.5em);
+  transition: transform 0.6s cubic-bezier(0.65, 0, 0.2, 1);
+  transition-delay: calc(var(--i) * 30ms);
+}
+
+/* Cara frontal */
+.char > span {
+  display: inline-block;
+  transform: translateZ(0.5em);
+  backface-visibility: hidden;
+}
+
+/* Cara que aparece al girar (misma letra, mismo color) */
+.char::after {
+  content: attr(data-char);
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: rotateX(90deg) translateZ(0.5em);
+  backface-visibility: hidden;
+}
+
+.rot:hover .char {
+  transform: translateZ(-0.5em) rotateX(-90deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .char { transition: none; }
+}
+
+

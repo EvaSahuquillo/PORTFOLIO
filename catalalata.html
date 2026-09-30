@@ -38,26 +38,54 @@
     <div id="custom-cursor"><div class="cursor-inner"></div></div>
     <header >
         <nav class="p-3 mt-2">
-            <div class="d-flex gap-4">
+            <div class="nav-brand d-flex gap-4">
                 <a href="index.html"><h4>sahuqui___®</h4></a>
             </div>
-            <div class="d-flex gap-4">
-                <a href="work.html"><h4>work</h4></a>
-                <a href="archivos.html"><h4>archivos</h4></a>
-                <a href="aboutme.html"><h4>about me</h4></a>
-                <a href=""><h4>contact</h4></a>
+            <div class="nav-links d-flex gap-4">
+                <a href="work.html" class="rot"><h4 class="grey">work</h4></a>
+                <a href="archivos.html" class="rot"><h4>archives</h4></a>
+                <a href="aboutme.html" class="rot"><h4>about</h4></a>
+                <a href="contact.html" class="rot"><h4>contact</h4></a>
             </div>
+    
+            <!-- Botón (solo se ve en móvil) -->
+            <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
+                <svg width="24" height="24" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <line class="bar bar-top" x1="3" y1="7"  x2="17" y2="7" stroke="currentColor"  stroke-width="1.5" stroke-linecap="round"/>
+                    <line class="bar bar-mid" x1="3" y1="10" x2="17" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    <line class="bar bar-bot" x1="3" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </button>
         </nav>
     </header>
+    <!-- ✅ MENÚ FUERA DEL HEADER -->
+    <div class="menu" id="menu">
+        <div class="menu-bg"></div>
+        <div class="menu-top menu-panel" role="navigation" aria-label="Menú principal">
+            <ul class="menu-list">
+                <li class="menu-item"><a class="menu-link" href="work.html">work</a></li>
+                <li class="menu-item"><a class="menu-link" href="archivos.html">archives</a></li>
+                <li class="menu-item"><a class="menu-link" href="aboutme.html">about</a></li>
+                <li class="menu-item"><a class="menu-link" href="contact.html">contact</a></li>
+            </ul>
+        </div>
+        <div class="menu-bottom menu-panel">
+            <ul class="menu-socials">
+                <li><a class="menu-social" href="#" target="_blank" rel="noopener">Instagram</a></li>
+                <li><a class="menu-social" href="#" target="_blank" rel="noopener">Behance</a></li>
+                <li><a class="menu-social" href="#" target="_blank" rel="noopener">LinkedIn</a></li>
+            </ul>
+        </div>
+    </div>
     <main class="flex-grow-1">
-        <div class="portada d-flex p-3 gap-2 pt-5 flex-column">
-            <div class="texto-portada d-flex gap-5 justify-content-between  pt-5 flex-md-row flex-column">
-                <div class="col d-flex gap-4">
+        <div class="portada d-flex p-3 flex-column justify-content-between">
+            <div class="texto-portada d-flex gap-2 justify-content-between  pt-5 flex-md-row flex-column">
+                <div class="subtitulos col d-flex gap-5">
                     <div class=""><h6 class="negri">(01) Cata la lata </h6><p>*Finalista VIII Premio<br>de Diseño ANFACO</p></div>
-                    <div class=""><h6>Packaging/ <br>2026  </h6></div>
-                    <div class=""><h6>Colaboración/ <br> Individual </h6></div>
+                    <div class=""><h6 class="grey">Packaging/ <br>2026  </h6></div>
+                    <div class=""><h6 class="grey">Colaboración/ <br> Individual </h6></div>
                 </div>
-                <div class="cuerpo-texto pl-3 col"><h6 class=""> El diseño propone una identidad donde cada variedad se identifica a través de una pincelada de óleo con textura y relieve visible: azul-verde para las sardinillas, rosa para el atún claro y naranja-negro para los mejillones en escabeche. El color evoca directamente el alimento. La ilustración de trazo naïf muestra una mano sosteniendo el tenedor de forma distinta según la categoría del producto, creando una jerarquía visual que va de lo cotidiano a lo refinado. El resultado es una familia de productos con carácter propio y reconocible dentro del lineal.</h6></div>
+                <div class="cuerpo-texto pl-3 col"><h6 class="grey"> El diseño propone una identidad donde cada variedad se identifica a través de una pincelada de óleo con textura y relieve visible: azul-gris para las sardinillas, rosa para el atún claro y naranja-negro para los mejillones en escabeche. El color evoca directamente el alimento. La ilustración de trazo naïf muestra una mano sosteniendo el tenedor de forma distinta según la categoría del producto, creando una jerarquía visual que va de lo cotidiano a lo refinado. El resultado es una familia de productos con carácter propio y reconocible dentro del lineal.</h6></div>
             </div>
             <div class="img-portada d-flex gap-2 flex-md-row flex-column">
                 <div class="col d-flex gap-2 flex-column">
@@ -80,11 +108,11 @@
                     <img src="img/proyectos/mock-portfolio.png" alt="">
                     <p class="caption">Vista cenital <br>2026</p>
                 </div>
-                <div class="col d-flex gap-2 flex-column">
+                <!-- <div class="col d-flex gap-2 flex-column">
                     <p>(05)</p>
                     <img src="img/proyectos/reticula-pack.gif" alt="">
                     <p class="caption">Retícula packaging <br> 2026</p>
-                </div>
+                </div> -->
             </div>
         </div>
     </main>
@@ -124,6 +152,7 @@
     </script>
 
     <!-- Tu JS personal -->
+     <script type="module" src="js/menu.js"></script>
      <script src="js/carrusel.js"></script>
     <script src="js/script.js"></script>
 </body>

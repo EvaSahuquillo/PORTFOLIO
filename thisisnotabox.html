@@ -37,17 +37,45 @@
     <div id="custom-cursor"><div class="cursor-inner"></div></div>
     <header >
         <nav class="p-3 mt-2">
-            <div class="d-flex gap-4">
+            <div class="nav-brand d-flex gap-4">
                 <a href="index.html"><h4>sahuqui___®</h4></a>
             </div>
-            <div class="d-flex gap-4">
-                <a href="work.html"><h4 class="grey">work</h4></a>
-                <a href="archivos.html"><h4>archivos</h4></a>
-                <a href="aboutme.html"><h4>about me</h4></a>
-                <a href=""><h4>contact</h4></a>
+            <div class="nav-links d-flex gap-4">
+                <a href="work.html" class="rot"><h4>work</h4></a>
+                <a href="archivos.html" class="rot"><h4>archives</h4></a>
+                <a href="aboutme.html" class="rot"><h4>about</h4></a>
+                <a href="contact.html" class="rot"><h4>contact</h4></a>
             </div>
+    
+            <!-- Botón (solo se ve en móvil) -->
+            <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
+                <svg width="24" height="24" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <line class="bar bar-top" x1="3" y1="7"  x2="17" y2="7"  stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    <line class="bar bar-mid" x1="3" y1="10" x2="17" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    <line class="bar bar-bot" x1="3" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </button>
         </nav>
     </header>
+    <!-- ✅ MENÚ FUERA DEL HEADER -->
+    <div class="menu" id="menu">
+        <div class="menu-bg"></div>
+        <div class="menu-top menu-panel" role="navigation" aria-label="Menú principal">
+            <ul class="menu-list">
+                <li class="menu-item"><a class="menu-link" href="work.html">work</a></li>
+                <li class="menu-item"><a class="menu-link" href="archivos.html">archives</a></li>
+                <li class="menu-item"><a class="menu-link" href="aboutme.html">about</a></li>
+                <li class="menu-item"><a class="menu-link" href="contact.html">contact</a></li>
+            </ul>
+        </div>
+        <div class="menu-bottom menu-panel">
+            <ul class="menu-socials">
+                <li><a class="menu-social" href="#" target="_blank" rel="noopener">Instagram</a></li>
+                <li><a class="menu-social" href="#" target="_blank" rel="noopener">Behance</a></li>
+                <li><a class="menu-social" href="#" target="_blank" rel="noopener">LinkedIn</a></li>
+            </ul>
+        </div>
+    </div>
     <main class="flex-grow-1">
         <div class="portada d-flex p-3 gap-2 pt-5 flex-column">
             <div class="texto-portada d-flex gap-4 justify-content-between  pt-5 flex-md-row flex-column">
@@ -138,6 +166,7 @@
     </script>
 
     <!-- Tu JS personal -->
+     <script type="module" src="js/menu.js"></script>
      <script src="js/carrusel.js"></script>
     <script src="js/script.js"></script>
 </body>

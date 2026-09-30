@@ -5,7 +5,6 @@ html {
 * {
   box-sizing: border-box;
   /* font-size: 16px; */
-  scroll-behavior: smooth;
   cursor: none !important;
 }
 
@@ -66,7 +65,7 @@ body {
 
 p {
   font-family: "Inter", sans-serif;
-  font-weight: 600;
+  font-weight: 400;
   font-style: normal;
   font-size: 0.75rem;
   letter-spacing: -1px;
@@ -170,9 +169,10 @@ nav {
   justify-content: space-between;
   gap: 2rem;
   background-color: transparent;
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 6;
+  z-index: 350;
+  width: 100%;
 }
 
 
@@ -204,7 +204,7 @@ nav {
   width: 100%;
   /* position: absolute; */
   padding: 10rem 0rem;
-  height: 85vh;
+  height: 100vh;
 }
 
 .presentacion {
@@ -259,29 +259,36 @@ nav {
   /* Vista ampliada al hacer clic en una imagen */
   .overlay{
     position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;
-    background:rgba(236,235,232,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+    background: rgba(255, 255, 255, 0.062);backdrop-filter:blur(20px);
     opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s linear .35s;
   }
   .overlay.open{opacity:1;visibility:visible;transition:opacity .35s ease}
   .card{
-    display:flex;flex-direction:column;gap:16px;max-width:min(560px,100%);
-    transform:scale(.94);transition:transform .45s cubic-bezier(.2,.8,.2,1);
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    gap:16px;
+    border: none !important;
+    max-width:min(560px,100%);
+    transform:scale(.94);
+    transition:transform .45s cubic-bezier(.2,.8,.2,1);
+    background-color: #ffffff00;
   }
   .overlay.open .card{transform:scale(1)}
   .card img{display:block;max-width:100%;max-height:68vh;object-fit:contain;margin:0 auto}
-  .card figcaption{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+  .card figcaption{display:flex;justify-content:space-between;align-items:flex-end;gap:24px; background-color: #efefef00;}
   .card h2{font-size:1.5rem;font-weight:600;letter-spacing:-.02em}
   .card p{color:var(--muted);margin-top:4px;font-size:.95rem}
   .actions{display:flex;gap:10px}
   .actions a,.actions button{
     font:inherit;font-size:.95rem;color:var(--ink);background:none;text-decoration:none;
-    border:1px solid var(--ink);border-radius:999px;padding:9px 18px;cursor:pointer;
-    transition:background .2s ease,color .2s ease;
+    cursor:pointer;
   }
   .actions a{background:var(--ink);color:var(--bg)}
   .actions a:hover{background:transparent;color:var(--ink)}
   .actions button:hover{background:var(--ink);color:var(--bg)}
-  .actions a:focus-visible,.actions button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+  .actions a:focus-visible,.actions button:focus-visible{}
  
   @media (max-width:520px){
     .card figcaption{flex-direction:column;align-items:flex-start}
@@ -320,6 +327,55 @@ h2 {
   font-style: normal;
 }
 
+/* ═══════════════════════════════════════════
+   PRELOADER: cortina SVG + contador
+   ═══════════════════════════════════════════ */
+
+/* .loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg-light);
+  overflow: hidden;
+  transition: opacity 0.8s ease, visibility 0s linear 0.8s;
+}
+
+body.dark-mode .loader {
+  background: var(--bg-dark);
+}
+
+.loader.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader-transition {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.loader-counter {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+  font-family: "Instrument Serif", serif;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: var(--text-middle);
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(6rem, 22vw, 18rem);
+
+} */
+
 
 /* ─────────────────────────────────────────────────────────────
    MENÚ DESPLEGABLE
@@ -336,6 +392,19 @@ h2 {
 :root {
   --menu-radius: 10px;
 }
+
+header {
+  position: relative;
+  z-index: 100;   /* por encima del menú cerrado, por debajo cuando está abierto */
+}
+
+body.menu-open header {
+  z-index: 300;   /* por encima del menú abierto para que el botón X funcione */
+}
+
+body.menu-open .menu-toggle {
+  color: var(--text-light);  /* o el color que quieras para la X */
+}
  
 /* Botón (se oculta en escritorio) */
 .menu-toggle {
@@ -347,8 +416,7 @@ h2 {
   margin-right: -10px;          /* alinea las barras con el borde del nav */
   padding: 0;
   border: 0;
-  background: transparent;
-  color: inherit;               /* las barras usan el color del texto (claro/oscuro) */
+  background: transparent;          /* las barras usan el color del texto (claro/oscuro) */
   position: relative;
 }
 .menu-toggle svg {
@@ -361,7 +429,7 @@ h2 {
   position: fixed;
   inset: 0;
   z-index: 200;
-  padding: 1rem;
+  padding: 5rem 1rem;
   gap: 0.5rem;
   flex-direction: column;
   visibility: hidden;           /* lo activa el JS al abrir */
@@ -373,6 +441,7 @@ h2 {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
   opacity: 0;
 }
  
@@ -392,12 +461,19 @@ h2 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 80px 1.5rem 1.5rem;  /* el hueco de arriba deja libres el logo y el botón */
+  padding: 3rem 1.5rem;  /* el hueco de arriba deja libres el logo y el botón */
   overflow-y: auto;
   touch-action: pan-y;
   background: var(--bg-light);
   color: var(--text-light);
   border-color: var(--text-light);
+}
+
+.menu-list{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
  
 /* Panel negro (abajo): redes sociales */
@@ -410,6 +486,11 @@ h2 {
   background: var(--bg-dark);
   color: var(--text-middle);
   border-color: #3a3a3a;
+}
+
+.menu-socials {
+  display: flex;
+  align-items: center;
 }
  
 .menu-list,
@@ -440,9 +521,9 @@ h2 {
   gap: 0.5rem 1.25rem;
 }
 .menu .menu-social {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.85rem;
-  font-weight: 500;
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
   color: var(--text-middle);
 }
  
@@ -452,7 +533,7 @@ body.menu-open nav {
   z-index: 300;
 }
  
-@media (max-width: 768px) {
+@media (max-width: 957px) {
   /* .d-flex de Bootstrap lleva !important, por eso hace falta aquí también */
   .nav-links {
     display: none !important;
@@ -463,4 +544,160 @@ body.menu-open nav {
   .menu {
     display: flex;
   }
+}
+
+
+/* CONTACT  */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.spacer {
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  position: relative;
+  height: 170vh;
+}
+
+.container {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border: 2px dashed var(--color-surface50);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Start point */
+.initial {
+  left: 60%;
+  top: 5%;
+}
+
+/* Down-the-page markers */
+.second {
+  left: 10%;
+  top: 45%;
+}
+
+.third {
+  right: 10%;
+  top: 65%;
+}
+
+.marker {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  z-index: 10;
+  border-radius: 10px;
+  background-image: url("img/proyectos/favicon2.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+
+
+
+
+.split-contact {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.split-icon {
+  position: absolute;
+  z-index: 1;
+  width: 120px; /* ajusta al tamaño de tu icono */
+}
+
+.split-icon img {
+  width: 120px;
+}
+
+.split-panel {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: var(--bg-light);
+  padding: 1rem;
+}
+
+.split-left {
+  right: 50%; /* pegado al centro por la derecha */
+}
+
+.split-right {
+  left: 50%; /* pegado al centro por la izquierda */
+}
+
+
+/* EFECTO GIRAR  */
+.rot {
+  display: block;
+  font-family:  "Inter", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 2rem;
+  letter-spacing: -2px;
+  /* text-transform: uppercase; */
+  cursor: pointer;
+  perspective: 600px;
+  white-space: nowrap;
+}
+
+.char {
+  display: inline-block;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: translateZ(-0.5em);
+  transition: transform 0.6s cubic-bezier(0.65, 0, 0.2, 1);
+  transition-delay: calc(var(--i) * 30ms);
+}
+
+/* Cara frontal */
+.char > span {
+  display: inline-block;
+  transform: translateZ(0.5em);
+  backface-visibility: hidden;
+}
+
+/* Cara que aparece al girar (misma letra, mismo color) */
+.char::after {
+  content: attr(data-char);
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: rotateX(90deg) translateZ(0.5em);
+  backface-visibility: hidden;
+}
+
+.rot:hover .char {
+  transform: translateZ(-0.5em) rotateX(-90deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .char { transition: none; }
 }
