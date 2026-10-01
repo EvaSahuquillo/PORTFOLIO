@@ -456,7 +456,7 @@ main:has(.carousel-track img:hover) .carousel-track .col:has(img:hover) > p {
     }
 
     .portada {
-        height: 90vh;
+        height: 95vh;
         padding-bottom: 0rem !important;
         
     }
