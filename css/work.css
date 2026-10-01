@@ -79,8 +79,8 @@ h1 {
   font-family: "Instrument Serif", serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 5rem;
-  letter-spacing: -1px;
+  font-size: 4rem;
+  letter-spacing: -2px;
   line-height: 1.1;
   /* color: var(--text-light); */
 }
@@ -195,7 +195,7 @@ a, button, .btn, .sol, #mode-toggle, .proyecto-link, [href] {
   }
 
   h1 {
-    font-size: 3rem;
+    font-size: 2rem;
   }
 
   .label {
@@ -235,13 +235,19 @@ ul {
   margin: 0;
   padding-top: 55px;
   padding-left: 0;
+  height: 90vh;
 }
 
 .container-fluid {
   display: inline-block;
-  border-bottom: 2px solid var(--text-middle);
+  /* border-bottom: 2px solid var(--text-middle); */
   width: 100%;
   padding: 1.5rem 1rem;
+}
+
+hr {
+  border: 1.5px solid var(--text-middle);
+  margin: 0;
 }
 
 .container-fluid .text {
@@ -262,6 +268,24 @@ ul {
   pointer-events: none;
 }
 
+
+@media (max-width: 957px) {
+  .text {
+    justify-content: start;
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .text-end {
+    text-align: start;
+  }
+
+  .container-fluid {
+    padding: 0rem 1rem;
+    padding-top: 1rem;
+  }
+
+}
 /* ─────────────────────────────────────────────────────────────
    MENÚ DESPLEGABLE
  
