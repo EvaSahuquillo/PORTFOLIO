@@ -431,7 +431,7 @@ main:has(.carousel-track img:hover) .carousel-track .col:has(img:hover) > p {
 }
  
 .portada {
-    height: 100vh;
+    height: 90vh;
     padding-bottom: 5rem !important;
 }
  
@@ -450,6 +450,10 @@ main:has(.carousel-track img:hover) .carousel-track .col:has(img:hover) > p {
       justify-content: space-between;
       gap: 0;
     } 
+    .img-portada img {
+    width: 240px;        /* ancho fijo, igual para todas — ajústalo a tu gusto */
+
+    }
 
 }
  
