@@ -451,9 +451,10 @@ main:has(.carousel-track img:hover) .carousel-track .col:has(img:hover) > p {
       gap: 0;
     } 
     .img-portada img {
-    width: 240px;        /* ancho fijo, igual para todas — ajústalo a tu gusto */
-
+    width: 240px; 
+    max-height: 40vh; 
     }
+    
 
 }
  
