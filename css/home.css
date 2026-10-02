@@ -229,7 +229,7 @@ nav {
   position: absolute;
   width: 100%;
   bottom: 0;
-  z-index: 100;
+  z-index: 400;
 }
 
 .sol {
@@ -380,6 +380,19 @@ body.dark-mode .loader {
 } */
 
 
+@media (hover: none), (pointer: coarse) {
+  .img-portada img:hover {
+    transform: none !important;
+    /* si tu hover también cambia otras cosas, añádelas aquí: */
+    /* filter: none !important; */
+    /* box-shadow: none !important; */
+    /* scale: 1 !important; */
+  }
+  #custom-cursor {
+    display: none;
+  }
+}
+
 /* ─────────────────────────────────────────────────────────────
    MENÚ DESPLEGABLE
  
@@ -421,7 +434,27 @@ body.menu-open .menu-toggle {
   border: 0;
   background: transparent;          /* las barras usan el color del texto (claro/oscuro) */
   position: relative;
+    /* ── Arreglos del botón nativo ── */
+  -webkit-appearance: none;      /* quita el fondo/estilo nativo de botón (Safari/iOS) */
+  appearance: none;
+  font: inherit;                 /* que no herede la fuente del sistema */
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;  /* quita el flash azul al tocar en móvil */
+
+  /* ── Color según el modo activo ── */
+  color: inherit;                /* hereda el color del body, que cambia con dark/light mode */
+
+  position: relative;
 }
+
+body.menu-open .menu-toggle {
+  color: inherit;  
+}
+
+body.menu-open .nav-brand {
+  color: inherit;  
+}
+
 .menu-toggle svg {
   display: block;
 }
@@ -464,7 +497,7 @@ body.menu-open .menu-toggle {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 3rem 1.5rem;  /* el hueco de arriba deja libres el logo y el botón */
+  padding: 3rem 2rem;  /* el hueco de arriba deja libres el logo y el botón */
   overflow-y: auto;
   touch-action: pan-y;
   background: var(--bg-light);
@@ -477,6 +510,7 @@ body.menu-open .menu-toggle {
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  padding: 0;
 }
  
 /* Panel negro (abajo): redes sociales */
@@ -485,7 +519,7 @@ body.menu-open .menu-toggle {
   /* min-height: 110px; */
   display: flex;
   align-items: center;
-  padding: 1.5rem;
+  padding: 2rem;
   background: var(--bg-dark);
   color: var(--text-middle);
   border-color: #3a3a3a;
@@ -494,6 +528,8 @@ body.menu-open .menu-toggle {
 .menu-socials {
   display: flex;
   align-items: center;
+  margin-bottom: 0;
+  padding: 0;
 }
  
 .menu-list,
