@@ -463,6 +463,13 @@ footer {
   }
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .carousel-track .col:has(img:hover) img {
+    width: 400px;
+    max-height: 55vh;
+  }
+}
+
 @media (max-width: 957px){
   /* #custom-cursor,.cursor-inner { display: none; } */
   .img-portada img:hover {
