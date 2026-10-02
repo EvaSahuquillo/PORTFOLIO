@@ -438,8 +438,8 @@ footer {
       gap: 0;
     } 
     .img-portada img {
-       width: 240px; 
-       max-height: 40vh; 
+       width: 220px; 
+       max-height: 35vh; 
     }
 
     .portada {
