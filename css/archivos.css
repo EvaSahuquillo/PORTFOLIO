@@ -10,6 +10,12 @@ html {
 }
 
 
+@media (hover: none), (pointer: coarse) {
+  #custom-cursor, .cursor-inner {
+    display: none !important;
+  }
+} 
+
 :root {
   --bg-light: #ffffff;
   --bg-dark: #141414;
