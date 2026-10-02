@@ -10,6 +10,12 @@ html {
 }
 
 
+@media (hover: none), (pointer: coarse) {
+  #custom-cursor, .cursor-inner {
+    display: none;
+  }
+}
+
 :root {
   --bg-light: #ffffff;
   --bg-dark: #141414;
@@ -190,7 +196,6 @@ a, button, .btn, .sol, #mode-toggle, .proyecto-link, [href] {
 
 /* ocultar cursor en móvil */
 @media (max-width: 768px) {
-  #custom-cursor, .cursor-inner { display: none; }
   body { cursor: auto !important; }
 
   p {

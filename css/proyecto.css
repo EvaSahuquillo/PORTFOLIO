@@ -13,6 +13,12 @@
   cursor: none !important;
 }
 
+@media (hover: none), (pointer: coarse) {
+  #custom-cursor, .cursor-inner {
+    display: none;
+  }
+}
+
 
 :root {
   --bg-light: #ffffff;

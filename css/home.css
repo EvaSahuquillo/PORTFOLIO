@@ -19,6 +19,19 @@ html {
   --link-dark: #efefef;
 }
 
+@media (hover: none), (pointer: coarse) {
+  .img-portada img:hover {
+    transform: none !important;
+    /* si tu hover también cambia otras cosas, añádelas aquí: */
+    /* filter: none !important; */
+    /* box-shadow: none !important; */
+    /* scale: 1 !important; */
+  }
+  #custom-cursor, .cursor-inner {
+    display: none;
+  }
+}
+
 body {
   transition: 0.3s ease, color 0.3s ease;
 }
@@ -211,7 +224,13 @@ nav {
 }
 
 .presentacion {
-  width: 60%;
+  width: 40%;
+}
+
+@media (max-width: 768px) {
+  .presentacion {
+    width: 70%;
+  }
 }
 
 
@@ -379,19 +398,6 @@ body.dark-mode .loader {
 
 } */
 
-
-@media (hover: none), (pointer: coarse) {
-  .img-portada img:hover {
-    transform: none !important;
-    /* si tu hover también cambia otras cosas, añádelas aquí: */
-    /* filter: none !important; */
-    /* box-shadow: none !important; */
-    /* scale: 1 !important; */
-  }
-  #custom-cursor {
-    display: none;
-  }
-}
 
 /* ─────────────────────────────────────────────────────────────
    MENÚ DESPLEGABLE
