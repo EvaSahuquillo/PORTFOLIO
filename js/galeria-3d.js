@@ -48,8 +48,8 @@ const SPAWN_RISE = 0.5;         // rise más notorio
 const SPIN_RAMP_MS = 2600;      // rampa de spin más larga = más suave
 
 /* ── Rampa del zoom de entrada ── */
-const ZOOM_IN_FROM = 1.2;       // arranca más pequeña
-const ZOOM_IN_TO   = 1;       // tamaño final
+const ZOOM_IN_FROM = 1.25;       // arranca más pequeña
+const ZOOM_IN_TO   = 1.1;       // tamaño final
 const ZOOM_RAMP_MS = 2600;      // dura lo mismo que el spin = coordinados
 
 /* ───────────────────────────────────────────────
