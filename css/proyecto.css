@@ -491,6 +491,43 @@ html, body, main, .portada {
 }
 
 
+/* ─────────────────────────────────────────────────────────────
+   MÓVIL: sin hover en el carrusel, solo arrastre horizontal
+   ───────────────────────────────────────────────────────────── */
+@media (hover: none), (pointer: coarse) {
+
+  /* Anula cualquier hover sobre las imágenes del carrusel */
+  .img-portada img:hover,
+  .img-portada .col:hover img,
+  .img-portada .col:hover {
+    transform: none !important;
+    scale: 1 !important;
+    filter: none !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+
+  /* Que el toque no dispare estados "hover" fantasma */
+  .img-portada,
+  .img-portada * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* El dedo solo mueve el carrusel: bloqueamos gestos verticales
+     sobre él para que no haga scroll de la página mientras arrastras */
+  .img-portada {
+    touch-action: pan-y;      /* permite scroll vertical normal de la página */
+    overscroll-behavior-x: contain;
+  }
+
+  /* Cursor coherente en táctil */
+  .img-portada img {
+    cursor: default;
+  }
+}
+
+
 
 /* EFECTO GIRAR  */
 .rot {
@@ -645,7 +682,7 @@ body.menu-open .nav-brand {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 3rem 2rem;  /* el hueco de arriba deja libres el logo y el botón */
+  padding: 2rem;  /* el hueco de arriba deja libres el logo y el botón */
   overflow-y: auto;
   touch-action: pan-y;
   background: var(--bg-light);

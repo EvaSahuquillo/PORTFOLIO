@@ -497,7 +497,7 @@ body.menu-open .nav-brand {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 3rem 2rem;  /* el hueco de arriba deja libres el logo y el botón */
+  padding: 2rem;  /* el hueco de arriba deja libres el logo y el botón */
   overflow-y: auto;
   touch-action: pan-y;
   background: var(--bg-light);
