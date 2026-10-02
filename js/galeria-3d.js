@@ -9,24 +9,24 @@ import * as THREE from "three";
    1. TUS PROYECTOS
    ─────────────────────────────────────────────── */
 const PROJECTS = [
-  { title: "(10)", tag: "This is not a box - Branding/Packaging", src: "img/proyectos/tote.png" },
-  { title: "(11)", tag: "Ilustración - Loki", src: "img/proyectos/IMG_6578.jpeg" },
-  { title: "(12)", tag: "3d", src: "img/proyectos/zapatilla_pospo.jpg" },
-  { title: "(13)", tag: "Ilustración - Cuadro sin título", src: "img/proyectos/fuego.jpeg" },
-  { title: "(14)", tag: "This is not a box - Branding/Packaging", src: "img/proyectos/niiiño.png" },
-  { title: "(15)", tag: "This is not a box - Branding/Packaging", src: "img/proyectos/manual3.png" },
-  { title: "(01)", tag: "No hay meta - Diseño exposición/Editorial", src: "img/proyectos/NF_010.png" },
-  { title: "(18)", tag: "3d", src: "img/proyectos/ender cuadrado weno.jpg" },
-  { title: "(17)", tag: "No hay meta - Diseño exposición/Editorial", src: "img/proyectos/poster-nhm.png" },
-  { title: "(02)", tag: "This is not a box - Branding/Packaging", src: "img/proyectos/cajapossssst.png" },
-  { title: "(16)", tag: "Cata la lata - Packaging", src: "img/proyectos/cargo sardinas.png" },
-  { title: "(03)", tag: "CasiCasi - Editorial", src: "img/proyectos/evacara.png" },
-  { title: "(04)", tag: "No hay meta - Diseño exposición/Editorial", src: "img/proyectos/portada-expo.png" },
-  { title: "(05)", tag: "Fotografía", src: "img/proyectos/SUJETADOR.png" },
-  { title: "(06)", tag: "Archif - Web", src: "img/proyectos/archif1.png" },
-  { title: "(07)", tag: "Ilustración - Revista el Duende", src: "img/proyectos/Ilustración_sin_título (27).png" },
-  { title: "(08)", tag: "Ilustración - Stand Up Loreal", src: "img/proyectos/1.png" },
-  { title: "(09)", tag: "CasiCasi - Editorial", src: "img/proyectos/pagina-casicasi1.png" }
+  { title: "(10)", tag: "This is not a box - Branding/Packaging", src: "img/proyectos/webp/tote.webp" },
+  { title: "(11)", tag: "Ilustración - Loki", src: "img/proyectos/webp/IMG_6578.webp" },
+  { title: "(12)", tag: "3d", src: "img/proyectos/webp/zapatilla_pospo.webp" },
+  { title: "(13)", tag: "Ilustración - Cuadro sin título", src: "img/proyectos/webp/fuego.webp" },
+  { title: "(14)", tag: "This is not a box - Branding/Packaging", src: "img/proyectos/webp/niiiño.webp" },
+  { title: "(15)", tag: "This is not a box - Branding/Packaging", src: "img/proyectos/webp/manual3.webp" },
+  { title: "(01)", tag: "No hay meta - Diseño exposición/Editorial", src: "img/proyectos/webp/NF_010.webp" },
+  { title: "(18)", tag: "3d", src: "img/proyectos/webp/ender cuadrado weno.webp" },
+  { title: "(17)", tag: "No hay meta - Diseño exposición/Editorial", src: "img/proyectos/webp/poster-nhm.webp" },
+  { title: "(02)", tag: "This is not a box - Branding/Packaging", src: "img/proyectos/webp/cajapossssst.webp" },
+  { title: "(16)", tag: "Cata la lata - Packaging", src: "img/proyectos/webp/cargo sardinas.webp" },
+  { title: "(03)", tag: "CasiCasi - Editorial", src: "img/proyectos/webp/evacara.webp" },
+  { title: "(04)", tag: "No hay meta - Diseño exposición/Editorial", src: "img/proyectos/webp/portada-expo.webp" },
+  { title: "(05)", tag: "Fotografía", src: "img/proyectos/webp/SUJETADOR.webp" },
+  { title: "(06)", tag: "Archif - Web", src: "img/proyectos/webp/archif1.webp" },
+  { title: "(07)", tag: "Ilustración - Revista el Duende", src: "img/proyectos/webp/Ilustración_sin_título (27).webp" },
+  { title: "(08)", tag: "Ilustración - Stand Up Loreal", src: "img/proyectos/webp/1.webp" },
+  { title: "(09)", tag: "CasiCasi - Editorial", src: "img/proyectos/webp/pagina-casicasi1.webp" }
 ];
 
 /* ───────────────────────────────────────────────
@@ -76,11 +76,23 @@ const ovTag = document.getElementById("ov-tag");
 /* ───────────────────────────────────────────────
    5. RENDERER
    ─────────────────────────────────────────────── */
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
 
+// Detección de móvil una sola vez (por si la usas en más sitios)
 const isMobile = window.innerWidth < 768;
-const pixelRatio = isMobile ? 1 : Math.min(window.devicePixelRatio, 1.5);
+
+const renderer = new THREE.WebGLRenderer({
+  canvas,
+  antialias: !isMobile,   // en móvil sin MSAA (ahorra GPU), el pixelRatio alto ya suaviza
+  alpha: true
+});
+
+// Pixel ratio: no bajamos a 1 en móvil. En pantallas Retina (la mayoría)
+// renderizar a 1 se ve pixelado. Usamos el devicePixelRatio real, con un
+// tope de 2 para no reventar la GPU en pantallas 3x.
+const dpr = window.devicePixelRatio || 1;
+const pixelRatio = Math.min(dpr, 2);
 renderer.setPixelRatio(pixelRatio);
+
 renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.setClearColor(0x000000, 0);
 
