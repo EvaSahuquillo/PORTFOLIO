@@ -543,3 +543,99 @@ body.menu-open nav {
 }
 
 
+
+/* ─────────────────────────────────────────────────────────────
+   OVERLAY DE IMAGEN
+   Al hacer clic en una imagen del carrusel se abre a pantalla
+   completa con blur del resto de la página.
+   ───────────────────────────────────────────────────────────── */
+
+.carousel-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+
+  /* Fondo semitransparente + blur del contenido de detrás */
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0s linear 0.35s;
+
+  cursor: pointer;   /* toda la capa es clicable para cerrar */
+}
+
+.carousel-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.35s ease;
+}
+
+.carousel-overlay__img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+
+  transform: scale(0.94);
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  cursor: default;   /* la imagen no cierra al clicarla */
+}
+
+.carousel-overlay.is-open .carousel-overlay__img {
+  transform: scale(1);
+}
+
+.carousel-overlay__close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.carousel-overlay__close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Cursor del sistema dentro del overlay (no queremos el custom ahí) */
+.carousel-overlay,
+.carousel-overlay * {
+  cursor: auto;
+}
+.carousel-overlay__close {
+  cursor: pointer;
+}
+
+/* En móvil el cursor custom ya está oculto, no hace falta más */
+
+/* Respeta "reduce motion" */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-overlay,
+  .carousel-overlay__img {
+    transition: none;
+  }
+}
+
+

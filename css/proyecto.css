@@ -415,26 +415,7 @@ footer {
     max-height: 55vh;
 }
  
-.texto-portada,
-.carousel-track .col {
-    transition: filter 0.35s ease;
-}
- 
-.carousel-track .col > p {
-    transition: filter 0.35s ease;
-}
- 
-/* todo lo que no sea la imagen hovered ni su propio contenedor se difumina */
-main:has(.carousel-track img:hover) .texto-portada,
-main:has(.carousel-track img:hover) .carousel-track .col:not(:has(img:hover)) {
-    filter: blur(6px);
-}
- 
-/* dentro de la columna de la imagen hovered, el texto de esa misma columna
-   también se difumina — solo la <img> se queda nítida */
-main:has(.carousel-track img:hover) .carousel-track .col:has(img:hover) > p {
-    filter: blur(6px);
-}
+
  
 .portada {
     height: 100vh;
@@ -506,58 +487,6 @@ main:has(.carousel-track img:hover) .carousel-track .col:has(img:hover) > p {
 html, body, main, .portada {
     overflow-x: clip;
     overflow-y: visible;
-}
-
-
-/* ─────────────────────────────────────────────────────────────
-   MÓVIL: sin hover en el carrusel, solo arrastre horizontal
-   ───────────────────────────────────────────────────────────── */
-@media (hover: none), (pointer: coarse) {
-
-  /* Anula cualquier hover sobre las imágenes del carrusel */
-  .img-portada img:hover,
-  .img-portada .col:hover img,
-  .img-portada .col:hover {
-    transform: none !important;
-    scale: 1 !important;
-    filter: none !important;
-    box-shadow: none !important;
-    opacity: 1 !important;
-    transition: none !important;
-  }
-
-  /* Que el toque no dispare estados "hover" fantasma */
-  .img-portada,
-  .img-portada * {
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  /* El dedo solo mueve el carrusel: bloqueamos gestos verticales
-     sobre él para que no haga scroll de la página mientras arrastras */
-  .img-portada {
-    touch-action: pan-y;      /* permite scroll vertical normal de la página */
-    overscroll-behavior-x: contain;
-  }
-
-  /* Cursor coherente en táctil */
-  .img-portada img {
-    cursor: default;
-  }
-}
-
-
-@media (hover: none), (pointer: coarse) {
-  .img-portada .col:hover,
-  .img-portada .col:focus,
-  .img-portada .col:active {
-    background: none !important;
-  }
-  /* Evita que el navegador "pegue" el hover tras el tap */
-  .img-portada img {
-    pointer-events: auto;
-    -webkit-user-select: none;
-    user-select: none;
-  }
 }
 
 
@@ -815,5 +744,80 @@ body.menu-open nav {
   }
   #custom-cursor {
     display: none;
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   OVERLAY DE IMAGEN
+   - Capa a pantalla completa con blur en lo de detrás.
+   - La imagen se ve centrada, max 300px de ancho.
+   - Clic fuera de la imagen → cierra.
+   ───────────────────────────────────────────────────────────── */
+
+.carousel-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  /* Fondo oscuro + blur de lo que hay detrás */
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+
+  /* Toda la capa es clicable para cerrar (el cursor pointer lo sugiere) */
+  cursor: pointer;
+}
+
+.carousel-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease;
+}
+
+.carousel-overlay__img {
+  display: block;
+  width: auto;
+  height: auto;
+       /* ← ancho máximo pedido */
+  max-height: 60vh;         /* no se sale de la pantalla en vertical */
+
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+
+  transform: scale(0.94);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* La imagen NO cierra al hacerle clic encima */
+  cursor: default;
+}
+
+.carousel-overlay.is-open .carousel-overlay__img {
+  transform: scale(1);
+}
+
+/* Botón de cerrar (arriba a la derecha) */
+.carousel-overlay__close {
+  display: none;
+}
+
+
+
+/* Respeta "prefers-reduced-motion" */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-overlay,
+  .carousel-overlay__img {
+    transition: none;
   }
 }
