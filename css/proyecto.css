@@ -451,7 +451,7 @@ footer {
 }
 
 @media (hover: none), (pointer: coarse) {
-  .img-portada img:hover, .carousel-track {
+  .img-portada img:hover {
     transform: none !important;
     /* si tu hover también cambia otras cosas, añádelas aquí: */
     /* filter: none !important; */
