@@ -482,7 +482,7 @@ body.menu-open .menu-toggle {
 /* Panel negro (abajo): redes sociales */
 .menu-bottom {
   z-index: 1;
-  min-height: 110px;
+  /* min-height: 110px; */
   display: flex;
   align-items: center;
   padding: 1.5rem;

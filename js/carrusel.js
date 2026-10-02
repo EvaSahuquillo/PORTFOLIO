@@ -174,4 +174,6 @@
   viewport.addEventListener('touchstart', (e) => pointerDown(e.touches[0].clientX), { passive: true });
   viewport.addEventListener('touchmove', (e) => pointerMove(e.touches[0].clientX), { passive: true });
   viewport.addEventListener('touchend', pointerUp);
+
+  
 })();

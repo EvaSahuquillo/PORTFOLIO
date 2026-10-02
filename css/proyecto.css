@@ -72,7 +72,7 @@ body {
 
 p {
   font-family: "Inter", sans-serif;
-  font-weight: 600;
+  font-weight: 400;
   font-style: normal;
   font-size: 0.75rem;
   letter-spacing: -1px;
@@ -431,7 +431,7 @@ main:has(.carousel-track img:hover) .carousel-track .col:has(img:hover) > p {
 }
  
 .portada {
-    height: 90vh;
+    height: 100vh;
     padding-bottom: 5rem !important;
 }
  
@@ -456,12 +456,21 @@ main:has(.carousel-track img:hover) .carousel-track .col:has(img:hover) > p {
     }
 
     .portada {
-        height: 95vh;
-        padding-bottom: 0rem !important;
-        
+        height: 100vh;
+        padding-bottom: 8vh !important;    
     }
     
 
+}
+
+@media (hover: none), (pointer: coarse) {
+  .img-portada img:hover {
+    transform: none !important;
+    /* si tu hover también cambia otras cosas, añádelas aquí: */
+    /* filter: none !important; */
+    /* box-shadow: none !important; */
+    /* scale: 1 !important; */
+  }
 }
  
 .cuerpo-texto {
