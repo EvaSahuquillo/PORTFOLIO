@@ -74,7 +74,7 @@ p {
   font-family: "Inter", sans-serif;
   font-weight: 500;
   font-style: normal;
-  font-size: 0.75rem;
+  font-size: 1rem;
   letter-spacing: -1px;
   line-height: 1;
   margin-bottom: 0;
@@ -390,8 +390,10 @@ nav {
     display: flex;
     backdrop-filter: blur(20px);
     /* -webkit-backdrop-filter: blur(20px) opacity(0.9); */
-    height: 100vh;
+    /* height: auto; */
+    min-height: 100vh;
     padding-top: 3em;
+    padding-bottom: 3em;
     mask-image: linear-gradient(to bottom, transparent 0%, black 60px);
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 60px);
 }
@@ -399,7 +401,8 @@ nav {
 .overlay-content {
     flex: 1 1 auto;
     width: 100%;
-    gap: 5rem;
+    display: flex;
+    justify-content: space-between;
 }
 
 .demo-area {
@@ -414,6 +417,10 @@ nav {
 .demo-area .mag-zone {
   position: absolute;
   pointer-events: auto; /* pero los botones sí reciben eventos */
+}
+
+.col-9 {
+  padding-right: 2rem;
 }
 
 .demo-col {
@@ -501,7 +508,7 @@ nav {
     padding-bottom: 3em;
   }
 
-  .col-8, .col-3 {
+  .col-9, .col-3 {
     width: 100%;
   }
 
