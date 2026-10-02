@@ -443,7 +443,7 @@ footer {
     }
 
     .portada {
-        height: 100vh;
+        height: 100dvh;
         padding-bottom: 8vh !important;    
     }
     
@@ -451,7 +451,7 @@ footer {
 }
 
 @media (hover: none), (pointer: coarse) {
-  .img-portada img:hover {
+  .img-portada img:hover, .carousel-track {
     transform: none !important;
     /* si tu hover también cambia otras cosas, añádelas aquí: */
     /* filter: none !important; */
@@ -488,6 +488,7 @@ html, body, main, .portada {
     overflow-x: clip;
     overflow-y: visible;
 }
+
 
 
 
@@ -538,6 +539,8 @@ html, body, main, .portada {
 @media (prefers-reduced-motion: reduce) {
   .char { transition: none; }
 }
+
+
 
 
 /* ─────────────────────────────────────────────────────────────
@@ -729,21 +732,6 @@ body.menu-open nav {
   }
   .menu {
     display: flex;
-  }
-}
-
-
-
-@media (hover: none), (pointer: coarse) {
-  .img-portada img:hover {
-    transform: none !important;
-    /* si tu hover también cambia otras cosas, añádelas aquí: */
-    /* filter: none !important; */
-    /* box-shadow: none !important; */
-    /* scale: 1 !important; */
-  }
-  #custom-cursor {
-    display: none;
   }
 }
 
