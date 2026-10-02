@@ -249,7 +249,9 @@ main ul {
   margin: 0;
   padding-top: 55px;
   padding-left: 0;
-  height: 100dvh;
+  height: 100vh;                        /* base para todos */
+  height: -webkit-fill-available;       /* fallback iOS viejo (sobreescribe vh) */
+  height: 100dvh;                       /* el correcto, gana donde existe */
   padding-bottom: 5rem;
 }
 

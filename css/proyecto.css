@@ -418,7 +418,7 @@ footer {
 
  
 .portada {
-    height: 100vh;
+    height: 100dvh;
     padding-bottom: 5rem !important;
 }
  
@@ -777,7 +777,7 @@ body.menu-open nav {
   display: block;
   width: auto;
   height: auto;
-       /* ← ancho máximo pedido */
+  max-width: auto;    /* ← ancho máximo pedido */
   max-height: 60vh;         /* no se sale de la pantalla en vertical */
 
   object-fit: contain;
@@ -800,7 +800,14 @@ body.menu-open nav {
   display: none;
 }
 
+@media (max-width: 957px) {
+  .carousel-overlay__img {
 
+  max-width: 300px;    /* ← ancho máximo pedido */
+  max-height: auto;         /* no se sale de la pantalla en vertical */
+
+  }
+}
 
 /* Respeta "prefers-reduced-motion" */
 @media (prefers-reduced-motion: reduce) {
