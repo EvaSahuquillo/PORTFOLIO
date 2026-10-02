@@ -72,7 +72,7 @@ body {
 
 p {
   font-family: "Inter", sans-serif;
-  font-weight: 600;
+  font-weight: 500;
   font-style: normal;
   font-size: 0.75rem;
   letter-spacing: -1px;
@@ -506,8 +506,7 @@ nav {
   }
 
   .demo-area {
-    padding: 2rem 0 !important;
-    height: 90vh;
+   display: none;
   }
 }
 

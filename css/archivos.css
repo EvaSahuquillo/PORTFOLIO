@@ -281,6 +281,7 @@ ul {
   display: flex;
   align-items: flex-start;
   margin-top: 5vh;
+  margin-bottom: 5vh;
 }
 
 .col {

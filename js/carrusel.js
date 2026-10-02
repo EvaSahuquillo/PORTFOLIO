@@ -4,6 +4,11 @@
   const viewport = document.querySelector('.img-portada');
   if (!viewport) return;
 
+  // Detección de dispositivo táctil (sin hover real).
+  // Se evalúa una sola vez al cargar. Si el usuario cambia de orientación
+  // o conecta un ratón, no se recalcula — suficiente para el 99% de casos.
+  const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
   // --- 1) Track interno ---
   const viewportGap = getComputedStyle(viewport).gap;
 
@@ -157,20 +162,23 @@
   viewport.addEventListener('touchmove', (e) => pointerMove(e.touches[0].clientX), { passive: true });
   viewport.addEventListener('touchend', pointerUp);
 
-  // --- 8) Ralentización al pasar el ratón sobre cada imagen ---
+  // --- 8) Ralentización al pasar el ratón (SOLO en dispositivos con ratón real) ---
   const images = track.querySelectorAll('img');
-  images.forEach((img) => {
-    img.addEventListener('mouseenter', () => {
-      speedFactor = HOVER_FACTOR;
+
+  if (!isTouch) {
+    images.forEach((img) => {
+      img.addEventListener('mouseenter', () => {
+        speedFactor = HOVER_FACTOR;
+      });
+      img.addEventListener('mouseleave', () => {
+        speedFactor = 1;
+      });
     });
-    img.addEventListener('mouseleave', () => {
+
+    viewport.addEventListener('mouseleave', () => {
       speedFactor = 1;
     });
-  });
-
-  viewport.addEventListener('mouseleave', () => {
-    speedFactor = 1;
-  });
+  }
 
   // --- 9) Overlay al hacer clic en una imagen ---
   const overlay = document.createElement('div');
@@ -199,24 +207,20 @@
     }, 300);
   }
 
-  // Clic en la X
   overlayClose.addEventListener('click', (e) => {
     e.stopPropagation();
     closeOverlay();
   });
 
-  // Clic fuera de la imagen: cualquier clic dentro del overlay que NO sea
-  // ni la imagen ni la X cierra.
   overlay.addEventListener('click', (e) => {
     if (e.target === overlay) closeOverlay();
   });
 
-  // Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeOverlay();
   });
 
-  // Detección clic vs drag sobre cada imagen del carrusel
+  // Detección clic vs drag sobre cada imagen (sirve para abrir el overlay)
   const CLICK_THRESHOLD = 8;
 
   images.forEach((img) => {
