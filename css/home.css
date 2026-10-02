@@ -451,6 +451,7 @@ body.menu-open .menu-toggle {
   color: inherit;                /* hereda el color del body, que cambia con dark/light mode */
 
   position: relative;
+  z-index: 450;
 }
 
 body.menu-open .menu-toggle {

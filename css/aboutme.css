@@ -581,8 +581,8 @@ body.menu-open .menu-toggle {
 
   /* ── Color según el modo activo ── */
   color: inherit;                /* hereda el color del body, que cambia con dark/light mode */
+  z-index: 450;
 
-  position: relative;
 }
 
 body.menu-open .menu-toggle {
