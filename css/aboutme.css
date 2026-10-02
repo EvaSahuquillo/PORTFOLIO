@@ -190,7 +190,7 @@ a, button, .btn, .sol, #mode-toggle, .proyecto-link, [href] {
 
 /* ocultar cursor en móvil */
 @media (max-width: 768px) {
-  #custom-cursor { display: none; }
+  #custom-cursor, .cursor-inner { display: none; }
   body { cursor: auto !important; }
 
   p {
@@ -203,6 +203,10 @@ a, button, .btn, .sol, #mode-toggle, .proyecto-link, [href] {
 
   h1 {
     font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 0.75rem;
   }
 
   .label {
@@ -449,6 +453,14 @@ nav {
   position: relative;
   z-index: 1;
   pointer-events: none;
+}
+
+
+/* ocultar cursor en móvil */
+@media (max-width: 768px) {
+  .overlay-content {
+    gap: 2rem;
+}
 }
 
 

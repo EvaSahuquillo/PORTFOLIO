@@ -145,7 +145,7 @@ a, button, .btn, .sol, #mode-toggle, .proyecto-link, [href] {
 
 /* ocultar cursor en móvil */
 @media (max-width: 957px){
-  #custom-cursor { display: none; }
+  #custom-cursor,.cursor-inner { display: none; }
 
 }
 @media (max-width: 768px) {

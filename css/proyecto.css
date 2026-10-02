@@ -471,9 +471,21 @@ main:has(.carousel-track img:hover) .carousel-track .col:has(img:hover) > p {
     /* box-shadow: none !important; */
     /* scale: 1 !important; */
   }
-  #custom-cursor {
+  #custom-cursor, .cursor-inner {
     display: none;
   }
+}
+
+@media (max-width: 957px){
+  /* #custom-cursor,.cursor-inner { display: none; } */
+  .img-portada img:hover {
+    transform: none !important;
+    /* si tu hover también cambia otras cosas, añádelas aquí: */
+    /* filter: none !important; */
+    /* box-shadow: none !important; */
+    /* scale: 1 !important; */
+  }
+
 }
  
 .cuerpo-texto {
@@ -524,6 +536,21 @@ html, body, main, .portada {
   /* Cursor coherente en táctil */
   .img-portada img {
     cursor: default;
+  }
+}
+
+
+@media (hover: none), (pointer: coarse) {
+  .img-portada .col:hover,
+  .img-portada .col:focus,
+  .img-portada .col:active {
+    background: none !important;
+  }
+  /* Evita que el navegador "pegue" el hover tras el tap */
+  .img-portada img {
+    pointer-events: auto;
+    -webkit-user-select: none;
+    user-select: none;
   }
 }
 
