@@ -109,7 +109,7 @@ h4 {
   font-family:  "Inter", sans-serif;
   font-weight: 600;
   font-style: normal;
-  font-size: 2rem;
+  font-size: 1.5rem;
   letter-spacing: -2px;
   /* color: var(--text-light); */
 }
@@ -220,6 +220,7 @@ nav {
   top: 0;
   z-index: 6;
 }
+
 
 .nav-link:hover {
   cursor: pointer;
@@ -810,7 +811,7 @@ body.menu-open nav {
   font-family:  "Inter", sans-serif;
   font-weight: 600;
   font-style: normal;
-  font-size: 2rem;
+  font-size: 1.5rem;
   letter-spacing: -2px;
   /* text-transform: uppercase; */
   cursor: pointer;

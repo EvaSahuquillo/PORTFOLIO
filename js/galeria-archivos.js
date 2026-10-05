@@ -7,7 +7,7 @@ const items = [
   { title:"(05)", tag:"Fotografía", type: 'img',   src: 'img/proyectos/webp/SUJETADOR.webp' },
   { title:"(06)", tag:"3D", type: 'img',   src: 'img/proyectos/webp/ender cuadrado weno.webp' },
   { title:"(07)", tag:"Ilustración Loreal StandUp", type: 'img',   src: 'img/proyectos/loreal-ilustracion.gif' },
-  { title:"(08)", tag:"Cata la lata", type: 'img',   src: 'img/proyectos/webp/foto1-portfolio.webp' },
+  { title:"(08)", tag:"Fotografía", type: 'img',   src: 'img/proyectos/webp/foto1-portfolio.webp' },
   { title:"(09)", tag:"Rostros", type: 'img',   src: 'img/proyectos/cuadro-metro.gif' },
   { title:"(10)", tag:"Fotografía", type: 'img',   src: 'img/proyectos/webp/portada definitiva.webp' },
   { title:"(11)", tag:"Fotografía", type: 'img',   src: 'img/proyectos/webp/roberto.webp' },
@@ -17,7 +17,7 @@ const items = [
   { title:"(15)", tag:"Fotografía", type: 'img',   src: 'img/proyectos/lajulai.jpg' },
   { title:"(16)", tag:"Revista Yorokobu - 3D", type: 'img',   src: 'img/proyectos/webp/Sahuquillo.Eva_3.1_Yorokobu_Revista.webp' },
   { title:"(17)", tag:"Rostros", type: 'img',   src: 'img/proyectos/ROSTROS.GIF' },
-  { title:"(18)", tag:"Cata la lata", type: 'img',   src: 'img/proyectos/webp/IMG_1354.webp' },
+  { title:"(18)", tag:"Fotografía", type: 'img',   src: 'img/proyectos/webp/IMG_1354.webp' },
 ];
  
 const grid = document.getElementById('grid');

@@ -80,12 +80,11 @@ p {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 1rem;
+  font-size: 0.9rem;
   letter-spacing: -1px;
   line-height: 1;
   margin-bottom: 0;
 }
-
 
 .premio {
     font-family: "Inter", sans-serif;
@@ -151,7 +150,7 @@ h4 {
   font-family:  "Inter", sans-serif;
   font-weight: 600;
   font-style: normal;
-  font-size: 2rem;
+  font-size: 1.5rem;
   letter-spacing: -2px;
   /* color: var(--text-light); */
 }
@@ -392,9 +391,9 @@ footer {
 }
  
 .img-portada img {
-    width: 340px;        /* ancho fijo, igual para todas — ajústalo a tu gusto */
+    width: 250px;        /* ancho fijo, igual para todas — ajústalo a tu gusto */
     height: auto;         /* la altura sale sola según la proporción real de cada foto */
-    max-height: 50vh;     /* red de seguridad para fotos muy verticales, opcional */
+    max-height: 40vh;     /* red de seguridad para fotos muy verticales, opcional */
     display: block;
     object-fit: cover;
     transition: width 0.55s;
@@ -451,8 +450,8 @@ footer {
 
 @media (hover: hover) and (pointer: fine) {
   .carousel-track .col:has(img:hover) img {
-    width: 400px;
-    max-height: 55vh;
+    width: 300px;
+    max-height: 50vh;
   }
 }
 
@@ -571,7 +570,7 @@ html, body, main, .portada {
   font-family:  "Inter", sans-serif;
   font-weight: 600;
   font-style: normal;
-  font-size: 2rem;
+  font-size: 1.5rem;
   letter-spacing: -2px;
   /* text-transform: uppercase; */
   cursor: pointer;
