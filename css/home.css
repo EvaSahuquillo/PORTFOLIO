@@ -80,7 +80,7 @@ p {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 0.75rem;
+  font-size: 1rem;
   letter-spacing: -1px;
   line-height: 1;
   margin-bottom: 0;
@@ -225,6 +225,13 @@ nav {
 
 .presentacion {
   width: 40%;
+  height: 100dvh;
+  align-items: center;
+  justify-content: center;
+}
+
+.presentacion h1 {
+  margin: 0;
 }
 
 @media (max-width: 768px) {

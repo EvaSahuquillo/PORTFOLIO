@@ -73,9 +73,9 @@ body {
 
 p {
   font-family: "Inter", sans-serif;
-  font-weight: 600;
+  font-weight: 400;
   font-style: normal;
-  font-size: 0.75rem;
+  font-size: 1rem;
   letter-spacing: -1px;
   line-height: 1;
   margin-bottom: 0;
@@ -280,8 +280,8 @@ ul {
 #grid {
   display: flex;
   align-items: flex-start;
-  margin-top: 5vh;
-  margin-bottom: 5vh;
+  padding-top: 8vh !important;
+  padding-bottom: 8vh !important;
 }
 
 .col {
@@ -311,6 +311,8 @@ ul {
   display: none;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
   padding: 40px;
   z-index: 10;
 }
@@ -330,7 +332,7 @@ ul {
 #lightbox-content video {
   display: block;
   max-width: 100%;
-  max-height: calc(100vh - 140px); /* deja sitio para el caption */
+  max-height: 70vh; /* deja sitio para el caption */
   cursor: default;
 }
 

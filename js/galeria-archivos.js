@@ -1,34 +1,34 @@
 // Añade aquí tus imágenes y vídeos, en el orden que quieras
 const items = [
-  { title:"(01)", tag:"Cata la lata",  type: 'img',   src: 'img/proyectos/IMG_4965.jpeg' },
-  { title:"(01)", tag:"Cata la lata",  type: 'img',   src: 'img/proyectos/zapatilla_pospo.jpg' },
-  { title:"(01)", tag:"Cata la lata",  type: 'img',   src: 'img/proyectos/patas-min.png' },
-  { title:"(01)", tag:"Cata la lata",  type: 'img',   src: 'img/proyectos/fuego.jpeg' },
-  { title:"(01)", tag:"Cata la lata",  type: 'img',   src: 'img/proyectos/SUJETADOR.png' },
-  { title:"(01)", tag:"Cata la lata",  type: 'img',   src: 'img/proyectos/ender cuadrado weno.jpg' },
-  { title:"(01)", tag:"Cata la lata",  type: 'img',   src: 'img/proyectos/loreal-ilustracion.gif' },
-  { title:"(01)", tag:"Cata la lata",  type: 'img',   src: 'img/proyectos/foto1-portfolio.jpg' },
-  { title:"(01)", tag:"Cata la lata",  type: 'img',   src: 'img/proyectos/cuadro-metro.gif' },
-  { title:"(01)", tag:"Cata la lata",  type: 'img',   src: 'img/proyectos/portada definitiva.png' },
-  { title:"(01)", tag:"Cata la lata",  type: 'img',   src: 'img/proyectos/roberto.jpg' },
-  { type: 'img',   src: 'img/proyectos/IMG_6578.jpeg' },
-  { type: 'video', src: 'img/proyectos/Sahuquillo.Eva_A3D_P1_VIDEO.mp4' },
-  { type: 'img',   src: 'img/proyectos/Ilustración_sin_título (27).png' },
-  { type: 'img',   src: 'img/proyectos/lajulai.jpg' },
-  { type: 'img',   src: 'img/proyectos/Sahuquillo.Eva_3.1_Yorokobu_Revista.png' },
-  { type: 'img',   src: 'img/proyectos/ROSTROS.GIF' },
-  { type: 'img',   src: 'img/proyectos/IMG_1354.JPG' },
-
-
+  { title:"(01)", tag:"Cuadro sin título", type: 'img',   src: 'img/proyectos/webp/IMG_4965.webp' },
+  { title:"(02)", tag:"3D", type: 'img',   src: 'img/proyectos/webp/zapatilla_pospo.webp' },
+  { title:"(03)", tag:"Fotografía", type: 'img',   src: 'img/proyectos/webp/patas-min.webp' },
+  { title:"(04)", tag:"Cuadro sin título", type: 'img',   src: 'img/proyectos/webp/fuego.webp' },
+  { title:"(05)", tag:"Fotografía", type: 'img',   src: 'img/proyectos/webp/SUJETADOR.webp' },
+  { title:"(06)", tag:"3D", type: 'img',   src: 'img/proyectos/webp/ender cuadrado weno.webp' },
+  { title:"(07)", tag:"Ilustración Loreal StandUp", type: 'img',   src: 'img/proyectos/loreal-ilustracion.gif' },
+  { title:"(08)", tag:"Cata la lata", type: 'img',   src: 'img/proyectos/webp/foto1-portfolio.webp' },
+  { title:"(09)", tag:"Rostros", type: 'img',   src: 'img/proyectos/cuadro-metro.gif' },
+  { title:"(10)", tag:"Fotografía", type: 'img',   src: 'img/proyectos/webp/portada definitiva.webp' },
+  { title:"(11)", tag:"Fotografía", type: 'img',   src: 'img/proyectos/webp/roberto.webp' },
+  { title:"(12)", tag:"Cuadro sin título", type: 'img',   src: 'img/proyectos/webp/IMG_6578.webp' },
+  { title:"(13)", tag:"3D-Animación", type: 'video', src: 'img/proyectos/Sahuquillo.Eva_A3D_P1_VIDEO.mp4' },
+  { title:"(14)", tag:"Ilustración Revista-Calendario ElDuende", type: 'img',   src: 'img/proyectos/webp/Ilustración_sin_título (27).webp' },
+  { title:"(15)", tag:"Fotografía", type: 'img',   src: 'img/proyectos/lajulai.jpg' },
+  { title:"(16)", tag:"Revista Yorokobu - 3D", type: 'img',   src: 'img/proyectos/webp/Sahuquillo.Eva_3.1_Yorokobu_Revista.webp' },
+  { title:"(17)", tag:"Rostros", type: 'img',   src: 'img/proyectos/ROSTROS.GIF' },
+  { title:"(18)", tag:"Cata la lata", type: 'img',   src: 'img/proyectos/webp/IMG_1354.webp' },
 ];
-
+ 
 const grid = document.getElementById('grid');
 const lightbox = document.getElementById('lightbox');
 const lightboxContent = document.getElementById('lightbox-content');
+const ovTitle = document.getElementById('ov-title');
+const ovTag = document.getElementById('ov-tag');
 let currentCols = 0;
-
+ 
 const getCols = () => innerWidth <= 600 ? 2 : innerWidth <= 973 ? 3 : 5;
-
+ 
 // Mide la proporción de cada archivo antes de repartirlo
 function measure() {
   return Promise.all(items.map(it => new Promise(resolve => {
@@ -47,19 +47,19 @@ function measure() {
     }
   })));
 }
-
+ 
 function makeEl(it) {
   const div = document.createElement('div');
   div.className = 'item';
   if (it.type === 'img') {
-    div.innerHTML = `<img src="${it.src}" alt="${it.caption || ''}" loading="lazy">`;
+    div.innerHTML = `<img src="${it.src}" alt="${it.tag || ''}" loading="lazy">`;
   } else {
     div.innerHTML = `<video src="${it.src}" autoplay muted loop playsinline></video>`;
   }
   div.addEventListener('click', () => openLightbox(it));
   return div;
 }
-
+ 
 function render() {
   const n = getCols();
   currentCols = n;
@@ -76,32 +76,35 @@ function render() {
     target.el.appendChild(makeEl(it));
   });
 }
-
+ 
 function openLightbox(it) {
   const media = it.type === 'img'
-    ? `<img src="${it.src}" alt="${it.caption || ''}">`
+    ? `<img src="${it.src}" alt="${it.tag || ''}">`
     : `<video src="${it.src}" autoplay controls loop playsinline></video>`;
-  const caption = it.caption ? `<p class="caption">${it.caption}</p>` : '';
-  lightboxContent.innerHTML = media + caption;
+  lightboxContent.innerHTML = media;
+  ovTitle.textContent = it.title || '';
+  ovTag.textContent = it.tag || '';
   lightbox.classList.add('open');
 }
-
+ 
 function closeLightbox() {
   lightbox.classList.remove('open');
   lightboxContent.innerHTML = '';
+  ovTitle.textContent = '';
+  ovTag.textContent = '';
 }
-
-// Cierra al pulsar fuera de la imagen/vídeo y del caption
+ 
+// Cierra al pulsar fuera de la imagen/vídeo y de los textos
 lightbox.addEventListener('click', e => {
-  if (!e.target.closest('img, video, .caption')) closeLightbox();
+  if (!e.target.closest('img, video, #ov-title, #ov-tag')) closeLightbox();
 });
 addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-
+ 
 // Solo vuelve a repartir cuando cambia el número de columnas
 addEventListener('resize', () => {
   if (getCols() !== currentCols) render();
 });
-
+ 
 measure().then(render);
 // GALERIA ARCHIVOS 
 // gsap.registerPlugin(ScrollTrigger, ScrollSmoother);

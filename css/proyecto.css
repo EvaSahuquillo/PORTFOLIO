@@ -80,7 +80,7 @@ p {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 0.75rem;
+  font-size: 1rem;
   letter-spacing: -1px;
   line-height: 1;
   margin-bottom: 0;
@@ -400,20 +400,6 @@ footer {
     transition: width 0.55s;
 }
  
-/* --- Hover: la imagen crece (hacia arriba, gracias a align-items: flex-end
-   + la altura fija de .img-portada), empuja a las vecinas al ser un width
-   real (no un transform), y TODO el <main> se difumina excepto ella.
- 
-   El trigger es la propia <img> (no toda la columna con el texto).
- 
-   Nota técnica: el filtro blur no se puede "quitar" en un hijo si se aplicó
-   en un ancestro común — hay que aplicarlo elemento a elemento. Por eso se
-   listan aquí, en vez de poner un único blur en <main>. --- */
- 
-.carousel-track .col:has(img:hover) img {
-    width: 400px; /* ancho al hacer hover — ajusta la proporción a tu gusto */
-    max-height: 55vh;
-}
  
 
  
@@ -497,6 +483,86 @@ html, body, main, .portada {
 }
 
 
+/* ─────────────────────────────────────────────────────────────
+   OVERLAY DE IMAGEN
+   - Capa a pantalla completa con blur en lo de detrás.
+   - La imagen se ve centrada, max 300px de ancho.
+   - Clic fuera de la imagen → cierra.
+   ───────────────────────────────────────────────────────────── */
+
+.carousel-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  /* Fondo oscuro + blur de lo que hay detrás */
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+
+  /* Toda la capa es clicable para cerrar (el cursor pointer lo sugiere) */
+  cursor: pointer;
+}
+
+.carousel-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease;
+}
+
+.carousel-overlay__img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: auto;    /* ← ancho máximo pedido */
+  max-height: 70vh;         /* no se sale de la pantalla en vertical */
+
+  object-fit: contain;
+  /* border-radius: 6px; */
+  /* box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); */
+
+  transform: scale(0.94);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* La imagen NO cierra al hacerle clic encima */
+  cursor: default;
+}
+
+.carousel-overlay.is-open .carousel-overlay__img {
+  transform: scale(1);
+}
+
+/* Botón de cerrar (arriba a la derecha) */
+.carousel-overlay__close {
+  display: none;
+}
+
+@media (max-width: 957px) {
+  .carousel-overlay__img {
+
+  max-width: 300px;    /* ← ancho máximo pedido */
+  max-height: auto;         /* no se sale de la pantalla en vertical */
+
+  }
+}
+
+/* Respeta "prefers-reduced-motion" */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-overlay,
+  .carousel-overlay__img {
+    transition: none;
+  }
+}
 
 
 /* EFECTO GIRAR  */
@@ -739,87 +805,5 @@ body.menu-open nav {
   }
   .menu {
     display: flex;
-  }
-}
-
-
-/* ─────────────────────────────────────────────────────────────
-   OVERLAY DE IMAGEN
-   - Capa a pantalla completa con blur en lo de detrás.
-   - La imagen se ve centrada, max 300px de ancho.
-   - Clic fuera de la imagen → cierra.
-   ───────────────────────────────────────────────────────────── */
-
-.carousel-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 24px;
-
-  /* Fondo oscuro + blur de lo que hay detrás */
-  background: rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
-
-  /* Toda la capa es clicable para cerrar (el cursor pointer lo sugiere) */
-  cursor: pointer;
-}
-
-.carousel-overlay.is-open {
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.3s ease;
-}
-
-.carousel-overlay__img {
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: auto;    /* ← ancho máximo pedido */
-  max-height: 60vh;         /* no se sale de la pantalla en vertical */
-
-  object-fit: contain;
-  border-radius: 6px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-
-  transform: scale(0.94);
-  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-
-  /* La imagen NO cierra al hacerle clic encima */
-  cursor: default;
-}
-
-.carousel-overlay.is-open .carousel-overlay__img {
-  transform: scale(1);
-}
-
-/* Botón de cerrar (arriba a la derecha) */
-.carousel-overlay__close {
-  display: none;
-}
-
-@media (max-width: 957px) {
-  .carousel-overlay__img {
-
-  max-width: 300px;    /* ← ancho máximo pedido */
-  max-height: auto;         /* no se sale de la pantalla en vertical */
-
-  }
-}
-
-/* Respeta "prefers-reduced-motion" */
-@media (prefers-reduced-motion: reduce) {
-  .carousel-overlay,
-  .carousel-overlay__img {
-    transition: none;
   }
 }

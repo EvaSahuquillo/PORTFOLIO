@@ -515,6 +515,10 @@ nav {
   .demo-area {
    display: none;
   }
+
+  .col-4 {
+    width: 20%;
+  }
 }
 
 
