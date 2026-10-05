@@ -388,11 +388,11 @@ nav {
     position: relative;
     z-index: 5;
     display: flex;
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(50px);
     /* -webkit-backdrop-filter: blur(20px) opacity(0.9); */
     /* height: auto; */
-    min-height: 100vh;
-    padding-top: 3em;
+    min-height: 110vh;
+    padding-top: 10vh !important;
     padding-bottom: 3em;
     mask-image: linear-gradient(to bottom, transparent 0%, black 60px);
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 60px);
@@ -403,6 +403,8 @@ nav {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    padding-top: 8vh !important;
+
 }
 
 .demo-area {
