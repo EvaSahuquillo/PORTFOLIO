@@ -119,7 +119,7 @@ a {
   /* color: var(--text-light); */
 }
 
-.texto-contacto a {
+.texto-contacto div a {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -133,9 +133,10 @@ a {
 h5 {
   font-family: "Instrument Serif", serif;
   font-weight: 300;
-  font-size: 4.5rem;
+  font-size: 5rem;
   /* color: var(--text-light); */
   line-height: 0.8;
+  /* color: var(--text-middle); */
 }
 
 h6 {
@@ -191,11 +192,11 @@ a, button, .btn, .sol, #mode-toggle, .proyecto-link, [href] {
 @media (max-width: 768px) {
   body { cursor: auto !important; }
   .texto-contacto a {
-    font-size: 0.7rem;
+    font-size: 0.8rem !important;
   }
 
   p {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
   h4 {
     font-size: 1.25rem;
@@ -205,6 +206,11 @@ a, button, .btn, .sol, #mode-toggle, .proyecto-link, [href] {
   h1 {
     font-size: 2rem;
   }
+
+  h5 {
+    font-size: 2rem;
+  }
+
 }
 
 /* HOME  */
@@ -800,6 +806,49 @@ body.menu-open nav {
     width: 100%;
     position: fixed !important;
     padding: 3rem ;
+}
+
+/* ====== CONTACTO: lista infinita + columnas que se apartan ====== */
+/* Pega esto al final de tu CSS (css/home.css o el de contacto) */
+ 
+.texto-contacto {
+  position: relative;
+  height: 100vh;
+  height: 100svh;          /* móvil: evita saltos por la barra del navegador */
+  overflow: hidden;        /* la página no scrollea, scrollea la lista */
+}
+ 
+/* Todas las .row pasan a posicionarse a mano */
+.texto-contacto > .row {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  margin: 0;               /* quita los márgenes negativos de Bootstrap */
+}
+
+.ponteencontacto {
+  width: 20%;
+}
+ 
+/* Fila 1: el título, fijo en el centro y por encima */
+.texto-contacto > .row:first-child {
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  pointer-events: none;
+}
+ 
+/* Fila 2 (y sus copias): se mueven con JS */
+.texto-contacto > .row:nth-child(n + 2) {
+  top: 0;
+  z-index: 1;
+  will-change: transform;
+}
+ 
+/* cada línea (cada <p> y cada <a>) se mueve por separado */
+.texto-contacto > .row:nth-child(n + 2) > .col-6 > * {
+  will-change: transform;
 }
 
 
