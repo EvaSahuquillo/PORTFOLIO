@@ -31,6 +31,8 @@
 
   <!-- Estilos -->
   <link rel="stylesheet" href="css/aboutme.css" />
+  <link rel="stylesheet" href="lanyard/lanyard.css" />
+
   <link rel="shortcut icon" href="favicon/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-title" content="Archif." />
@@ -97,12 +99,12 @@
                 </button>
             </div>
 
-            <div class="mag-zone" data-mode="true" data-wiggle="false">
+            <!-- <div class="mag-zone" data-mode="true" data-wiggle="false">
                 <button class="mag-btn">
                 <div class="bg"></div>
                 <span class="label">UX design</span>
                 </button>
-            </div>
+            </div> -->
             <div class="mag-zone" data-mode="true" data-wiggle="false">
                 <button class="mag-btn">
                 <div class="bg"></div>
@@ -132,12 +134,12 @@
                 </button>
             </div>
 
-            <div class="mag-zone" data-mode="true" data-wiggle="false">
+            <!-- <div class="mag-zone" data-mode="true" data-wiggle="false">
                 <button class="mag-btn">
                 <div class="bg"></div>
                 <span class="label">Publicidad</span>
                 </button>
-            </div>
+            </div> -->
             <div class="mag-zone" data-mode="true" data-wiggle="false">
                 <button class="mag-btn">
                 <div class="bg"></div>
@@ -155,7 +157,8 @@
         <div class="texto-introduccion wave-target d-flex align-items-center justify-content-center">
             <h6 class="text-center">Haz scroll para saber más de mi o quedate girando este muñeco.</h6>
         </div>
-        <section class="soap-product">
+        <div id="lanyard-root" style="width:100%; height:100vh;"></div>
+        <!-- <section class="soap-product">
             <div class="soap3D">
                 <div class="d-flex align-items-center justify-content-center">
                     <model-viewer id="draggable-model" tabindex="-1" alt="Modelo 3D" src="media/3D/yo.glb"
@@ -166,10 +169,10 @@
                     max-camera-orbit="Infinity 75deg auto"
                     auto-rotate rotation-per-second="30deg"
                     interaction-prompt="none">
-                    <!-- <div class="caption"><h5>DRAG-ME.png</h5></div> -->
+                   
                     </model-viewer>
                 </div>
-            </div>
+            </div> -->
         </section>
         <section class="container-fluid espacio"></section>
         <section class="overlay-section">
@@ -264,6 +267,8 @@
 
     <!-- 8. Tu JS personal (al final, después de todo) -->
     <script src="js/aboutme.js"></script>
+    <script type="module" src="lanyard/lanyard.js"></script>
+
 
     
 </body>
