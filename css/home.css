@@ -116,7 +116,34 @@ h4 {
 
 a {
   text-decoration: none;
-  color: var(--text-light);
+  /* color: var(--text-light); */
+}
+
+.texto-contacto a {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1rem;
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 0;
+  color: var(--text-middle);
+}
+
+h5 {
+  font-family: "Instrument Serif", serif;
+  font-weight: 300;
+  font-size: 4.5rem;
+  /* color: var(--text-light); */
+  line-height: 0.8;
+}
+
+h6 {
+  font-family: "Instrument Serif", serif;
+  font-weight: 300;
+  font-size: 3.5rem;
+  /* color: var(--text-light); */
+  line-height: 1;
 }
 
 /* CUSTOM CURSOR */
@@ -163,6 +190,9 @@ a, button, .btn, .sol, #mode-toggle, .proyecto-link, [href] {
 }
 @media (max-width: 768px) {
   body { cursor: auto !important; }
+  .texto-contacto a {
+    font-size: 0.7rem;
+  }
 
   p {
     font-size: 0.7rem;
@@ -178,6 +208,46 @@ a, button, .btn, .sol, #mode-toggle, .proyecto-link, [href] {
 }
 
 /* HOME  */
+nav {
+  height: 55px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  background-color: transparent;
+  position: fixed;
+  top: 0;
+  z-index: 6;
+}
+
+.nav-link:hover {
+  cursor: pointer;
+}
+
+#expanded-menu {
+  background-color: transparent;
+  border-bottom: 1px solid var(--bg-dark);
+  overflow: hidden;
+  height: 0;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  img {
+    max-width: 40vh;
+    max-height: 40vh;
+    object-fit: cover;
+    opacity: 0;
+  }
+}
+
+
+.text-center {
+  width: 50%;
+}
 nav {
   height: 55px;
   display: flex;
@@ -333,7 +403,6 @@ nav {
   .actions a{background:var(--ink);}
   .actions a:hover{background:transparent;}
   .actions button:hover{background:var(--ink);}
-  .actions a:focus-visible,.actions button:focus-visible{}
  
   @media (max-width:780px){
     .card figcaption{flex-direction:column;align-items:flex-start}
@@ -724,6 +793,15 @@ body.menu-open nav {
 .split-right {
   left: 50%; /* pegado al centro por la izquierda */
 }
+
+.texto-contacto{
+    height: 100dvh;
+    width: 100%;
+    position: fixed !important;
+    padding: 3rem ;
+}
+
+
 
 
 /* EFECTO GIRAR  */
