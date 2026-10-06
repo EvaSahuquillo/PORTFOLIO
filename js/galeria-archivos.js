@@ -16,7 +16,7 @@ const items = [
   { title:"(14)", tag:"Ilustración Revista-Calendario ElDuende", type: 'img',   src: 'img/proyectos/webp/Ilustración_sin_título (27).webp' },
   { title:"(15)", tag:"Fotografía", type: 'img',   src: 'img/proyectos/lajulai.jpg' },
   { title:"(16)", tag:"Revista Yorokobu - 3D", type: 'img',   src: 'img/proyectos/webp/Sahuquillo.Eva_3.1_Yorokobu_Revista.webp' },
-  { title:"(17)", tag:"Rostros", type: 'img',   src: 'img/proyectos/ROSTROS.GIF' },
+  { title:"(17)", tag:"Rostros", type: 'img',   src: 'img/proyectos/ROSTROS.gif' },
   { title:"(18)", tag:"Fotografía", type: 'img',   src: 'img/proyectos/webp/IMG_1354.webp' },
 ];
  
