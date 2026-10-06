@@ -253,7 +253,7 @@ nav {
 
 
 .text-center {
-  width: 50%;
+  width: 30%;
 }
 nav {
   height: 55px;
@@ -794,11 +794,11 @@ body.menu-open nav {
 }
 
 .split-left {
-  right: 50%; /* pegado al centro por la derecha */
+  right: 30%; /* pegado al centro por la derecha */
 }
 
 .split-right {
-  left: 50%; /* pegado al centro por la izquierda */
+  left: 30%; /* pegado al centro por la izquierda */
 }
 
 .texto-contacto{
@@ -828,13 +828,11 @@ body.menu-open nav {
 }
 
 .ponteencontacto {
-  width: 20%;
+  flex: 30%;
 }
  
 /* Fila 1: el título, fijo en el centro y por encima */
 .texto-contacto > .row:first-child {
-  top: 50%;
-  transform: translateY(-50%);
   z-index: 2;
   pointer-events: none;
 }

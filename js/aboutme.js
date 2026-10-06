@@ -141,7 +141,7 @@
     // Función para verificar si un elemento es clickable
     function esClickable(elemento) {
       const selectores = [
-        'a', 'button', '.btn', 'input', 'textarea', 'select', 
+        'a', '.btn', 'input', 'textarea', 'select', 
         '.grid-item', '[href]', '[data-link]', '.project-link',
         '.proyecto-link', '[onclick]', '[role="button"]', '[id="mode-toggle"]'
       ];
@@ -326,5 +326,28 @@ document.addEventListener('DOMContentLoaded', () => {
         // ya no hay "once: true"
       });
     }
+  });
+});
+
+// EFECTO GIRAR 
+document.querySelectorAll('.rot').forEach((el) => {
+  const text = el.textContent;
+  el.setAttribute('aria-label', text);
+  el.textContent = '';
+
+  [...text].forEach((c, i) => {
+    const letter = c === ' ' ? '\u00A0' : c;
+
+    const ch = document.createElement('span');
+    ch.className = 'char';
+    ch.setAttribute('aria-hidden', 'true');
+    ch.dataset.char = letter;
+    ch.style.setProperty('--i', i);
+
+    const front = document.createElement('span');
+    front.textContent = letter;
+
+    ch.appendChild(front);
+    el.appendChild(ch);
   });
 });
