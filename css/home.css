@@ -80,7 +80,7 @@ p {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 1rem;
+  font-size: 0.9rem;
   letter-spacing: -1px;
   line-height: 1;
   margin-bottom: 0;
@@ -379,8 +379,8 @@ nav {
     max-width:min(560px,100%);
     transform:scale(.94);
     transition:transform .45s cubic-bezier(.2,.8,.2,1);
-    background-color: #ffffff0a;
-    backdrop-filter:blur(20px);
+    background-color: #ffffff00;
+    /* backdrop-filter:blur(20px); */
   }
   .overlay.open .card{
     transform:scale(1)

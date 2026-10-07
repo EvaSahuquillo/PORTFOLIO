@@ -24,7 +24,7 @@ const PROJECTS = [
   { title: "(04)", tag: "No hay meta - Diseño exposición/Editorial", src: "img/proyectos/webp/portada-expo.webp" },
   { title: "(05)", tag: "Fotografía", src: "img/proyectos/webp/SUJETADOR.webp" },
   { title: "(06)", tag: "Archif - Web", src: "img/proyectos/webp/archif1.webp" },
-  { title: "(07)", tag: "Ilustración - Revista el Duende", src: "img/proyectos/webp/Ilustración_sin_título (27).webp" },
+  { title: "(07)", tag: "Ilustración - Revista el Duende", src: "img/proyectos/webp/Ilustración_sin_título (27).webp" },
   { title: "(08)", tag: "Ilustración - Stand Up Loreal", src: "img/proyectos/webp/1.webp" },
   { title: "(09)", tag: "CasiCasi - Editorial", src: "img/proyectos/webp/pagina-casicasi1.webp" }
 ];
