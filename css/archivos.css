@@ -349,6 +349,13 @@ ul {
   #lightbox { padding: 20px; }
 }
 
+#lightbox-content img {
+  transition: filter .35s ease;
+}
+#lightbox-content img.loading {
+  filter: blur(6px);
+}
+
 
 /* EFECTO GIRAR  */
 .rot {
