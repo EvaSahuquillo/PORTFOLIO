@@ -24,10 +24,13 @@ const PROJECTS = [
   { title: "(04)", tag: "No hay meta - Diseño exposición/Editorial", src: "img/proyectos/webp/portada-expo.webp" },
   { title: "(05)", tag: "Fotografía", src: "img/proyectos/webp/SUJETADOR.webp" },
   { title: "(06)", tag: "Archif - Web", src: "img/proyectos/webp/archif1.webp" },
-  { title: "(07)", tag: "Ilustración - Revista el Duende", src: "img/proyectos/webp/Ilustración_sin_título (27).webp" },
+  { title: "(07)", tag: "Ilustración - Revista el Duende", src: "img/proyectos/webp/Ilustración_sin_título (27).webp" },
   { title: "(08)", tag: "Ilustración - Stand Up Loreal", src: "img/proyectos/webp/1.webp" },
   { title: "(09)", tag: "CasiCasi - Editorial", src: "img/proyectos/webp/pagina-casicasi1.webp" }
 ];
+
+/* Ruta de la miniatura a partir de la ruta de la imagen completa */
+const thumbOf = src => src.replace("/webp/", "/thumbs/");
 
 /* ───────────────────────────────────────────────
    2. CONFIGURACIÓN
@@ -178,24 +181,45 @@ function pick(clientX, clientY) {
 }
 
 /* ───────────────────────────────────────────────
-   11. OVERLAY
+   11. OVERLAY (miniatura al instante + imagen completa después)
    ─────────────────────────────────────────────── */
+let openToken = 0;   // evita que una carga lenta pise a otra imagen
+
 function openItem(ud) {
   opened = true;
   vx = 0;
   vy = 0;
   hovered = null;
   canvas.classList.remove("hover");
-  ovImg.src = ud.url;
+
+  const token = ++openToken;
+
+  // 1. Miniatura al instante (ya está en caché), ligeramente desenfocada
+  ovImg.classList.add("loading");
+  ovImg.src = ud.thumbUrl;
   ovImg.alt = ud.data.title;
   ovTitle.textContent = ud.data.title;
   ovTag.textContent = ud.data.tag;
   overlay.classList.add("open");
   overlay.setAttribute("aria-hidden", "false");
   hint.classList.add("hide");
+
+  // 2. Imagen completa en segundo plano
+  const full = new Image();
+  full.decoding = "async";
+  full.onload = () => {
+    if (token !== openToken || !opened) return;
+    ovImg.src = full.src;
+    ovImg.classList.remove("loading");
+  };
+  full.onerror = () => {
+    if (token === openToken) ovImg.classList.remove("loading");
+  };
+  full.src = ud.fullUrl;
 }
 
 function closeItem() {
+  openToken++;   // cancela cualquier carga pendiente
   opened = false;
   overlay.classList.remove("open");
   overlay.setAttribute("aria-hidden", "true");
@@ -229,7 +253,7 @@ canvas.addEventListener("pointerdown", e => {
 });
 
 /* ───────────────────────────────────────────────
-   13. POINTER MOVE
+   13. POINTER MOVE (con precarga de la imagen completa al pasar el ratón)
    ─────────────────────────────────────────────── */
 canvas.addEventListener("pointermove", e => {
   if (opened || !ready) return;
@@ -248,8 +272,17 @@ canvas.addEventListener("pointermove", e => {
     lastX = e.clientX;
     lastY = e.clientY;
   } else {
+    const prev = hovered;
     hovered = pick(e.clientX, e.clientY);
     canvas.classList.toggle("hover", !!hovered);
+
+    // Precarga: si el cursor se queda sobre una tarjeta, empezamos a bajar la imagen completa
+    if (hovered && hovered !== prev && !hovered.userData.prefetched) {
+      hovered.userData.prefetched = true;
+      const pre = new Image();
+      pre.decoding = "async";
+      pre.src = hovered.userData.fullUrl;
+    }
   }
 });
 
@@ -335,7 +368,8 @@ function createCard(img, i) {
 
   mesh.userData = {
     data,
-    url: img.src,
+    thumbUrl: img.src,      // miniatura (ya cargada)
+    fullUrl: data.src,      // calidad completa (solo al hacer clic)
     base: new THREE.Vector3(CARD_H * aspect, CARD_H, 1),
     s: 1,
     spawnStart: performance.now(),
@@ -352,13 +386,9 @@ function createCard(img, i) {
 }
 
 /* ───────────────────────────────────────────────
-   18. CACHÉ DE IMÁGENES (para no recargar al volver)
+   18. CACHÉ DE IMÁGENES (miniaturas)
    ─────────────────────────────────────────────── */
-/* Guardamos las imágenes ya cargadas en un Map global.
-   Si el script se re-ejecuta (por ejemplo con SPA o al volver a la home)
-   las imágenes estarán disponibles al instante. */
 const IMG_CACHE = (() => {
-  // Intentamos reutilizar una caché ya existente en window
   if (window.__GALLERY_IMG_CACHE) return window.__GALLERY_IMG_CACHE;
   const m = new Map();
   window.__GALLERY_IMG_CACHE = m;
@@ -367,10 +397,11 @@ const IMG_CACHE = (() => {
 
 function loadImage(i) {
   const data = PROJECTS[i % PROJECTS.length];
+  const thumb = thumbOf(data.src);
 
   // 1. Si ya la tenemos en caché, la devolvemos al instante
-  if (IMG_CACHE.has(data.src)) {
-    return Promise.resolve(IMG_CACHE.get(data.src));
+  if (IMG_CACHE.has(thumb)) {
+    return Promise.resolve(IMG_CACHE.get(thumb));
   }
 
   // 2. Si no, la cargamos y guardamos
@@ -380,16 +411,15 @@ function loadImage(i) {
     img.crossOrigin = "anonymous";
 
     img.onload = () => {
-      IMG_CACHE.set(data.src, img);
+      IMG_CACHE.set(thumb, img);
       resolve(img);
     };
     img.onerror = () => {
-      // Marcamos como "no disponible" para no reintentar en esta sesión
-      IMG_CACHE.set(data.src, null);
+      IMG_CACHE.set(thumb, null);
       resolve(null);
     };
 
-    img.src = data.src;
+    img.src = thumb;
   });
 }
 
@@ -397,7 +427,7 @@ function loadImage(i) {
    19. CARGA + APARICIÓN ESCALONADA
    ─────────────────────────────────────────────── */
 async function loadGallery() {
-  // 1. Cargar TODAS las imágenes en paralelo (usa caché si existen)
+  // 1. Cargar TODAS las miniaturas en paralelo (usa caché si existen)
   const promises = [];
   for (let i = 0; i < COUNT; i++) {
     promises.push(loadImage(i));

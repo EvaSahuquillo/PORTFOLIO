@@ -421,6 +421,13 @@ nav {
     .overlay,.card,.hint{transition:none}
   }
 
+.card img{
+  transition: filter .35s ease;
+}
+.card img.loading{
+  filter: blur(6px);
+}
+
 /* OTRA GALERIA  */
 .galeria-3d {
     width: 100%;
