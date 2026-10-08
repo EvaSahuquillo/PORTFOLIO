@@ -180,6 +180,27 @@ a {
     color: var(--text-middle);
 }
 
+/* TOGGLE DARK MODE  */
+/* Transición de tema: círculo desde abajo a la izquierda */
+::view-transition-group(root) {
+  animation-duration: 2s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); /* expo-out */
+}
+
+::view-transition-old(root) {
+  animation: none;
+  z-index: -1;
+}
+
+::view-transition-new(root) {
+  animation-name: reveal-circle;
+}
+
+@keyframes reveal-circle {
+  from { clip-path: circle(0% at 0% 100%); }
+  to   { clip-path: circle(150% at 0% 100%); }
+}
+
 
 
 /* CUSTOM CURSOR */

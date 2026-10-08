@@ -1,102 +1,3 @@
-// // ELEMENTO 3D
-
-
-// const el = document.getElementById("draggable-model");
-// const container = document.querySelector(".soap3D");
-
-// let offsetX = 0, offsetY = 0;
-// let dragging = false;
-
-// function getBounds() {
-//     return container.getBoundingClientRect();
-// }
-
-// // Quita el auto-rotate nativo de model-viewer en cuanto lo coges
-// function stopAutoRotate() {
-//     el.removeAttribute("auto-rotate");
-// }
-
-// el.addEventListener("mousedown", (e) => {
-//     dragging = true;
-//     stopAutoRotate();
-//     offsetX = e.clientX - el.offsetLeft;
-//     offsetY = e.clientY - el.offsetTop;
-// });
-
-// document.addEventListener("mousemove", (e) => {
-//     if (!dragging) return;
-
-//     const bounds = getBounds();
-
-//     let x = e.clientX - offsetX;
-//     let y = e.clientY - offsetY;
-
-//     x = Math.max(0, Math.min(x, bounds.width - el.offsetWidth));
-//     y = Math.max(0, Math.min(y, bounds.height - el.offsetHeight));
-
-//     el.style.left = x + "px";
-//     el.style.top = y + "px";
-// });
-
-// document.addEventListener("mouseup", () => dragging = false);
-
-// // -----------------------------
-// //      MOBILE / TOUCH
-// // -----------------------------
-// el.addEventListener("touchstart", (e) => {
-//     dragging = true;
-//     stopAutoRotate();
-//     const touch = e.touches[0];
-//     offsetX = touch.clientX - el.offsetLeft;
-//     offsetY = touch.clientY - el.offsetTop;
-// });
-
-// document.addEventListener("touchmove", (e) => {
-//     if (!dragging) return;
-
-//     const touch = e.touches[0];
-//     const bounds = getBounds();
-
-//     let x = touch.clientX - offsetX;
-//     let y = touch.clientY - offsetY;
-
-//     x = Math.max(0, Math.min(x, bounds.width - el.offsetWidth));
-//     y = Math.max(0, Math.min(y, bounds.height - el.offsetHeight));
-
-//     el.style.left = x + "px";
-//     el.style.top = y + "px";
-// });
-
-// document.addEventListener("touchend", () => dragging = false);
-
-// // -----------------------------
-// //      MOBILE / TOUCH
-// // -----------------------------
-// el.addEventListener("touchstart", (e) => {
-//     dragging = true;
-//     const touch = e.touches[0];
-//     offsetX = touch.clientX - el.offsetLeft;
-//     offsetY = touch.clientY - el.offsetTop;
-// });
-
-// document.addEventListener("touchmove", (e) => {
-//     if (!dragging) return;
-
-//     const touch = e.touches[0];
-//     const bounds = getBounds();
-
-//     let x = touch.clientX - offsetX;
-//     let y = touch.clientY - offsetY;
-
-//     // Limitar dentro del contenedor
-//     x = Math.max(0, Math.min(x, bounds.width - el.offsetWidth));
-//     y = Math.max(0, Math.min(y, bounds.height - el.offsetHeight));
-
-//     el.style.left = x + "px";
-//     el.style.top = y + "px";
-// });
-
-// document.addEventListener("touchend", () => dragging = false);
 
 // CURSOR ACTUALIZADO - Compatible con galería 3D
 (function initCustomCursor() {
@@ -198,6 +99,7 @@ setInterval(actualizarHora, 1000);
 
 // ============================================
 // DARK MODE
+// Transición circular basada en Skiper UI (skiper26), concepto original de rudrodip
 // ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -206,22 +108,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!toggle) return;
 
-  // Aplicar modo guardado al cargar
-  const saved = localStorage.getItem('mode');
-  if (saved === 'dark') {
-    body.classList.add('dark-mode');
-    toggle.textContent = '☼';
-  } else if (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    body.classList.add('dark-mode');
-    toggle.textContent = '☼';
-  }
+  const applyMode = (mode) => {
+    const isDark = mode === 'dark';
+    body.classList.toggle('dark-mode', isDark);
+    body.classList.toggle('light-mode', !isDark);
+    toggle.textContent = isDark ? '☼' : '☾';
+  };
 
-  // Toggle al hacer click
+  // Modo inicial
+  const saved = localStorage.getItem('mode');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  applyMode(saved === 'dark' || (!saved && prefersDark) ? 'dark' : 'light');
+
+  // Click con transición
   toggle.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
-    const mode = body.classList.contains('dark-mode') ? 'dark' : 'light';
-    localStorage.setItem('mode', mode);
-    toggle.textContent = mode === 'dark' ? '☼' : '☾';
+    const next = body.classList.contains('dark-mode') ? 'light' : 'dark';
+    localStorage.setItem('mode', next);
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Sin soporte o con "reducir movimiento": cambio directo
+    if (!document.startViewTransition || reduceMotion) {
+      applyMode(next);
+      return;
+    }
+
+    document.startViewTransition(() => applyMode(next));
   });
 });
 

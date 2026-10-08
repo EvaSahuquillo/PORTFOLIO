@@ -98,6 +98,7 @@ setInterval(actualizarHora, 1000);
 
 // ============================================
 // DARK MODE
+// Transición circular basada en Skiper UI (skiper26), concepto original de rudrodip
 // ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -106,26 +107,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!toggle) return;
 
+  const applyMode = (mode) => {
+    const isDark = mode === 'dark';
+    body.classList.toggle('dark-mode', isDark);
+    body.classList.toggle('light-mode', !isDark);
+    toggle.textContent = isDark ? '☼' : '☾';
+  };
+
+  // Modo inicial
   const saved = localStorage.getItem('mode');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  applyMode(saved === 'dark' || (!saved && prefersDark) ? 'dark' : 'light');
 
-  // Aplicar modo inicial SIEMPRE
-  if (saved === 'dark' || (!saved && prefersDark)) {
-    body.classList.add('dark-mode');
-    body.classList.remove('light-mode');
-    toggle.textContent = '☼';
-  } else {
-    body.classList.add('light-mode');
-    body.classList.remove('dark-mode');
-    toggle.textContent = '☾';
-  }
-
+  // Click con transición
   toggle.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
-    body.classList.toggle('light-mode');
-    const mode = body.classList.contains('dark-mode') ? 'dark' : 'light';
-    localStorage.setItem('mode', mode);
-    toggle.textContent = mode === 'dark' ? '☼' : '☾';
+    const next = body.classList.contains('dark-mode') ? 'light' : 'dark';
+    localStorage.setItem('mode', next);
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Sin soporte o con "reducir movimiento": cambio directo
+    if (!document.startViewTransition || reduceMotion) {
+      applyMode(next);
+      return;
+    }
+
+    document.startViewTransition(() => applyMode(next));
   });
 });
 

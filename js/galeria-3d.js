@@ -1,10 +1,10 @@
 import * as THREE from "three";
-
-
+ 
+ 
 /* ═══════════════════════════════════════════
    GALERÍA 3D
    ═══════════════════════════════════════════ */
-
+ 
 /* ───────────────────────────────────────────────
    1. TUS PROYECTOS
    ─────────────────────────────────────────────── */
@@ -28,10 +28,10 @@ const PROJECTS = [
   { title: "(08)", tag: "Ilustración - Stand Up Loreal", src: "img/proyectos/webp/1.webp" },
   { title: "(09)", tag: "CasiCasi - Editorial", src: "img/proyectos/webp/pagina-casicasi1.webp" }
 ];
-
+ 
 /* Ruta de la miniatura a partir de la ruta de la imagen completa */
 const thumbOf = src => src.replace("/webp/", "/thumbs/");
-
+ 
 /* ───────────────────────────────────────────────
    2. CONFIGURACIÓN
    ─────────────────────────────────────────────── */
@@ -41,33 +41,33 @@ const CARD_H = 1.35;
 const AUTO_SPEED = 0.0012;
 const FRICTION = 0.95;
 const BACK_OPACITY = 0.3;
-
+ 
 /* ── Aparición escalonada (más smooth) ── */
 const SPAWN_INTERVAL = 130;     // ms entre tarjeta y tarjeta (más pausado)
 const SPAWN_FADE_MS = 1500;     // fade-in más largo
 const SPAWN_RISE = 0.5;         // rise más notorio
-
+ 
 /* ── Arranque del giro progresivo ── */
 const SPIN_RAMP_MS = 2600;      // rampa de spin más larga = más suave
-
+ 
 /* ── Rampa del zoom de entrada ── */
 const ZOOM_IN_FROM = 1.25;       // arranca más pequeña
 const ZOOM_IN_TO   = 1.1;       // tamaño final
 const ZOOM_RAMP_MS = 2600;      // dura lo mismo que el spin = coordinados
-
+ 
 /* ───────────────────────────────────────────────
    3. ELEMENTOS
    ─────────────────────────────────────────────── */
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const canvas = document.getElementById("c");
 const hint = document.getElementById("hint");
-
+ 
 /* Ocultamos el cursor hasta que la escena esté lista.
    La regla !important evita que cualquier CSS externo lo sobreescriba. */
 const cursorStyle = document.createElement("style");
 cursorStyle.textContent = `#c { cursor: none !important; }`;
 document.head.appendChild(cursorStyle);
-
+ 
 /* ───────────────────────────────────────────────
    4. OVERLAY
    ─────────────────────────────────────────────── */
@@ -75,30 +75,31 @@ const overlay = document.getElementById("overlay");
 const ovImg = document.getElementById("ov-img");
 const ovTitle = document.getElementById("ov-title");
 const ovTag = document.getElementById("ov-tag");
-
+const ovCaption = document.getElementById("ov-caption");   // tooltip del efecto tilt (solo ordenador)
+ 
 /* ───────────────────────────────────────────────
    5. RENDERER
    ─────────────────────────────────────────────── */
-
+ 
 // Detección de móvil una sola vez (por si la usas en más sitios)
 const isMobile = window.innerWidth < 768;
-
+ 
 const renderer = new THREE.WebGLRenderer({
   canvas,
   antialias: !isMobile,   // en móvil sin MSAA (ahorra GPU), el pixelRatio alto ya suaviza
   alpha: true
 });
-
+ 
 // Pixel ratio: no bajamos a 1 en móvil. En pantallas Retina (la mayoría)
 // renderizar a 1 se ve pixelado. Usamos el devicePixelRatio real, con un
 // tope de 2 para no reventar la GPU en pantallas 3x.
 const dpr = window.devicePixelRatio || 1;
 const pixelRatio = Math.min(dpr, 2);
 renderer.setPixelRatio(pixelRatio);
-
+ 
 renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.setClearColor(0x000000, 0);
-
+ 
 /* ───────────────────────────────────────────────
    6. ESCENA
    ─────────────────────────────────────────────── */
@@ -106,13 +107,13 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
 const group = new THREE.Group();
 scene.add(group);
-
+ 
 /* ───────────────────────────────────────────────
    7. RESIZE
    ─────────────────────────────────────────────── */
 let zoom = ZOOM_IN_FROM;
 let zoomTarget = ZOOM_IN_FROM;
-
+ 
 function resize() {
   const w = window.innerWidth;
   const h = window.innerHeight;
@@ -122,11 +123,11 @@ function resize() {
   camera.userData.baseZ = fitH / (2 * Math.tan(THREE.MathUtils.degToRad(22.5)));
   camera.updateProjectionMatrix();
 }
-
+ 
 window.addEventListener("resize", resize);
 resize();
 camera.position.z = camera.userData.baseZ * zoom;
-
+ 
 /* ───────────────────────────────────────────────
    8. ROTACIÓN
    ─────────────────────────────────────────────── */
@@ -134,22 +135,22 @@ const AX_X = new THREE.Vector3(1, 0, 0);
 const AX_Y = new THREE.Vector3(0, 1, 0);
 const qa = new THREE.Quaternion();
 const qb = new THREE.Quaternion();
-
+ 
 function rotate(dx, dy) {
   qa.setFromAxisAngle(AX_Y, dx);
   qb.setFromAxisAngle(AX_X, dy);
   group.quaternion.premultiply(qa).premultiply(qb);
 }
-
+ 
 group.rotation.set(0.35, -0.4, 0);
-
+ 
 /* ───────────────────────────────────────────────
    9. INTERACCIÓN
    ─────────────────────────────────────────────── */
 const raycaster = new THREE.Raycaster();
 const ndc = new THREE.Vector2();
 const tmp = new THREE.Vector3();
-
+ 
 let dragging = false;
 let moved = false;
 let opened = false;
@@ -160,14 +161,14 @@ let lastY = 0;
 let vx = 0;
 let vy = 0;
 let hovered = null;
-
+ 
 let ready = false;
 let autoSpin = 0;
 let readyAt = 0;
-
+ 
 let zoomRampActive = false;
 let zoomRampStart = 0;
-
+ 
 /* ───────────────────────────────────────────────
    10. SELECCIÓN DE TARJETAS
    ─────────────────────────────────────────────── */
@@ -179,31 +180,32 @@ function pick(clientX, clientY) {
   const hit = hits.find(h => h.object.getWorldPosition(tmp).z > 0);
   return hit ? hit.object : null;
 }
-
+ 
 /* ───────────────────────────────────────────────
    11. OVERLAY (miniatura al instante + imagen completa después)
    ─────────────────────────────────────────────── */
 let openToken = 0;   // evita que una carga lenta pise a otra imagen
-
+ 
 function openItem(ud) {
   opened = true;
   vx = 0;
   vy = 0;
   hovered = null;
   canvas.classList.remove("hover");
-
+ 
   const token = ++openToken;
-
+ 
   // 1. Miniatura al instante (ya está en caché), ligeramente desenfocada
   ovImg.classList.add("loading");
   ovImg.src = ud.thumbUrl;
   ovImg.alt = ud.data.title;
   ovTitle.textContent = ud.data.title;
   ovTag.textContent = ud.data.tag;
+  ovCaption.textContent = ud.data.title + " · " + ud.data.tag;   // info para el tooltip (ordenador)
   overlay.classList.add("open");
   overlay.setAttribute("aria-hidden", "false");
   hint.classList.add("hide");
-
+ 
   // 2. Imagen completa en segundo plano
   const full = new Image();
   full.decoding = "async";
@@ -217,26 +219,139 @@ function openItem(ud) {
   };
   full.src = ud.fullUrl;
 }
-
+ 
 function closeItem() {
   openToken++;   // cancela cualquier carga pendiente
   opened = false;
   overlay.classList.remove("open");
   overlay.setAttribute("aria-hidden", "true");
+  resetTilt();   // reinicia el efecto tilt (solo hace algo en ordenador)
 }
-
+ 
 overlay.addEventListener("click", e => {
   if (e.target === overlay) {
     closeItem();
   }
 });
-
+ 
 window.addEventListener("keydown", e => {
   if (e.key === "Escape" && opened) {
     closeItem();
   }
 });
-
+ 
+/* ───────────────────────────────────────────────
+   11b. EFECTO TILT EN EL OVERLAY (solo ordenador)
+   ─────────────────────────────────────────────── */
+const isDesktopPointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+let resetTilt = () => {};
+ 
+if (isDesktopPointer) {
+  const TILT_AMPLITUDE = 15;   // inclinación máxima en grados (baja a 12–14 si es muy fuerte)
+  const TILT_SCALE = 1.1;      // escala al pasar el ratón
+  const card = ovImg.parentElement;   // la <figure class="card">
+ 
+  // Muelle simple (mismos valores que el TiltedCard original)
+  const spring = (value, stiffness = 100, damping = 30, mass = 2) =>
+    ({ value, target: value, vel: 0, k: stiffness, c: damping, m: mass });
+ 
+  const rotX = spring(0);
+  const rotY = spring(0);
+  const sc = spring(1);
+  const capOpacity = spring(0, 100, 30, 2);
+  const capRot = spring(0, 350, 30, 1);
+ 
+  const springs = [rotX, rotY, sc, capOpacity, capRot];
+  let capX = 0;
+  let capY = 0;
+  let lastOffsetY = 0;
+  let running = false;
+  let lastT = 0;
+ 
+  function stepSpring(s, dt) {
+    const acc = (-s.k * (s.value - s.target) - s.c * s.vel) / s.m;
+    s.vel += acc * dt;
+    s.value += s.vel * dt;
+    if (Math.abs(s.value - s.target) < 0.001 && Math.abs(s.vel) < 0.001) {
+      s.value = s.target;
+      s.vel = 0;
+      return false;
+    }
+    return true;
+  }
+ 
+  function tiltLoop(now) {
+    const dt = Math.min((now - lastT) / 1000, 0.032);
+    lastT = now;
+ 
+    let active = false;
+    for (const s of springs) {
+      if (stepSpring(s, dt)) active = true;
+    }
+ 
+    ovImg.style.transform =
+      `rotateX(${rotX.value}deg) rotateY(${rotY.value}deg) scale(${sc.value})`;
+    ovCaption.style.transform =
+      `translate(${capX}px, ${capY}px) rotate(${capRot.value}deg)`;
+    ovCaption.style.opacity = capOpacity.value;
+ 
+    if (active) {
+      requestAnimationFrame(tiltLoop);
+    } else {
+      running = false;
+    }
+  }
+ 
+  function startTilt() {
+    if (running) return;
+    running = true;
+    lastT = performance.now();
+    requestAnimationFrame(tiltLoop);
+  }
+ 
+  card.addEventListener("mouseenter", () => {
+    sc.target = TILT_SCALE;
+    capOpacity.target = 1;
+    startTilt();
+  });
+ 
+  card.addEventListener("mousemove", e => {
+    const rect = card.getBoundingClientRect();
+    const offsetX = e.clientX - rect.left - rect.width / 2;
+    const offsetY = e.clientY - rect.top - rect.height / 2;
+ 
+    rotX.target = (offsetY / (rect.height / 2)) * -TILT_AMPLITUDE;
+    rotY.target = (offsetX / (rect.width / 2)) * TILT_AMPLITUDE;
+ 
+    capX = e.clientX - rect.left;
+    capY = e.clientY - rect.top;
+ 
+    const velocityY = offsetY - lastOffsetY;
+    capRot.target = -velocityY * 0.6;
+    lastOffsetY = offsetY;
+ 
+    startTilt();
+  });
+ 
+  card.addEventListener("mouseleave", () => {
+    capOpacity.target = 0;
+    sc.target = 1;
+    rotX.target = 0;
+    rotY.target = 0;
+    capRot.target = 0;
+    startTilt();
+  });
+ 
+  resetTilt = () => {
+    for (const s of springs) {
+      s.value = s.target = (s === sc ? 1 : 0);
+      s.vel = 0;
+    }
+    ovImg.style.transform = "";
+    ovCaption.style.opacity = 0;
+  };
+}
+ 
 /* ───────────────────────────────────────────────
    12. POINTER DOWN
    ─────────────────────────────────────────────── */
@@ -251,19 +366,19 @@ canvas.addEventListener("pointerdown", e => {
   canvas.setPointerCapture(e.pointerId);
   canvas.classList.add("dragging");
 });
-
+ 
 /* ───────────────────────────────────────────────
    13. POINTER MOVE (con precarga de la imagen completa al pasar el ratón)
    ─────────────────────────────────────────────── */
 canvas.addEventListener("pointermove", e => {
   if (opened || !ready) return;
-
+ 
   if (dragging) {
     if (Math.hypot(e.clientX - startX, e.clientY - startY) > 5) {
       moved = true;
       hint.classList.add("hide");
     }
-
+ 
     const dx = (e.clientX - lastX) * 0.006;
     const dy = (e.clientY - lastY) * 0.006;
     rotate(dx, dy);
@@ -275,7 +390,7 @@ canvas.addEventListener("pointermove", e => {
     const prev = hovered;
     hovered = pick(e.clientX, e.clientY);
     canvas.classList.toggle("hover", !!hovered);
-
+ 
     // Precarga: si el cursor se queda sobre una tarjeta, empezamos a bajar la imagen completa
     if (hovered && hovered !== prev && !hovered.userData.prefetched) {
       hovered.userData.prefetched = true;
@@ -285,7 +400,7 @@ canvas.addEventListener("pointermove", e => {
     }
   }
 });
-
+ 
 /* ───────────────────────────────────────────────
    14. POINTER UP
    ─────────────────────────────────────────────── */
@@ -293,7 +408,7 @@ function endDrag(e) {
   if (!dragging) return;
   dragging = false;
   canvas.classList.remove("dragging");
-
+ 
   if (!moved) {
     const m = pick(e.clientX, e.clientY);
     if (m) {
@@ -301,7 +416,7 @@ function endDrag(e) {
     }
   }
 }
-
+ 
 canvas.addEventListener("pointerup", endDrag);
 canvas.addEventListener("pointercancel", () => {
   dragging = false;
@@ -313,7 +428,7 @@ canvas.addEventListener("pointerleave", () => {
     canvas.classList.remove("hover");
   }
 });
-
+ 
 /* ───────────────────────────────────────────────
    15. ZOOM
    ─────────────────────────────────────────────── */
@@ -326,7 +441,7 @@ canvas.addEventListener(
   },
   { passive: false }
 );
-
+ 
 /* ───────────────────────────────────────────────
    16. CONSTRUCCIÓN DE LA GALERÍA
    ─────────────────────────────────────────────── */
@@ -334,20 +449,20 @@ const maxAniso = isMobile ? 1 : Math.min(renderer.capabilities.getMaxAnisotropy(
 const meshes = [];
 const GOLDEN = Math.PI * (3 - Math.sqrt(5));
 const planeGeo = new THREE.PlaneGeometry(1, 1);
-
+ 
 /* ───────────────────────────────────────────────
    17. CREAR UNA TARJETA
    ─────────────────────────────────────────────── */
 function createCard(img, i) {
   if (!img) return;
-
+ 
   const data = PROJECTS[i % PROJECTS.length];
   const y = 1 - ((i + 0.5) / COUNT) * 2;
   const r = Math.sqrt(1 - y * y);
   const t = GOLDEN * i;
-
+ 
   const pos = new THREE.Vector3(Math.cos(t) * r, y, Math.sin(t) * r).multiplyScalar(RADIUS);
-
+ 
   const mat = new THREE.MeshBasicMaterial({
     transparent: true,
     side: THREE.FrontSide,
@@ -355,17 +470,17 @@ function createCard(img, i) {
   });
   const mesh = new THREE.Mesh(planeGeo, mat);
   mesh.position.copy(pos);
-
+ 
   const tex = new THREE.Texture(img);
   tex.encoding = THREE.sRGBEncoding;
   tex.anisotropy = maxAniso;
   tex.needsUpdate = true;
-
+ 
   mat.map = tex;
   mat.needsUpdate = true;
-
+ 
   const aspect = img.naturalWidth / img.naturalHeight;
-
+ 
   mesh.userData = {
     data,
     thumbUrl: img.src,      // miniatura (ya cargada)
@@ -376,15 +491,15 @@ function createCard(img, i) {
     spawned: true,
     posY: pos.y
   };
-
+ 
   mesh.position.y = pos.y - SPAWN_RISE;
-
+ 
   mesh.scale.copy(mesh.userData.base);
-
+ 
   group.add(mesh);
   meshes.push(mesh);
 }
-
+ 
 /* ───────────────────────────────────────────────
    18. CACHÉ DE IMÁGENES (miniaturas)
    ─────────────────────────────────────────────── */
@@ -394,22 +509,22 @@ const IMG_CACHE = (() => {
   window.__GALLERY_IMG_CACHE = m;
   return m;
 })();
-
+ 
 function loadImage(i) {
   const data = PROJECTS[i % PROJECTS.length];
   const thumb = thumbOf(data.src);
-
+ 
   // 1. Si ya la tenemos en caché, la devolvemos al instante
   if (IMG_CACHE.has(thumb)) {
     return Promise.resolve(IMG_CACHE.get(thumb));
   }
-
+ 
   // 2. Si no, la cargamos y guardamos
   return new Promise(resolve => {
     const img = new Image();
     img.decoding = "async";
     img.crossOrigin = "anonymous";
-
+ 
     img.onload = () => {
       IMG_CACHE.set(thumb, img);
       resolve(img);
@@ -418,11 +533,11 @@ function loadImage(i) {
       IMG_CACHE.set(thumb, null);
       resolve(null);
     };
-
+ 
     img.src = thumb;
   });
 }
-
+ 
 /* ───────────────────────────────────────────────
    19. CARGA + APARICIÓN ESCALONADA
    ─────────────────────────────────────────────── */
@@ -433,31 +548,31 @@ async function loadGallery() {
     promises.push(loadImage(i));
   }
   const images = await Promise.all(promises);
-
+ 
   if (window.__preloader) {
     window.__preloader.markImagesReady();
   }
-
+ 
   // 2. Crear tarjetas UNA A UNA
   for (let i = 0; i < COUNT; i++) {
     const img = images[i];
     if (img) createCard(img, i);
-
+ 
     if (i < COUNT - 1) {
       await new Promise(r => setTimeout(r, SPAWN_INTERVAL));
     }
   }
-
+ 
   // 3. Esperar al fade de la última tarjeta
   await new Promise(r => setTimeout(r, SPAWN_FADE_MS));
-
+ 
   // 4. Activar el giro y la rampa de zoom
   readyAt = performance.now();
   zoomRampActive = true;
   zoomRampStart = performance.now();
   zoomTarget = ZOOM_IN_TO;
   ready = true;
-
+ 
   // 5. Restaurar el cursor: quitamos la regla "none" y ponemos la adecuada
   cursorStyle.textContent = `
     #c { cursor: default !important; }
@@ -465,24 +580,24 @@ async function loadGallery() {
     #c.dragging { cursor: grabbing !important; }
   `;
 }
-
+ 
 loadGallery();
-
+ 
 /* ───────────────────────────────────────────────
    20. BUCLE DE ANIMACIÓN
    ─────────────────────────────────────────────── */
 function tick() {
   requestAnimationFrame(tick);
-
+ 
   const now = performance.now();
-
+ 
   // Rampa del auto-spin
   if (ready) {
     autoSpin = THREE.MathUtils.clamp((now - readyAt) / SPIN_RAMP_MS, 0, 1);
     // smoothstep (más suave que antes)
     autoSpin = autoSpin * autoSpin * autoSpin * (autoSpin * (autoSpin * 6 - 15) + 10);
   }
-
+ 
   // Rotación automática
   if (ready && !dragging && !opened) {
     const speed = reduceMotion ? 0 : AUTO_SPEED * autoSpin;
@@ -490,14 +605,14 @@ function tick() {
     vx *= FRICTION;
     vy *= FRICTION;
   }
-
+ 
   // Rampa del zoom de entrada
   if (zoomRampActive) {
     const t = THREE.MathUtils.clamp((now - zoomRampStart) / ZOOM_RAMP_MS, 0, 1);
     // smootherstep: aún más suave que smoothstep
     const e = t * t * t * (t * (t * 6 - 15) + 10);
     zoom = THREE.MathUtils.lerp(ZOOM_IN_FROM, ZOOM_IN_TO, e);
-
+ 
     if (t >= 1) {
       zoomRampActive = false;
       zoom = ZOOM_IN_TO;
@@ -506,19 +621,19 @@ function tick() {
   } else {
     zoom += (zoomTarget - zoom) * 0.08;
   }
-
+ 
   const targetZ = camera.userData.baseZ * zoom;
   // Suavizado de cámara más lento (0.10) para menos tirón
   camera.position.z += (targetZ - camera.position.z) * 0.10;
-
+ 
   group.updateMatrixWorld(true);
-
+ 
   for (const m of meshes) {
     m.getWorldPosition(tmp);
-
+ 
     const depth = THREE.MathUtils.clamp((tmp.z + RADIUS) / (RADIUS * 2), 0, 1);
     const depthOpacity = BACK_OPACITY + (1 - BACK_OPACITY) * Math.pow(depth, 1.4);
-
+ 
     // Fade-in con ease-out quint
     let spawnT = 1;
     if (m.userData.spawned) {
@@ -528,27 +643,27 @@ function tick() {
       );
       spawnT = 1 - Math.pow(1 - raw, 5);
     }
-
+ 
     // Rise
     m.position.y = m.userData.posY - SPAWN_RISE * (1 - spawnT);
-
+ 
     m.material.opacity = depthOpacity * spawnT;
-
+ 
     m.quaternion.copy(group.quaternion).invert();
-
+ 
     const target = m === hovered ? 1.14 : 1;
     m.userData.s += (target - m.userData.s) * 0.15;
-
+ 
     const b = m.userData.base;
     const s = m.userData.s;
     const k = 0.55 + 0.45 * depth;
-
+ 
     m.scale.set(b.x * s * k, b.y * s * k, 1);
   }
-
+ 
   renderer.render(scene, camera);
 }
-
+ 
 /* ───────────────────────────────────────────────
    21. INICIAR
    ─────────────────────────────────────────────── */
