@@ -75,7 +75,7 @@ body {
 
 p {
   font-family: "Inter", sans-serif;
-  font-weight: 600;
+  font-weight: 400;
   font-style: normal;
   font-size: 0.9rem;
   letter-spacing: -1px;
@@ -641,4 +641,154 @@ body.menu-open nav {
   }
 }
 
+
+
+/* OTRO TIPPO DE LISTA  */
+/* ═══════════════════════════════════════════
+   OPTION WHEEL
+   ═══════════════════════════════════════════ */
+ 
+.option-wheel {
+  --ow-text-color: #8a8a8a;
+  --ow-active-color: #000;
+  --ow-font-size: clamp(2.2rem, 5.2vw, 4.75rem);
+  --ow-inset: clamp(24px, 5vw, 80px);
+ 
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  outline: none;
+}
+ 
+/* Colores según tu toggle de modo claro / oscuro */
+.light-mode .option-wheel { --ow-text-color: #8a8a8a; --ow-active-color: #000; }
+.dark-mode  .option-wheel { --ow-text-color: #a6a6a6; --ow-active-color: #fff; }
+ 
+.option-wheel--dragging { cursor: grabbing; }
+ 
+.option-wheel__item {
+  position: absolute;
+  top: 50%;
+  left: var(--ow-inset);
+  white-space: nowrap;
+  font-size: var(--ow-font-size);
+  line-height: 1;
+  font-weight: 200;
+  transform-origin: left center;
+  cursor: pointer;
+  will-change: transform, opacity, filter;
+  /* --ow-p va de 0 a 1 cuando la opción se acerca al centro */
+  color: color-mix(in srgb, var(--ow-active-color) calc(var(--ow-p, 0) * 100%), var(--ow-text-color));
+}
+ 
+.option-wheel--right .option-wheel__item {
+  left: auto;
+  right: var(--ow-inset);
+  transform-origin: right center;
+}
+ 
+.option-wheel__item--selected { font-weight: 500; }
+ 
+/* ── Subtítulo tipo superíndice ──
+   Aparece solo cuando la opción llega al centro (opacidad = --ow-p²) */
+.option-wheel__sub {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 0.6em;
+  font-size: 0.24em;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  opacity: calc(var(--ow-p, 0) * var(--ow-p, 0));
+  pointer-events: none;
+}
+ 
+.option-wheel__sub::before { content: "["; }
+.option-wheel__sub::after  { content: "]"; }
+ 
+ 
+/* ═══════════════════════════════════════════
+   LAYOUT: rueda a la izquierda + imagen a la derecha
+   ═══════════════════════════════════════════ */
+ 
+.rueda {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+  height: 100vh;
+  height: 100svh;
+}
+ 
+.rueda__wheel {
+  height: 100%;
+  min-width: 0;
+}
+ 
+.rueda__preview {
+  position: relative;
+  justify-self: center;
+  /* height: max(70vh); */
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  max-width: 90%;
+}
+ 
+/* Todas las imágenes apiladas; solo la activa se ve */
+.rueda__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;        /* sin deformar ni recortar */
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 0.6s ease, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+ 
+.rueda__img.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 1. TÍTULO de cada opción (tamaño, fuente, peso) */
+.option-wheel__item {
+  --ow-font-size: clamp(2.2rem, 5.2vw, 4.75rem); /* tamaño, escala en responsive */
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: -1px;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  text-transform: none;      /* o uppercase */
+}
+
+
+/* 3. SUBTÍTULO en superíndice */
+.option-wheel__sub {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 0.9rem;
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 0;
+    color: var(--text-middle);
+     margin-left: 0.6em;        /* separación con el título */
+}
+ 
+/* ── Móvil: sin foto ── */
+@media (max-width: 767px) {
+  .rueda { grid-template-columns: 1fr; }
+  .rueda__preview { display: none; }
+  .option-wheel__sub { font-size: 0.3em; }
+}
+ 
+@media (prefers-reduced-motion: reduce) {
+  .rueda__img { transition: opacity 0.2s ease; transform: none; }
+}
 

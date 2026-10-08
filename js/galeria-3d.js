@@ -9,24 +9,24 @@ import * as THREE from "three";
    1. TUS PROYECTOS
    ─────────────────────────────────────────────── */
 const PROJECTS = [
-  { title: "(10)", tag: "This is not a box - Branding/Packaging", src: "img/proyectos/webp/tote.webp" },
-  { title: "(11)", tag: "Ilustración - Loki", src: "img/proyectos/webp/IMG_6578.webp" },
-  { title: "(12)", tag: "3d", src: "img/proyectos/webp/zapatilla_pospo.webp" },
-  { title: "(13)", tag: "Ilustración - Cuadro sin título", src: "img/proyectos/webp/fuego.webp" },
-  { title: "(14)", tag: "This is not a box - Branding/Packaging", src: "img/proyectos/webp/niiiño.webp" },
-  { title: "(15)", tag: "This is not a box - Branding/Packaging", src: "img/proyectos/webp/manual3.webp" },
-  { title: "(01)", tag: "No hay meta - Diseño exposición/Editorial", src: "img/proyectos/webp/NF_010.webp" },
-  { title: "(18)", tag: "3d", src: "img/proyectos/webp/ender cuadrado weno.webp" },
-  { title: "(17)", tag: "No hay meta - Diseño exposición/Editorial", src: "img/proyectos/webp/poster-nhm.webp" },
-  { title: "(02)", tag: "This is not a box - Branding/Packaging", src: "img/proyectos/webp/cajapossssst.webp" },
-  { title: "(16)", tag: "Cata la lata - Packaging", src: "img/proyectos/webp/cargo sardinas.webp" },
-  { title: "(03)", tag: "CasiCasi - Editorial", src: "img/proyectos/webp/evacara.webp" },
-  { title: "(04)", tag: "No hay meta - Diseño exposición/Editorial", src: "img/proyectos/webp/portada-expo.webp" },
-  { title: "(05)", tag: "Fotografía", src: "img/proyectos/webp/SUJETADOR.webp" },
-  { title: "(06)", tag: "Archif - Web", src: "img/proyectos/webp/archif1.webp" },
-  { title: "(07)", tag: "Ilustración - Revista el Duende", src: "img/proyectos/webp/Ilustración_sin_título (27).webp" },
-  { title: "(08)", tag: "Ilustración - Stand Up Loreal", src: "img/proyectos/webp/1.webp" },
-  { title: "(09)", tag: "CasiCasi - Editorial", src: "img/proyectos/webp/pagina-casicasi1.webp" }
+  { title: "(10)", tag: "This is not a box - Branding/Packaging", src: "img/proyectos/webp/tote.webp", href: "thisisnotabox.html" },
+  { title: "(11)", tag: "Ilustración - Loki", src: "img/proyectos/webp/IMG_6578.webp", href: "archivos.html" },
+  { title: "(12)", tag: "3d", src: "img/proyectos/webp/zapatilla_pospo.webp", href: "archivos.html" },
+  { title: "(13)", tag: "Ilustración - Cuadro sin título", src: "img/proyectos/webp/fuego.webp", href: "archivos.html" },
+  { title: "(14)", tag: "This is not a box - Branding/Packaging", src: "img/proyectos/webp/niiiño.webp", href: "thisisnotabox.html" },
+  { title: "(15)", tag: "This is not a box - Branding/Packaging", src: "img/proyectos/webp/manual3.webp", href: "thisisnotabox.html" },
+  { title: "(01)", tag: "No hay meta - Diseño exposición/Editorial", src: "img/proyectos/webp/NF_010.webp", href: "nohaymeta.html" },
+  { title: "(18)", tag: "3d", src: "img/proyectos/webp/ender cuadrado weno.webp", href: "archivos.html" },
+  { title: "(17)", tag: "No hay meta - Diseño exposición/Editorial", src: "img/proyectos/webp/poster-nhm.webp", href: "nohaymeta.html" },
+  { title: "(02)", tag: "This is not a box - Branding/Packaging", src: "img/proyectos/webp/cajapossssst.webp", href: "thisisnotabox.html" },
+  { title: "(16)", tag: "Cata la lata - Packaging", src: "img/proyectos/webp/cargo sardinas.webp", href: "catalalata.html" },
+  { title: "(03)", tag: "CasiCasi - Editorial", src: "img/proyectos/webp/evacara.webp", href: "casicasi.html" },
+  { title: "(04)", tag: "No hay meta - Diseño exposición/Editorial", src: "img/proyectos/webp/portada-expo.webp", href: "nohaymeta.html" },
+  { title: "(05)", tag: "Fotografía", src: "img/proyectos/webp/SUJETADOR.webp", href: "archivos.html" },
+  { title: "(06)", tag: "Archif - Web", src: "img/proyectos/webp/archif1.webp", href: "archif.html" },
+  { title: "(07)", tag: "Ilustración - Revista el Duende", src: "img/proyectos/webp/Ilustración_sin_título (27).webp", href: "archivos.html" },
+  { title: "(08)", tag: "Ilustración - Stand Up Loreal", src: "img/proyectos/webp/1.webp", href: "archivos.html" },
+  { title: "(09)", tag: "CasiCasi - Editorial", src: "img/proyectos/webp/pagina-casicasi1.webp", href: "casicasi.html" }
 ];
  
 /* Ruta de la miniatura a partir de la ruta de la imagen completa */
@@ -184,7 +184,8 @@ function pick(clientX, clientY) {
 /* ───────────────────────────────────────────────
    11. OVERLAY (miniatura al instante + imagen completa después)
    ─────────────────────────────────────────────── */
-let openToken = 0;   // evita que una carga lenta pise a otra imagen
+let openToken = 0;      // evita que una carga lenta pise a otra imagen
+let currentHref = "";   // destino (página del proyecto) de la imagen abierta
  
 function openItem(ud) {
   opened = true;
@@ -201,6 +202,7 @@ function openItem(ud) {
   ovImg.alt = ud.data.title;
   ovTitle.textContent = ud.data.title;
   ovTag.textContent = ud.data.tag;
+  currentHref = ud.data.href;   // página a la que lleva el clic en la imagen
   ovCaption.textContent = ud.data.title + " · " + ud.data.tag;   // info para el tooltip (ordenador)
   overlay.classList.add("open");
   overlay.setAttribute("aria-hidden", "false");
@@ -223,6 +225,7 @@ function openItem(ud) {
 function closeItem() {
   openToken++;   // cancela cualquier carga pendiente
   opened = false;
+  currentHref = "";
   overlay.classList.remove("open");
   overlay.setAttribute("aria-hidden", "true");
   resetTilt();   // reinicia el efecto tilt (solo hace algo en ordenador)
@@ -237,6 +240,15 @@ overlay.addEventListener("click", e => {
 window.addEventListener("keydown", e => {
   if (e.key === "Escape" && opened) {
     closeItem();
+  }
+});
+ 
+/* Clic en la imagen del overlay → ir a la página del proyecto
+   (solo la imagen; el fondo sigue cerrando el overlay) */
+ovImg.style.cursor = "pointer";
+ovImg.addEventListener("click", () => {
+  if (opened && currentHref) {
+    window.location.href = currentHref;
   }
 });
  

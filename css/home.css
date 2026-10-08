@@ -93,7 +93,7 @@ h1 {
   font-size: 3.5rem;
   letter-spacing: -1px;
   line-height: 1.1;
-  color: var(--text-middle);
+  /* color: var(--text-middle); */
   /* text-indent: 1.5em; */
 }
 
