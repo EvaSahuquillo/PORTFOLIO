@@ -298,10 +298,13 @@ nav {
   /* position: absolute; */
   padding: 10rem 0rem;
   height: 100dvh;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
 }
 
 .presentacion {
-  width: 60%;
+  width: 40%;
   height: 100dvh;
   align-items: center;
   justify-content: center;
@@ -315,6 +318,16 @@ nav {
   .presentacion {
     width: 70%;
   }
+}
+
+
+.section-present.visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-present { transition: none; transform: none; }
 }
 
 

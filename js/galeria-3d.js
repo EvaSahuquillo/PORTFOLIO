@@ -51,9 +51,12 @@ const SPAWN_RISE = 0.5;         // rise más notorio
 const SPIN_RAMP_MS = 2600;      // rampa de spin más larga = más suave
  
 /* ── Rampa del zoom de entrada ── */
-const ZOOM_IN_FROM = 1.1;       // arranca más pequeña
-const ZOOM_IN_TO   = 1.25;       // tamaño final
+const ZOOM_IN_FROM = 1.3;       // arranca más pequeña
+const ZOOM_IN_TO   = 0.6;       // tamaño final
 const ZOOM_RAMP_MS = 2600;      // dura lo mismo que el spin = coordinados
+ 
+/* ── Texto de presentación ── */
+const PRESENT_FALLBACK_MS = 15000;  // si la galería falla, el texto aparece igualmente a los 15 s
  
 /* ───────────────────────────────────────────────
    3. ELEMENTOS
@@ -61,12 +64,21 @@ const ZOOM_RAMP_MS = 2600;      // dura lo mismo que el spin = coordinados
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const canvas = document.getElementById("c");
 const hint = document.getElementById("hint");
+const presentSection = document.querySelector(".section-present");   // texto de presentación
  
 /* Ocultamos el cursor hasta que la escena esté lista.
    La regla !important evita que cualquier CSS externo lo sobreescriba. */
 const cursorStyle = document.createElement("style");
 cursorStyle.textContent = `#c { cursor: none !important; }`;
 document.head.appendChild(cursorStyle);
+ 
+/* Muestra el texto de presentación (la clase .visible se define en el CSS) */
+function showPresentation() {
+  if (presentSection) presentSection.classList.add("visible");
+}
+ 
+/* Red de seguridad: pase lo que pase, el texto acaba apareciendo */
+setTimeout(showPresentation, PRESENT_FALLBACK_MS);
  
 /* ───────────────────────────────────────────────
    4. OVERLAY
@@ -629,6 +641,7 @@ function tick() {
       zoomRampActive = false;
       zoom = ZOOM_IN_TO;
       zoomTarget = ZOOM_IN_TO;
+      showPresentation();   // el zoom ha terminado → aparece el texto de presentación
     }
   } else {
     zoom += (zoomTarget - zoom) * 0.08;
