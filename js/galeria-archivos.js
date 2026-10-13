@@ -13,7 +13,7 @@ const items = [
   { title:"(11)", tag:"Fotografía", type: 'img',   src: 'img/proyectos/webp/roberto.webp' },
   { title:"(12)", tag:"Cuadro sin título", type: 'img',   src: 'img/proyectos/webp/IMG_6578.webp' },
   { title:"(13)", tag:"3D-Animación", type: 'video', src: 'img/proyectos/Sahuquillo.Eva_A3D_P1_VIDEO.mp4' },
-  { title:"(14)", tag:"Ilustración Revista-Calendario ElDuende", type: 'img',   src: 'img/proyectos/webp/Ilustración_sin_título (27).webp' },
+  { title:"(14)", tag:"Ilustración Revista-Calendario ElDuende", type: 'img',   src: 'img/proyectos/webp/elduendefebrero.webp' },
   { title:"(15)", tag:"Fotografía", type: 'img',   src: 'img/proyectos/lajulai.jpg' },
   { title:"(16)", tag:"Revista Yorokobu - 3D", type: 'img',   src: 'img/proyectos/webp/Sahuquillo.Eva_3.1_Yorokobu_Revista.webp' },
   { title:"(17)", tag:"Rostros", type: 'img',   src: 'img/proyectos/ROSTROS.gif' },
