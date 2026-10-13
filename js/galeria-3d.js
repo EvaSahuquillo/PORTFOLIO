@@ -57,6 +57,35 @@ const ZOOM_RAMP_MS = 2600;      // dura lo mismo que el spin = coordinados
  
 /* ── Texto de presentación ── */
 const PRESENT_FALLBACK_MS = 15000;  // si la galería falla, el texto aparece igualmente a los 15 s
+
+/* ── Intro: solo se anima la primera vez de cada sesión ──
+   Si ya la viste (y vuelves a la home), todo aparece directamente, sin animación. */
+const INTRO_KEY = "introSeen";
+let SKIP_INTRO = false;
+
+/* Si la página se ha RECARGADO, la intro se repite (y el zoom vuelve al de la intro).
+   Solo se salta cuando se vuelve a la home navegando desde otra página. */
+const navEntry = performance.getEntriesByType("navigation")[0];
+const isReload = navEntry ? navEntry.type === "reload" : false;
+
+try {
+  if (isReload) {
+    sessionStorage.removeItem(INTRO_KEY);
+    sessionStorage.removeItem("galleryZoom");
+  }
+  SKIP_INTRO = sessionStorage.getItem(INTRO_KEY) === "1";
+} catch (e) {}
+
+/* ── Zoom: se recuerda donde lo dejó el usuario al navegar por otras páginas ── */
+const ZOOM_KEY = "galleryZoom";
+const ZOOM_MIN = 0.6;
+const ZOOM_MAX = 1.4;
+let SAVED_ZOOM = null;
+try {
+  const z = parseFloat(sessionStorage.getItem(ZOOM_KEY));
+  if (Number.isFinite(z)) SAVED_ZOOM = Math.min(Math.max(z, ZOOM_MIN), ZOOM_MAX);
+} catch (e) {}
+const RESTORE_ZOOM = SAVED_ZOOM !== null ? SAVED_ZOOM : ZOOM_IN_TO;   // zoom con el que se vuelve a la home
  
 /* ───────────────────────────────────────────────
    3. ELEMENTOS
@@ -72,13 +101,19 @@ const cursorStyle = document.createElement("style");
 cursorStyle.textContent = `#c { cursor: none !important; }`;
 document.head.appendChild(cursorStyle);
  
-/* Muestra el texto de presentación (la clase .visible se define en el CSS) */
+/* Revela todo tras el zoom: texto de presentación + header + footer.
+   La clase "intro-done" en <body> es la que activa el CSS. */
 function showPresentation() {
+  document.body.classList.add("intro-done");
   if (presentSection) presentSection.classList.add("visible");
+  try { sessionStorage.setItem(INTRO_KEY, "1"); } catch (e) {}   // recordamos que ya se vio
 }
  
 /* Red de seguridad: pase lo que pase, el texto acaba apareciendo */
 setTimeout(showPresentation, PRESENT_FALLBACK_MS);
+
+/* Si ya se vio la intro en esta sesión, mostramos todo ya, sin esperar a la galería */
+if (SKIP_INTRO) showPresentation();
  
 /* ───────────────────────────────────────────────
    4. OVERLAY
@@ -123,8 +158,8 @@ scene.add(group);
 /* ───────────────────────────────────────────────
    7. RESIZE
    ─────────────────────────────────────────────── */
-let zoom = ZOOM_IN_FROM;
-let zoomTarget = ZOOM_IN_FROM;
+let zoom = SKIP_INTRO ? RESTORE_ZOOM : ZOOM_IN_FROM;
+let zoomTarget = zoom;
  
 function resize() {
   const w = window.innerWidth;
@@ -461,7 +496,8 @@ canvas.addEventListener(
   e => {
     if (opened || !ready) return;
     e.preventDefault();
-    zoomTarget = THREE.MathUtils.clamp(zoomTarget + e.deltaY * 0.001, 0.6, 1.4);
+    zoomTarget = THREE.MathUtils.clamp(zoomTarget + e.deltaY * 0.001, ZOOM_MIN, ZOOM_MAX);
+    try { sessionStorage.setItem(ZOOM_KEY, String(zoomTarget)); } catch (err) {}   // lo recordamos
   },
   { passive: false }
 );
@@ -511,12 +547,12 @@ function createCard(img, i) {
     fullUrl: data.src,      // calidad completa (solo al hacer clic)
     base: new THREE.Vector3(CARD_H * aspect, CARD_H, 1),
     s: 1,
-    spawnStart: performance.now(),
+    spawnStart: performance.now() - (SKIP_INTRO ? SPAWN_FADE_MS : 0),   // sin fade si se salta la intro
     spawned: true,
     posY: pos.y
   };
  
-  mesh.position.y = pos.y - SPAWN_RISE;
+  mesh.position.y = SKIP_INTRO ? pos.y : pos.y - SPAWN_RISE;
  
   mesh.scale.copy(mesh.userData.base);
  
@@ -577,26 +613,35 @@ async function loadGallery() {
     window.__preloader.markImagesReady();
   }
  
-  // 2. Crear tarjetas UNA A UNA
+  // 2. Crear tarjetas (una a una en la primera visita; todas a la vez si se salta la intro)
   for (let i = 0; i < COUNT; i++) {
     const img = images[i];
     if (img) createCard(img, i);
- 
-    if (i < COUNT - 1) {
+
+    if (!SKIP_INTRO && i < COUNT - 1) {
       await new Promise(r => setTimeout(r, SPAWN_INTERVAL));
     }
   }
- 
-  // 3. Esperar al fade de la última tarjeta
-  await new Promise(r => setTimeout(r, SPAWN_FADE_MS));
- 
-  // 4. Activar el giro y la rampa de zoom
-  readyAt = performance.now();
-  zoomRampActive = true;
-  zoomRampStart = performance.now();
-  zoomTarget = ZOOM_IN_TO;
+
+  // 3. Esperar al fade de la última tarjeta (solo en la primera visita)
+  if (!SKIP_INTRO) {
+    await new Promise(r => setTimeout(r, SPAWN_FADE_MS));
+  }
+
+  // 4. Activar el giro (y la rampa de zoom en la primera visita)
+  if (SKIP_INTRO) {
+    readyAt = performance.now() - SPIN_RAMP_MS;   // giro ya a velocidad completa
+    zoomRampActive = false;
+    zoom = zoomTarget = RESTORE_ZOOM;
+    camera.position.z = camera.userData.baseZ * zoom;
+  } else {
+    readyAt = performance.now();
+    zoomRampActive = true;
+    zoomRampStart = performance.now();
+    zoomTarget = ZOOM_IN_TO;
+  }
   ready = true;
- 
+
   // 5. Restaurar el cursor: quitamos la regla "none" y ponemos la adecuada
   cursorStyle.textContent = `
     #c { cursor: default !important; }

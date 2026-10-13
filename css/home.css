@@ -298,9 +298,6 @@ nav {
   /* position: absolute; */
   padding: 10rem 0rem;
   height: 100dvh;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1.2s ease, transform 1.2s ease;
 }
 
 .presentacion {
@@ -321,15 +318,46 @@ nav {
 }
 
 
-.section-present.visible {
+/* Oculto hasta que termina el zoom */
+header,
+footer,
+.section-present {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1.2s ease, visibility 0s linear 1.2s;
+}
+
+.section-present {
+  transform: translateY(20px);
+  transition: opacity 1.2s ease, transform 1.2s ease, visibility 0s linear 1.2s;
+}
+
+/* Visible tras el zoom */
+body.intro-done header,
+body.intro-done footer,
+body.intro-done .section-present {
   opacity: 1;
+  visibility: visible;
+  transition: opacity 1.2s ease, transform 1.2s ease, visibility 0s;
+}
+
+body.intro-done .section-present {
   transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .section-present { transition: none; transform: none; }
+  header, footer, .section-present { transition: none !important; transform: none !important; }
 }
 
+/* Vuelta a la home: todo visible desde el primer pintado, sin animar */
+html.skip-intro header,
+html.skip-intro footer,
+html.skip-intro .section-present {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  transition: none !important;
+}
 
 /* Split Text */
 .split {
