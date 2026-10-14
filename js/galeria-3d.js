@@ -33,7 +33,7 @@ import * as THREE from "three";
    ─────────────────────────────────────────────── */
 const PROJECTS = [
   
-  { title: "(13)", tag: "Ilustración - Cuadro sin título", src: "img/proyectos/webp/fuego.webp", href: "archivos.html" },
+  { title: "(13)", tag: "Cuadro sin título", src: "img/proyectos/webp/fuego.webp", href: "archivos.html" },
   { title: "(16)", tag: "Cata la lata - Packaging", src: "img/proyectos/webp/cargo sardinas.webp", href: "catalalata.html" },
   { title: "(15)", tag: "This is not a box - Branding/Packaging", src: "img/proyectos/webp/manual3.webp", href: "thisisnotabox.html" },
   { title: "(03)", tag: "CasiCasi - Editorial", src: "img/proyectos/webp/evacara.webp", href: "casicasi.html" },
@@ -48,7 +48,7 @@ const PROJECTS = [
   { title: "(07)", tag: "Ilustración - Revista el Duende", src:"img/proyectos/webp/CN_021.webp", href: "archivos.html" },
   { title: "(08)", tag: "Ilustración - Stand Up Loreal", src: "img/proyectos/webp/1.webp", href: "archivos.html" },
   { title: "(09)", tag: "CasiCasi - Editorial", src: "img/proyectos/webp/pagina-casicasi1.webp", href: "casicasi.html" },
-  { title: "(11)", tag: "Ilustración - Loki", src: "img/proyectos/webp/IMG_6578.webp", href: "archivos.html" },
+  { title: "(11)", tag: "Cuadro sin título", src: "img/proyectos/webp/IMG_6578.webp", href: "archivos.html" },
 ];
  
 /* Ruta de la miniatura a partir de la ruta de la imagen completa */
