@@ -1,3 +1,26 @@
+const forceNoCursor = () => {
+  document.documentElement.style.setProperty('cursor', 'none', 'important');
+  document.body.style.setProperty('cursor', 'none', 'important');
+  document.querySelectorAll('canvas, canvas *').forEach(el => {
+    el.style.setProperty('cursor', 'none', 'important');
+  });
+};
+
+// Al cargar
+forceNoCursor();
+
+// Vigila cuando la galería se inicializa y añade/modifica estilos
+const observer = new MutationObserver(forceNoCursor);
+observer.observe(document.body, {
+  childList: true,
+  subtree: true,
+  attributes: true,
+  attributeFilter: ['style', 'class']
+});
+
+// Reaplica también en mousemove por si acaso (barato)
+document.addEventListener('mousemove', forceNoCursor, { passive: true });
+
 import * as THREE from "three";
  
  
@@ -9,24 +32,23 @@ import * as THREE from "three";
    1. TUS PROYECTOS
    ─────────────────────────────────────────────── */
 const PROJECTS = [
-  { title: "(10)", tag: "This is not a box - Branding/Packaging", src: "img/proyectos/webp/tote.webp", href: "thisisnotabox.html" },
-  { title: "(11)", tag: "Ilustración - Loki", src: "img/proyectos/webp/IMG_6578.webp", href: "archivos.html" },
-  { title: "(12)", tag: "3d", src: "img/proyectos/webp/zapatilla_pospo.webp", href: "archivos.html" },
+  
   { title: "(13)", tag: "Ilustración - Cuadro sin título", src: "img/proyectos/webp/fuego.webp", href: "archivos.html" },
-  { title: "(14)", tag: "This is not a box - Branding/Packaging", src: "img/proyectos/webp/niiiño.webp", href: "thisisnotabox.html" },
-  { title: "(15)", tag: "This is not a box - Branding/Packaging", src: "img/proyectos/webp/manual3.webp", href: "thisisnotabox.html" },
-  { title: "(01)", tag: "No hay meta - Diseño exposición/Editorial", src: "img/proyectos/webp/NF_010.webp", href: "nohaymeta.html" },
-  { title: "(18)", tag: "3d", src: "img/proyectos/webp/ender cuadrado weno.webp", href: "archivos.html" },
-  { title: "(17)", tag: "No hay meta - Diseño exposición/Editorial", src: "img/proyectos/webp/poster-nhm.webp", href: "nohaymeta.html" },
-  { title: "(02)", tag: "This is not a box - Branding/Packaging", src: "img/proyectos/webp/cajapossssst.webp", href: "thisisnotabox.html" },
   { title: "(16)", tag: "Cata la lata - Packaging", src: "img/proyectos/webp/cargo sardinas.webp", href: "catalalata.html" },
+  { title: "(15)", tag: "This is not a box - Branding/Packaging", src: "img/proyectos/webp/manual3.webp", href: "thisisnotabox.html" },
   { title: "(03)", tag: "CasiCasi - Editorial", src: "img/proyectos/webp/evacara.webp", href: "casicasi.html" },
+  { title: "(12)", tag: "3d", src: "img/proyectos/webp/ender cuadrado weno.webp", href: "archivos.html" },
+  { title: "(02)", tag: "This is not a box - Branding/Packaging", src: "img/proyectos/webp/cajapossssst.webp", href: "thisisnotabox.html" },
+  { title: "(01)", tag: "No hay meta - Diseño exposición/Editorial", src: "img/proyectos/webp/NF_010.webp", href: "nohaymeta.html" },
   { title: "(04)", tag: "No hay meta - Diseño exposición/Editorial", src: "img/proyectos/webp/portada-expo.webp", href: "nohaymeta.html" },
+  { title: "(14)", tag: "This is not a box - Branding/Packaging", src: "img/proyectos/webp/niiiño.webp", href: "thisisnotabox.html" },
   { title: "(05)", tag: "Fotografía", src: "img/proyectos/webp/SUJETADOR.webp", href: "archivos.html" },
   { title: "(06)", tag: "Archif - Web", src: "img/proyectos/webp/archif1.webp", href: "archif.html" },
-  { title: "(07)", tag: "Ilustración - Revista el Duende", src:"img/proyectos/webp/elduendefebrero.webp", href: "archivos.html" },
+  { title: "(10)", tag: "No hay meta - Diseño exposición/Editorial", src: "img/proyectos/webp/poster-nhm.webp", href: "nohaymeta.html" },
+  { title: "(07)", tag: "Ilustración - Revista el Duende", src:"img/proyectos/webp/CN_021.webp", href: "archivos.html" },
   { title: "(08)", tag: "Ilustración - Stand Up Loreal", src: "img/proyectos/webp/1.webp", href: "archivos.html" },
-  { title: "(09)", tag: "CasiCasi - Editorial", src: "img/proyectos/webp/pagina-casicasi1.webp", href: "casicasi.html" }
+  { title: "(09)", tag: "CasiCasi - Editorial", src: "img/proyectos/webp/pagina-casicasi1.webp", href: "casicasi.html" },
+  { title: "(11)", tag: "Ilustración - Loki", src: "img/proyectos/webp/IMG_6578.webp", href: "archivos.html" },
 ];
  
 /* Ruta de la miniatura a partir de la ruta de la imagen completa */
@@ -35,7 +57,7 @@ const thumbOf = src => src.replace("/webp/", "/thumbs/");
 /* ───────────────────────────────────────────────
    2. CONFIGURACIÓN
    ─────────────────────────────────────────────── */
-const COUNT = 18;
+const COUNT = 16;
 const RADIUS = 3.6;
 const CARD_H = 1.35;
 const AUTO_SPEED = 0.0012;

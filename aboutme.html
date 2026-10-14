@@ -39,6 +39,13 @@
   <link rel="manifest" href="favicon/web-app-manifest-192x192.png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="icon" type="image/png" href="img/proyectos/favicon2.png">
+  <!-- Script  -->
+   <script>
+     try { if (sessionStorage.getItem('iris') || window.name.indexOf('iris:') === 0) document.documentElement.classList.add('iris-cover'); } catch (e) {}
+   </script>
+   <style>
+     html.iris-cover::before { content:""; position:fixed; inset:0; background:#141414; z-index:2147483647; }
+   </style>
 </head>
 <body>
     <div id="custom-cursor"><div class="cursor-inner"></div></div>
@@ -194,8 +201,8 @@
                             <p class="split grey">[Experiencia]</p>
                         </div>
                         <div class="col-7">
-                            <p class="split grey">/Jun-Sep 2025<br>→Coonic Conmunica Mediatrader S.L.(Diseñadora Gráfica)
-                            <br><br>/Jun-Sep 2025<br>→Coonic Conmunica Mediatrader S.L.(Intership)</p>
+                            <p class="split grey">/Jun - Sep 2025<br>→Coonic Conmunica Mediatrader S.L.(Diseñadora Gráfica)
+                            <br><br>/Nov 2024 - May 2025<br>→Coonic Conmunica Mediatrader S.L.(Intership)</p>
                         </div>
                         <div class="col"></div>
                     </div>
@@ -268,6 +275,7 @@
     <script src="js/magnetismos.js"></script>
     <!-- <script src="js/wave-effect.js"></script> -->
     <script type="module" src="js/menu.js"></script>
+    <script type="module" src="js/iris.js"></script>
 
     <!-- 8. Tu JS personal (al final, después de todo) -->
     <script src="js/aboutme.js"></script>

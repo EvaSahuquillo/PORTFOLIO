@@ -8,6 +8,17 @@ html {
   cursor: none !important;
 }
 
+canvas, canvas * {
+  cursor: none !important;
+}
+
+html, body {
+  cursor: none !important;
+}
+
+*, *::before, *::after {
+  cursor: none !important;
+}
 
 :root {
   --bg-light: #ffffff;
