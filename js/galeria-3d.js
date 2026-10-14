@@ -45,7 +45,7 @@ const PROJECTS = [
   { title: "(05)", tag: "Fotografía", src: "img/proyectos/webp/SUJETADOR.webp", href: "archivos.html" },
   { title: "(06)", tag: "Archif - Web", src: "img/proyectos/webp/archif1.webp", href: "archif.html" },
   { title: "(10)", tag: "No hay meta - Diseño exposición/Editorial", src: "img/proyectos/webp/poster-nhm.webp", href: "nohaymeta.html" },
-  { title: "(07)", tag: "Ilustración - Revista el Duende", src:"img/proyectos/webp/CN_021.webp", href: "archivos.html" },
+  { title: "(07)", tag: "Archif - Web", src:"img/proyectos/webp/CN_021.webp", href: "archif.html" },
   { title: "(08)", tag: "Ilustración - Stand Up Loreal", src: "img/proyectos/webp/1.webp", href: "archivos.html" },
   { title: "(09)", tag: "CasiCasi - Editorial", src: "img/proyectos/webp/pagina-casicasi1.webp", href: "casicasi.html" },
   { title: "(11)", tag: "Cuadro sin título", src: "img/proyectos/webp/IMG_6578.webp", href: "archivos.html" },
